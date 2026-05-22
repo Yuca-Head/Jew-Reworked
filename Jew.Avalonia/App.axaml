@@ -11,5 +11,10 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Buttons.axaml"/>
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Cards.axaml"/>
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Text.axaml"/>
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Collections.axaml"/>
     </Application.Styles>
+
 </Application>

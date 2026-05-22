@@ -1,4 +1,8 @@
-﻿
+﻿using Jew.Application.ProductInventory;
+using Jew.Domain.ProductInventory.Entities;
+using Jew.Domain.ProductInventory.Exceptions;
+using Jew.Domain.ProductInventory.Repositories;
+using Jew.Infrastructure.Repositories;
 using Moq;
 namespace Jew.Test;
 
