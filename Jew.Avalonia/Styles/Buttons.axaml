@@ -1,0 +1,17 @@
+<Styles xmlns="https://github.com/avaloniaui">
+    
+    <!--Todos los styles de botones-->
+
+    <!--Botones Comunes-->
+    <Style Selector="Button.common" >
+        <Setter Property="Background" Value="DarkCyan"/>
+        <Setter Property="Foreground" Value="White"/>
+
+    </Style>
+
+    <Style Selector="Button.main">
+        <Setter Property="Background" Value="Navy"/>
+        <Setter Property="Foreground" Value="lightgray"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+</Styles>

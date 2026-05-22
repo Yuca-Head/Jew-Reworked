@@ -1,0 +1,4 @@
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Infrastructure\obj\Debug\net10.0\Jew.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Infrastructure\obj\Debug\net10.0\Jew.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Infrastructure\obj\Debug\net10.0\Jew.Infrastructure.AssemblyInfo.cs
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Infrastructure\obj\Debug\net10.0\Jew.Infrastructure.csproj.CoreCompileInputs.cache

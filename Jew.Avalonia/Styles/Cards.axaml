@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui">
+
+    <!--Todos los CardStyles-->
+
+    <!--Footer Genérico (Descartado)-->
+    <Style Selector="TextBlock.commonfooter">
+        <Setter Property="Background" Value="#292929"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Margin" Value="30"/>
+    </Style>
+
+    <!--Formulario-->
+
+    <Style Selector="Border.form">
+        <Setter Property = "Background" Value = "DimGray"/>
+        <Setter Property="Padding" Value="12"/>
+    </Style>
+    
+    <!--TextBlocks-->
+    <Style Selector = "Border.form TextBlock">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <!--Botones (Button.Common por default)-->
+    <Style Selector="Border.form Button">
+        <Setter Property="Background" Value="DarkCyan"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <!--/Formulario-->
+
+
+</Styles>

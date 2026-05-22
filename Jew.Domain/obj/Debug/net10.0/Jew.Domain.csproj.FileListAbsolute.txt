@@ -1,0 +1,11 @@
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.AssemblyInfoInputs.cache
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.AssemblyInfo.cs
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\bin\Debug\net10.0\Jew.Domain.deps.json
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\bin\Debug\net10.0\Jew.Domain.dll
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\bin\Debug\net10.0\Jew.Domain.pdb
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.dll
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\refint\Jew.Domain.dll
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\Jew.Domain.pdb
+C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\Debug\net10.0\ref\Jew.Domain.dll

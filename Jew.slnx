@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Jew.Avalonia/Jew.Avalonia.csproj"/>
+  <Project Path="Jew.Test/Jew.Test.csproj"/>
+  <Project Path="Jew.Application/Jew.Application.csproj"/>
+  <Project Path="Jew.Domain/Jew.Domain.csproj"/>
+  <Project Path="Jew.Infrastructure/Jew.Infrastructure.csproj"/>
+</Solution>

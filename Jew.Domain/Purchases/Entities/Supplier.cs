@@ -1,0 +1,15 @@
+
+
+using Jew.Domain.Shared.Contacts;
+using Jew.Domain.Shared.People;
+
+namespace Jew.Domain.Purchases.Entities;
+
+public class Supplier: Person<int>, IParty
+{
+    public Supplier(int id, string name, ICollection<IContact>? contacts = null) : base (id, name, contacts){}
+    public Supplier(Supplier supplier) : base(supplier){}
+
+
+}
+

@@ -1,0 +1,43 @@
+<Styles xmlns="https://github.com/avaloniaui">
+
+
+
+<!--ComboBox Common-->
+<Style Selector="ComboBox.common ComboBoxItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="White"/>
+</Style>
+
+<!--Cuando el item es seleccionado-->
+<Style Selector="ComboBox.common ComboBoxItem:selected /template/ ContentPresenter">
+    <Setter Property="Background" Value="Teal"/>
+</Style>
+
+<!--Cuando el ratón está encima del item-->
+<Style Selector="ComboBox.common ComboBoxItem:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="Teal"/>
+    <Setter Property="Opacity" Value="0.5"/>
+</Style>
+
+<!--Cuando el ratón está encima del item seleccionado-->
+<Style Selector="ComboBox.common ComboBoxItem:pointerover:selected /template/ ContentPresenter">
+    <Setter Property="Opacity" Value=".8"/>
+</Style>
+
+<!--Como se ve el fondo del interior de la lista (detrás de los items)-->
+<Style Selector="ComboBox.common /template/ Popup Border">
+    <Setter Property="Background" Value="DarkGray"/>
+</Style>
+<!--/ComboBox Common-->
+
+<!--ListBox Common-->
+<Style Selector="ListBox.common ListBoxItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="White"/>
+</Style>
+
+
+
+
+
+</Styles>
