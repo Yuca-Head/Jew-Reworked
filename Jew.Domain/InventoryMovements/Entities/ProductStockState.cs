@@ -12,7 +12,7 @@ public class ProductStockState : IHasPK<string>, IClonable<ProductStockState>
     /// Product ID.
     /// This is used as the unique identifier for the stock state of a specific product.
     /// </summary>
-    public string Key { get; }
+    public string Key { get; init;}
     public int Quantity { get; protected set; }
     public decimal AverageCost { get; protected set; }
 

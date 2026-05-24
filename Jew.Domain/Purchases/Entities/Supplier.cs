@@ -10,6 +10,12 @@ public class Supplier: Person<int>, IParty
     public Supplier(int id, string name, ICollection<IContact>? contacts = null) : base (id, name, contacts){}
     public Supplier(Supplier supplier) : base(supplier){}
 
-
+    internal void SetId(int id)
+    {
+        if(Key != 0)
+            throw new InvalidOperationException("ID ya ha sido asignado.");
+        Key = id;
+    }
+    
 }
 

@@ -1,0 +1,37 @@
+
+using Jew.Domain.ProductInventory.Entities;
+using Jew.Domain.ProductInventory.Exceptions;
+using Jew.Domain.ProductInventory.Repositories;
+using Jew.Infrastructure.Repositories.Test;
+
+
+namespace Jew.Infrastructure.Repositories.InMemory;
+
+public sealed class InMemoryProducts(Dictionary<string, Product> products) : InMemoryRepository<Product, string>(products), IProductsRepo
+{
+    public override void Add(Product entity)
+    {
+        ArgumentNullException.ThrowIfNull(entity);
+
+        if(_entities.Values.Any(p => string.Equals(p.Category.Name, entity.Category.Name, StringComparison.OrdinalIgnoreCase) 
+        && string.Equals(p.Name, entity.Name, StringComparison.OrdinalIgnoreCase)))
+            throw new ProductException("Ya existe este producto", ProductException.Field.name);
+        if(Exist(entity.Code))
+            throw new ProductException("Ya existe un producto con ese código", ProductException.Field.code);
+
+        _entities.Add(entity.Code, entity);
+    }
+
+
+
+    public Product? GetByCode(string code)
+    => _entities.Values.FirstOrDefault(p => string.Equals(p.Code, code, StringComparison.OrdinalIgnoreCase));
+
+    public IEnumerable<Product> GetFromCategory(Category category)
+    => GetFromCategory(category.Key);
+
+    public IEnumerable<Product> GetFromCategory(int categoryId)
+    => [.. _entities.Values.Where(p => p.Category.Key == categoryId)];
+
+
+}

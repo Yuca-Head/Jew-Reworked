@@ -1,5 +1,3 @@
-
-
 using Jew.Domain.Purchases.Transactions;
 using Jew.Domain.Shared.Common;
 

@@ -13,8 +13,9 @@ public readonly record struct SaleItem
     public readonly Product Product{get;}
     public readonly decimal UnitPrice{get;}
     public readonly int Quantity{get;}
-    public SaleItem(Product product, decimal unitPrice, int quantity)
+    public SaleItem(Product product, int quantity, decimal unitPrice)
     {
+        ArgumentNullException.ThrowIfNull(product);
         if(unitPrice <= 0)
             throw new SaleException("Ingrese un precio válido mayor que 0", nameof(UnitPrice));
         if(quantity <= 0)

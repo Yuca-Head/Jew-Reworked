@@ -14,14 +14,14 @@ public enum MovementType
 
 public readonly record struct InventoryMovement : IHasId, IIsTransaction
 {
-    public string ProductId { get; }
-    public int Quantity { get; }
-    public decimal UnitCost { get; }
-    public DateTime Date { get; }
-    public MovementType MovementType { get; }
-    public IParty? Party {get;}
-    public Guid TransactionId {get;}
-    public int Key{get; init;}
+    public string ProductId { get; init;}
+    public int Quantity { get; init;}
+    public decimal UnitCost { get; init;}
+    public DateTime Date { get; init;}
+    public MovementType MovementType { get; init;}
+    public IParty? Party {get; init;}
+    public Guid TransactionId {get; init;}
+    public readonly int Key{get; init;}
 
 
     public int SignedQuantity =>

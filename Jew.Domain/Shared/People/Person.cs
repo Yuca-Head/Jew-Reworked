@@ -1,15 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using Jew.Domain.Shared.Contacts;
 using Jew.Domain.Shared.Exceptions;
+using Jew.Domain.Shared.Keys;
 namespace Jew.Domain.Shared.People;
 
 /// <summary>
 /// Person.
 /// </summary>
 /// <typeparam name="T">Primary Key type.</typeparam>
-public abstract class Person<T> : Keys.IHasPK<T>
+public abstract class Person<T> : IHasPK<T>
 {
-    public virtual T Key {get; init;}
+    public virtual T Key {get; protected set;}
 
     public readonly PersonContacts Contacts = new();
 

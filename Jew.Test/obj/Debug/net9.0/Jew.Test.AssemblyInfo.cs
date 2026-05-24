@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jew.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25fa1d33ab5e3c451e2b99ce27db093cef8424e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+864105042e796e208671a5f4346235b5e806368e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Jew.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jew.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

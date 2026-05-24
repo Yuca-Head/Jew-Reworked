@@ -74,9 +74,9 @@ public class SupplierService(InventoryService inventory, ISuppliersRepo supplier
     public IReadOnlyList<Product> GetProductsNotSuppliedBy(int supplierId)
     {
         var ids = GetProductsFromSupplier(supplierId).Select(p => p.ProductId).ToHashSet();
-
+    
         return _inventory.GetProducts()
-            .Where(p => !ids.Contains(p.Key))
+            .Where(p => !ids.Contains(p.Code))
             .ToList();
     }
 

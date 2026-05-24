@@ -51,7 +51,7 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
     /// <summary>
     /// Mismo que código.
     /// </summary>
-    public string  Key => Code;
+    public string  Key {get => Code; set => _ = value;}
 
     public string Code
     {

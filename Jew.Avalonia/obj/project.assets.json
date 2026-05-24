@@ -598,6 +598,42 @@
         "runtime": {
           "lib/net8.0/Tmds.DBus.Protocol.dll": {}
         }
+      },
+      "Jew.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Jew.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Jew.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Jew.Application.dll": {}
+        }
+      },
+      "Jew.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Jew.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Jew.Domain.dll": {}
+        }
+      },
+      "Jew.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Jew.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Jew.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Jew.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -1451,6 +1487,21 @@
         "tmds.dbus.protocol.0.21.2.nupkg.sha512",
         "tmds.dbus.protocol.nuspec"
       ]
+    },
+    "Jew.Application/1.0.0": {
+      "type": "project",
+      "path": "../Jew.Application/Jew.Application.csproj",
+      "msbuildProject": "../Jew.Application/Jew.Application.csproj"
+    },
+    "Jew.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Jew.Domain/Jew.Domain.csproj",
+      "msbuildProject": "../Jew.Domain/Jew.Domain.csproj"
+    },
+    "Jew.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Jew.Infrastructure/Jew.Infrastructure.csproj",
+      "msbuildProject": "../Jew.Infrastructure/Jew.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1460,7 +1511,10 @@
       "Avalonia.Diagnostics >= 11.3.6",
       "Avalonia.Fonts.Inter >= 11.3.6",
       "Avalonia.Themes.Fluent >= 11.3.6",
-      "CommunityToolkit.Mvvm >= 8.2.1"
+      "CommunityToolkit.Mvvm >= 8.2.1",
+      "Jew.Application >= 1.0.0",
+      "Jew.Domain >= 1.0.0",
+      "Jew.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1469,11 +1523,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
+      "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
       "projectName": "Jew.Avalonia",
-      "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
+      "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
       "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\obj\\",
+      "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1487,7 +1541,17 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj": {
+              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj"
+            },
+            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
+              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
+            },
+            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

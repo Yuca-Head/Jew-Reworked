@@ -3,16 +3,13 @@
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
 
-namespace Jew.Infrastructure.Repositories;
+namespace Jew.Infrastructure.Repositories.InMemory;
 
-public class InMemoryStockState : IStockStateRepo
+public sealed class InMemoryStockState(Dictionary<string, ProductStockState> entities) : InMemoryRepository<ProductStockState, string>(entities), IStockStateRepo
 {
-
-    private readonly Dictionary<string, ProductStockState> _states = [];
-
     public ProductStockState Get(string productId)
     {
-        if (!_states.TryGetValue(productId, out var state))
+        if (!_entities.TryGetValue(productId, out var state))
             throw new KeyNotFoundException($"No stock state for product {productId}");
 
         return state;
@@ -20,31 +17,24 @@ public class InMemoryStockState : IStockStateRepo
 
     public ProductStockState GetOrCreate(string key)
     {
-        if (!_states.TryGetValue(key, out var state))
+        if (!_entities.TryGetValue(key, out var state))
         {
             state = new ProductStockState(key, 0, 0);   
-            _states.Add(key, state);
+            _entities.Add(key, state);
         }
 
         return state;
     }
     
-    public void Add(ProductStockState item)
+    public override void Add(ProductStockState item)
     {
         ArgumentNullException.ThrowIfNull(item);
 
-        if (_states.ContainsKey(item.Key))
+        if (_entities.ContainsKey(item.Key))
             throw new InvalidOperationException($"Stock state for product {item.Key} already exists.");
         
-        _states.Add(item.Key, item);
+        _entities.Add(item.Key, item);
     }
-
-    public IEnumerable<ProductStockState> GetAll()
-    => _states.Values.ToList();
-
-
-    public ProductStockState GetById(string id)
-    => _states.GetValueOrDefault(id) ?? throw new Exception($"No stock state found with id {id}");
 
     public void ApplyMovement(InventoryMovement movement)
     {
@@ -61,6 +51,4 @@ public class InMemoryStockState : IStockStateRepo
         }
     }
 
-    public bool Exist(string key)
-    => _states.ContainsKey(key);
 }

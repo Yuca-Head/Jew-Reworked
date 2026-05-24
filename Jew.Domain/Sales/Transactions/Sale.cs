@@ -7,6 +7,6 @@ public readonly record struct Sale(Client Client, IReadOnlyList<SaleItem> Items,
 {
     public decimal TotalAmount => Items.Sum(i => i.UnitPrice * i.Quantity);
     
-   public Guid Key => TransactionId;
+   public Guid Key {get => TransactionId; set => _ = value;}
 }
 

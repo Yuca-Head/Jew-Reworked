@@ -47,7 +47,7 @@ public class InventoryService(IProductsRepo products, ICategoriesRepo categories
     public void AddCategory(Category category)
     {
         ArgumentNullException.ThrowIfNull(category);
-
+        
         if(_categories.GetByName(category.Name) is not null)
             throw new InventoryException("Esta categoria ya existe", "nombre");
         

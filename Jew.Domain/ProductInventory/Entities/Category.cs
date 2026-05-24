@@ -9,7 +9,7 @@ using Jew.Domain.Shared.Keys;
 namespace Jew.Domain.ProductInventory.Entities;
 
 
-public class Category : IHasId, IClonable<Category>
+public sealed class Category : IHasId, IClonable<Category>
 {
     private string name = string.Empty;
     private string description = string.Empty;
@@ -25,7 +25,13 @@ public class Category : IHasId, IClonable<Category>
         this.Name = name;
     }
 
-    public int Key {get; init;}
+    public int Key {get; private set;}
+    internal void SetId(int id)
+    {
+        if(Key != 0)
+            throw new InvalidOperationException("ID ya ha sido asignado.");
+        Key = id;
+    }
     public string Name 
     { 
         get => name; init

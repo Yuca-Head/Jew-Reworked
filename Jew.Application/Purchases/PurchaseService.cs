@@ -26,7 +26,7 @@ public class PurchaseService(MovementService movements)
         {
         
             _movements.AddMovement(new InventoryMovement(
-                item.Key,
+                item.Product.Code,
                 item.Quantity,
                 item.UnitCost,
                 MovementType.In,
