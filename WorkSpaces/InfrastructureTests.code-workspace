@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../Jew.Test"
+		},
+		{
+			"path": "../Jew.Infrastructure"
+		}
+	],
+	"settings": {}
+}

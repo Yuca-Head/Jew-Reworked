@@ -25,7 +25,7 @@ public sealed class Category : IHasId, IClonable<Category>
         this.Name = name;
     }
 
-    public int Key {get; private set;}
+    public int Key {get; private set;} = 0;
     internal void SetId(int id)
     {
         if(Key != 0)

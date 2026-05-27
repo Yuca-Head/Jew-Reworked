@@ -17,7 +17,7 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
     private Category category;
 
     public DateTime CreatedDate
-    {get;} 
+    {get; init;} 
 
 
     /// <summary>
@@ -44,6 +44,13 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
         CreatedDate = original.CreatedDate;
     }
 
+    internal Product(string code, string name, Category category, bool active, DateTime creation) :
+    this (code, name, category)
+    {
+        this.active = Active;
+        this.CreatedDate = creation;
+    }
+
     public Product Clone()
     => new(this);
     
@@ -51,7 +58,7 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
     /// <summary>
     /// Mismo que código.
     /// </summary>
-    public string  Key {get => Code; set => _ = value;}
+    public string  Key {get => Code;}
 
     public string Code
     {
@@ -98,7 +105,6 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
 
     public void Deactivate()
     {
-    
         if(!Active)
             throw new ProductException("Este producto ya está inactivo", ProductException.Field.state);
 

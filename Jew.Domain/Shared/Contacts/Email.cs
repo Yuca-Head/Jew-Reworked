@@ -6,7 +6,7 @@ namespace Jew.Domain.Shared.Contacts;
 /// <summary>
 /// Correo Electrónico.
 /// </summary>
-public class Email(int id, string correo) : Contacto<MailAddress>(id, Convert(correo))
+public sealed class Email(int id, string correo) : Contacto<MailAddress>(id, Convert(correo))
 {
 
     public override MailAddress Value 

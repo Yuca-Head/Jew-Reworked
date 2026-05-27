@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj": {}
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj": {
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj",
-        "projectName": "Jew.Application",
-        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj",
+        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj",
+        "projectName": "Jew.Applications",
+        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj",
         "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\obj\\",
+        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -126,14 +126,14 @@
         }
       }
     },
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
         "projectName": "Jew.Infrastructure",
-        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
+        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -189,14 +189,14 @@
         }
       }
     },
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj": {
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
+        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
         "projectName": "Jew.Test",
-        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
+        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
         "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\obj\\",
+        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -211,14 +211,14 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj": {
-                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj"
+              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
+                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj"
               },
               "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
                 "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
               },
-              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
+              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
               }
             }
           }

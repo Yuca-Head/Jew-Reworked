@@ -2,6 +2,7 @@
 
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
+using Jew.Domain.ProductInventory.Exceptions;
 
 namespace Jew.Infrastructure.Repositories.InMemory;
 
@@ -10,7 +11,7 @@ public sealed class InMemoryStockState(Dictionary<string, ProductStockState> ent
     public ProductStockState Get(string productId)
     {
         if (!_entities.TryGetValue(productId, out var state))
-            throw new KeyNotFoundException($"No stock state for product {productId}");
+            throw new ProductException($"Sin historial de producto encontrado. Id del producto: {productId}");
 
         return state;
     }

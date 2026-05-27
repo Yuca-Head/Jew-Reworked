@@ -10,17 +10,18 @@ namespace Jew.Domain.Sales.Transactions;
 /// </summary>
 public readonly record struct SaleItem
 {
-    public readonly Product Product{get;}
+    public readonly string ProductId{get;}
     public readonly decimal UnitPrice{get;}
     public readonly int Quantity{get;}
-    public SaleItem(Product product, int quantity, decimal unitPrice)
+    public SaleItem(string productId, int quantity, decimal unitPrice)
     {
-        ArgumentNullException.ThrowIfNull(product);
+        if(string.IsNullOrWhiteSpace(productId))
+            throw new SaleException("Código de producto no válido");
         if(unitPrice <= 0)
             throw new SaleException("Ingrese un precio válido mayor que 0", nameof(UnitPrice));
         if(quantity <= 0)
             throw new SaleException("Debe de vender más de un artículo para realizar la operación");   
-        Product = product;
+        ProductId = productId;
         UnitPrice = unitPrice;
         Quantity = quantity;
     }

@@ -5,5 +5,5 @@ namespace Jew.Domain.Purchases.Repositories;
 
 public interface ISuppliersRepo : IRepository<Supplier, int>
 {
-    Supplier? GetByName(string name);
+    IEnumerable<Supplier>? GetByName(string name);
 }

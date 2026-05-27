@@ -9,23 +9,23 @@ namespace Jew.Domain.Purchases.Transactions;
 /// </summary>
 public readonly record struct PurchaseItem
 {
-    public PurchaseItem(Product product, int quantity, decimal unitCost)
+    public PurchaseItem(string productId, int quantity, decimal unitCost)
     {
-        ArgumentNullException.ThrowIfNull(product); 
+        if(string.IsNullOrWhiteSpace(productId))
+            throw new PurchaseException("Código de producto no válido");
         if(quantity < 0)
             throw new PurchaseException("Se agregar al menos un item.", nameof(Quantity));
         if(unitCost < 1)
             throw new PurchaseException("El precio es muy bajo.", nameof(UnitCost));
         Quantity = quantity;
         UnitCost = unitCost;
-        Product = product;
+        ProductId = productId;
     }
     
 
     public readonly decimal UnitCost{get;}
     public readonly int Quantity{get;}
     public readonly decimal TotalCost => Quantity * UnitCost;
-
-    public readonly Product Product{get;}
+    public readonly string ProductId{get;}
 
 }

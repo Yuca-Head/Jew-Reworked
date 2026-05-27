@@ -8,7 +8,7 @@ namespace Jew.Domain.Purchases.Repositories;
 public interface ISupplierProductsRepo : IRepository<SupplierProduct, SupplierProductPK>
 {
     IEnumerable<SupplierProduct> GetBySupplierId(int supplierId);
-    IEnumerable<SupplierProduct> GetByProductId(int productId); 
+    IEnumerable<SupplierProduct> GetByProductId(string productId); 
 
 
 }

@@ -1,41 +1,62 @@
 using Jew.Domain.Shared.Common;
 using Jew.Domain.Shared.Keys;
+using Jew.Infrastructure.Enums;
+using Jew.Infrastructure.Persistence.Mappers;
+using Jew.Infrastructure.Persistence.Mappers.Shared;
+using Jew.Infrastructure.Persistence.Serialization;
 using Jew.Infrastructure.Repositories.InMemory;
+
 
 namespace Jew.Infrastructure.Repositories.Json;
 
-public abstract class JsonRepository<TValue, TKey>(InMemoryRepository<TValue, TKey> inMemoryRepo, string path)
-: IRepository<TValue, TKey> where TValue : IHasPK<TKey> where TKey : notnull
+
+
+public abstract class JsonRepository<TKey, TEntity, TModel>
+: IRepository<TEntity, TKey> where TEntity : IHasPK<TKey> where TKey : notnull 
 {
-    protected readonly InMemoryRepository<TValue, TKey> _inMemoryRepo = inMemoryRepo;
-    private readonly string _path = path;
-    public string Path => _path;
-    protected JsonStorageService<TValue> StorageService { get; } 
-    = new JsonStorageService<TValue>(path);
-    public virtual void Add(TValue entity)
-    => _inMemoryRepo.Add(entity);
-
-    public bool Exist(TKey key)
-    => _inMemoryRepo.Exist(key);
-
-    public IEnumerable<TValue> GetAll()
-    => _inMemoryRepo.GetAll();
-    public TValue? GetById(TKey key)
-    => _inMemoryRepo.GetById(key);
-    
-
-    public void Load()
+    public JsonRepository(string fileName, IMapper<TEntity, TModel> mapper, Enums.Environment environment)
     {
-        var entities = StorageService.Load();
-        foreach (var entity in entities)
-            Add(entity);
+        EnvironmentType = environment;
+        FilePath = AppPaths.GetDataFilePath(environment, fileName);
+        StorageService = new(FilePath);
+        Mapper = mapper;
     }
 
-    public void SaveChanges()
-    => StorageService.Save(_inMemoryRepo.GetAll());
+    protected abstract InMemoryRepository<TEntity, TKey> InMemoryRepo {get;}
+    protected readonly string FilePath;
+    public Enums.Environment EnvironmentType {get;}
 
-    public void Clear()
+    protected JsonStorageService<TModel> StorageService { get; }
+    public virtual void Add(TEntity entity)
+    => InMemoryRepo.Add(entity);
+    public virtual bool Exist(TKey key)
+    => InMemoryRepo.Exist(key);
+    public virtual IEnumerable<TEntity> GetAll()
+    => InMemoryRepo.GetAll();
+    public virtual TEntity? GetById(TKey key)
+    => InMemoryRepo.GetById(key);
+    protected IMapper<TEntity, TModel> Mapper { get; }
+    public virtual void Load()
     {
-        _inMemoryRepo.Clear();
+        ClearCache();
+        var models = StorageService.Load();
+        foreach (var model in models)
+            Add(Mapper.ToEntity(model));
+    }
+    public virtual void SaveChanges()
+    {
+        var models = GetAll()
+        .Select(Mapper.ToModel);
+        
+        StorageService.Save(models);
+    }
+    public virtual void ClearCache()
+    {
+        InMemoryRepo.Clear();
+    }
+
+    public virtual void ClearMemory()
+    {
+        StorageService.Clear();
     }
 }

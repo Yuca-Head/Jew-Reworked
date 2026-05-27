@@ -5,9 +5,7 @@ namespace Jew.Infrastructure.Repositories.InMemory;
 
 public abstract class InMemoryRepository<TValue, TKey>(Dictionary<TKey, TValue> entities) : IRepository<TValue, TKey> where TValue : IHasPK<TKey> where TKey : notnull
 {
-    public readonly Dictionary<TKey, TValue> _entities = entities;
-
-    public string Path => "";
+    protected readonly Dictionary<TKey, TValue> _entities = entities;
 
     public abstract void Add(TValue entity);
 

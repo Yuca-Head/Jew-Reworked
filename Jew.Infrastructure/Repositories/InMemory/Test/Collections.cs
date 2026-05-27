@@ -8,7 +8,7 @@ namespace Jew.Infrastructure.Repositories.Test;
 
 public static class Collections
 {
-
+    /*
     public static List<Category> CategoriesList = [new("Comida"){Key = 1},
     new("CuidadoPersonal"){Key = 2}, new("Limpieza") {Key = 3}, new("Utiles") {Key = 4},
     new("Electronica"){Key = 5}];
@@ -51,5 +51,5 @@ public static class Collections
 
 
     public static List<Supplier> SuppliersList = [new(0, "Carlota"), new(0, "RadioShack"), new(0, "El pelado")];
-
+    */
 }

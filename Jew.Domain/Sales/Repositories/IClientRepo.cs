@@ -8,4 +8,5 @@ namespace Jew.Domain.Sales.Repositories;
 
 public interface IClientRepo : IRepository<Client, CodeKey>
 {
+    IEnumerable<Client>? GetByName(string name);
 }

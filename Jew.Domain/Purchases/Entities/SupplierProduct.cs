@@ -35,7 +35,7 @@ public class SupplierProduct : IHasPK<SupplierProductPK>
         }
     }
 
-    public SupplierProductPK Key {get;}
+    public SupplierProductPK Key {get; init;}
 
     public SupplierProduct(string productid, int supplierId, decimal price)
     {

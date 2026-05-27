@@ -12,11 +12,14 @@ public interface IUnitOfWork
     ISuppliersRepo Suppliers { get; }
     IMovementsRepo Movements { get; }
     IStockStateRepo StockState { get; }
-    ISaleRepo Sales { get; }
-    IPurchaseRepo Purchases { get; }
+    ISalesRepo Sales { get; }   
+    IPurchasesRepo Purchases { get; }
+    ISupplierProductsRepo SuppliersProducts {get;}
+    IClientRepo Clients {get;}
 
     //No sé que hace pero cuando lo sepa lo usaré.
     virtual void Commit()
     => throw new NotImplementedException();
     void SaveChanges();
+    void Load();
 }

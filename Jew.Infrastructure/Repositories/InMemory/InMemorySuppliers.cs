@@ -1,8 +1,8 @@
 
 using Jew.Domain.Purchases.Entities;
 using Jew.Domain.Purchases.Repositories;
+using Jew.Infrastructure.Repositories.Shared;
 using Jew.Infrastructure.Repositories.Test;
-using Jew.Infrastructure.Shared;
 
 
 namespace Jew.Infrastructure.Repositories.InMemory;
@@ -19,6 +19,6 @@ public sealed class InMemorySuppliers(Dictionary<int, Supplier> entities) : InMe
         _entities.Add(entity.Key, entity);
     }
 
-    public Supplier? GetByName(string name)
-    => _entities.Values.FirstOrDefault(s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase));
+    public IEnumerable<Supplier>? GetByName(string name)
+    => _entities.Values.Where(s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase));
 }

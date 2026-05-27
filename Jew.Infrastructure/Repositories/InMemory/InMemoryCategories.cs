@@ -1,8 +1,8 @@
 
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.ProductInventory.Repositories;
+using Jew.Infrastructure.Repositories.Shared;
 using Jew.Infrastructure.Repositories.Test;
-using Jew.Infrastructure.Shared;
 
 
 namespace Jew.Infrastructure.Repositories.InMemory;
@@ -14,7 +14,8 @@ public sealed class InMemoryCategories(Dictionary<int, Category> entities) : InM
     {
         
         ArgumentNullException.ThrowIfNull(entity);
-        entity.SetId(_identity.Next(this));
+        if(entity.Key == 0)
+            entity.SetId(_identity.Next(this));
         _entities.Add(entity.Key, entity);
     }
 

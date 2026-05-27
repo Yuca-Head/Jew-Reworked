@@ -5,4 +5,4 @@ using Jew.Domain.Shared.People;
 
 namespace Jew.Domain.Sales.Entities;
 
-public class Client(CodeKey code, string name, ICollection<IContact>? contacts) : Person<CodeKey>(code, name, contacts), IParty;
+public class Client(CodeKey code, string name) : Person<CodeKey>(code, name), IParty;

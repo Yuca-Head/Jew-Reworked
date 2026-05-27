@@ -7,7 +7,7 @@ namespace Jew.Domain.Purchases.Entities;
 
 public class Supplier: Person<int>, IParty
 {
-    public Supplier(int id, string name, ICollection<IContact>? contacts = null) : base (id, name, contacts){}
+    public Supplier(int id, string name) : base (id, name){}
     public Supplier(Supplier supplier) : base(supplier){}
 
     internal void SetId(int id)

@@ -2,7 +2,7 @@
 
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
-using Jew.Infrastructure.Shared;
+using Jew.Infrastructure.Repositories.Shared;
 
 namespace Jew.Infrastructure.Repositories.InMemory;
 

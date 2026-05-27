@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace Jew.Domain.Shared.Contacts;
 
 
-public class Phone(int id, string tel) : Contacto<string>(id, tel)
+public sealed class Phone(int id, string tel) : Contacto<string>(id, tel)
 {
 
 

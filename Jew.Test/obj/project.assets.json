@@ -486,17 +486,17 @@
           "build/net8.0/xunit.runner.visualstudio.props": {}
         }
       },
-      "Jew.Application/1.0.0": {
+      "Jew.Applications/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Jew.Domain": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Jew.Application.dll": {}
+          "bin/placeholder/Jew.Applications.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Jew.Application.dll": {}
+          "bin/placeholder/Jew.Applications.dll": {}
         }
       },
       "Jew.Domain/1.0.0": {
@@ -1164,10 +1164,10 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "Jew.Application/1.0.0": {
+    "Jew.Applications/1.0.0": {
       "type": "project",
-      "path": "../Jew.Application/Jew.Application.csproj",
-      "msbuildProject": "../Jew.Application/Jew.Application.csproj"
+      "path": "../Jew.Applications/Jew.Applications.csproj",
+      "msbuildProject": "../Jew.Applications/Jew.Applications.csproj"
     },
     "Jew.Domain/1.0.0": {
       "type": "project",
@@ -1182,7 +1182,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Jew.Application >= 1.0.0",
+      "Jew.Applications >= 1.0.0",
       "Jew.Domain >= 1.0.0",
       "Jew.Infrastructure >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.14.1",
@@ -1198,11 +1198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
+      "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
       "projectName": "Jew.Test",
-      "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
+      "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
       "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\obj\\",
+      "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1217,14 +1217,14 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj": {
-              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Application\\Jew.Application.csproj"
+            "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
+              "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj"
             },
             "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
               "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
             },
-            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
+            "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+              "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
             }
           }
         }

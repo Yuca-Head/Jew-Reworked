@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nxC7+AOej7M=",
+  "dgSpecHash": "u+tndXN04H0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
+  "projectFilePath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Test\\Jew.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Eduardo\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Eduardo\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",

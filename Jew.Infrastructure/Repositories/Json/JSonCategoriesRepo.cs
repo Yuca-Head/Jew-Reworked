@@ -1,9 +1,18 @@
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.ProductInventory.Repositories;
+using Jew.Infrastructure.Persistence.Mappers;
+using Jew.Infrastructure.Persistence.Mappers.ProductInventory;
+using Jew.Infrastructure.Persistence.Models;
+using Jew.Infrastructure.Persistence.Models.ProductInventory;
+using Jew.Infrastructure.Repositories.InMemory;
 
 namespace Jew.Infrastructure.Repositories.Json;
 
-public class JSonCategoriesRepo : ICategoriesRepo
+public sealed class JsonCategoriesRepo(Enums.Environment environment, string? fileName = null) 
+: JsonRepository<int, Category, CategoryData>(fileName ?? defaultFileName, new CategoryMapper(), environment), ICategoriesRepo
 {
-
+    protected override InMemoryCategories InMemoryRepo { get; } = new InMemoryCategories([]);
+    private const string defaultFileName = "Categories.json";
+    public Category? GetByName(string name)
+    => InMemoryRepo.GetByName(name);
 }

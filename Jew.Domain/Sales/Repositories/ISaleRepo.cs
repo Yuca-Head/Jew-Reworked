@@ -3,7 +3,7 @@ using Jew.Domain.Shared.Common;
 
 namespace Jew.Domain.Sales.Repositories;
 
-public interface ISaleRepo : IRepository<Sale, Guid>
+public interface ISalesRepo : IRepository<Sale, Guid>
 {
     
 }

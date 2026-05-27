@@ -1,10 +1,9 @@
+using Jew.Infrastructure.Repositories.Json;
+
 namespace Jew.Infrastructure.UnitOfWork;
 
-public class JSonUnitOfWork : UnitOfWork
-{
-    public JSonUnitOfWork
-    (JSonCategoriesRepo categories, JSonProductsRepo products, JSonSuppliersRepo suppliers, JSonMovementsRepo movements, JSonStockStateRepo stockState, JSonSaleRepo sales, JSonPurchaseRepo purchases)
-        : base(categories, products, suppliers, movements, stockState, sales, purchases)
-    {
-    }
-}
+
+public class JSonUnitOfWork(JsonCategoriesRepo categories, JsonProductsRepo products, JsonSuppliersRepo suppliers,
+JsonMovementsRepo movements, JsonProductsStockStates stockState, JsonSalesRepo sales, JsonPurchasesRepo purchases,
+JsonSupplierProductsRepo supplierProducts, JsonClientsRepo clients) : 
+UnitOfWork(categories, products, suppliers, movements, stockState, sales, purchases, supplierProducts, clients);

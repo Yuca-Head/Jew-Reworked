@@ -12,7 +12,7 @@ public abstract class Person<T> : IHasPK<T>
 {
     public virtual T Key {get; protected set;}
 
-    public readonly PersonContacts Contacts = new();
+    //public readonly PersonContacts Contacts = new();
 
     private string _name = string.Empty;
 
@@ -26,21 +26,18 @@ public abstract class Person<T> : IHasPK<T>
         }
     }
 
-    public Person(T key, string name, ICollection<IContact>? contacts)
+    public Person(T key, string name)
     {
         Key = key;
         Name = name;
 
-        if(contacts is not null)
-            foreach(var c in contacts)
-                Contacts.AddContact(c);
+
     }
 
     public Person(Person<T> person)
     {
         Key = person.Key;
         Name = person.Name;
-        Contacts = person.Contacts;
     }
 }
 

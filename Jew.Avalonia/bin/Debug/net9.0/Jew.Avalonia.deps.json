@@ -13,7 +13,10 @@
           "Avalonia.Diagnostics": "11.3.6",
           "Avalonia.Fonts.Inter": "11.3.6",
           "Avalonia.Themes.Fluent": "11.3.6",
-          "CommunityToolkit.Mvvm": "8.2.1"
+          "CommunityToolkit.Mvvm": "8.2.1",
+          "Jew.Applications": "1.0.0",
+          "Jew.Domain": "1.0.0",
+          "Jew.Infrastructure": "1.0.0"
         },
         "runtime": {
           "Jew.Avalonia.dll": {}
@@ -444,6 +447,36 @@
             "fileVersion": "0.21.2.0"
           }
         }
+      },
+      "Jew.Applications/1.0.0": {
+        "dependencies": {
+          "Jew.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Jew.Applications.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Jew.Domain/1.0.0": {
+        "runtime": {
+          "Jew.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Jew.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Jew.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Jew.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -655,6 +688,21 @@
       "sha512": "sha512-ScSMrUrrw8px4kK1Glh0fZv/HQUlg1078bNXNPfRPKQ3WbRzV9HpsydYEOgSoMK5LWICMf2bMwIFH0pGjxjcMA==",
       "path": "tmds.dbus.protocol/0.21.2",
       "hashPath": "tmds.dbus.protocol.0.21.2.nupkg.sha512"
+    },
+    "Jew.Applications/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Jew.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Jew.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -72,3 +72,14 @@ C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\obj\Debug\net9.0\refint\Jew.A
 C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\obj\Debug\net9.0\Jew.Avalonia.pdb
 C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\obj\Debug\net9.0\Jew.Avalonia.genruntimeconfig.cache
 C:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\obj\Debug\net9.0\ref\Jew.Avalonia.dll
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\obj\Debug\net9.0\Jew.Avalonia.sourcelink.json
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Persistence\Data\Prod\Categories.json
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Persistence\Data\Prod\Products.json
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Persistence\Data\Test\Categories.json
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Persistence\Data\Test\Products.json
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Applications.dll
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Domain.dll
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Infrastructure.dll
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Applications.pdb
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Domain.pdb
+c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Avalonia\bin\Debug\net9.0\Jew.Infrastructure.pdb
