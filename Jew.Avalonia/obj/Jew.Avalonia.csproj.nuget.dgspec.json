@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj": {}
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj": {}
   },
   "projects": {
     "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
@@ -26,77 +26,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
-                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
-        "projectName": "Jew.Avalonia",
-        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
-        "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net9.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
-            "projectReferences": {
-              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
-                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj"
+              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
+                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
               },
-              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
-                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
-              },
-              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
-                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
+              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
               }
             }
           }
@@ -117,6 +51,82 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[16.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
+        "projectName": "Jew.Avalonia",
+        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
+        "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj": {
+                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Applications\\Jew.Applications.csproj"
+              },
+              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[16.1.1, )"
+            },
             "Avalonia": {
               "target": "Package",
               "version": "[11.3.6, )"
@@ -140,6 +150,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.1, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.8, )"
             }
           },
           "imports": [
@@ -162,14 +176,14 @@
         }
       }
     },
-    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
+    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj",
+        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj",
         "projectName": "Jew.Domain",
-        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj",
+        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj",
         "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\obj\\",
+        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -221,14 +235,14 @@
         }
       }
     },
-    "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
+    "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
         "projectName": "Jew.Infrastructure",
-        "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -243,8 +257,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
-                "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
+              "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
+                "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
               }
             }
           }

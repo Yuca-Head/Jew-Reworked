@@ -18,7 +18,7 @@ public class ProductStockState : IHasPK<string>, IClonable<ProductStockState>
 
     public void AddQuantity(int quantity, decimal unitCost)
     {
-        if (quantity < 0)
+        if (quantity <= 0)
             throw new InvalidOperationException("Quantity must be a positive value.");
 
         CalculateAverageCost(unitCost, quantity);
@@ -42,7 +42,7 @@ public class ProductStockState : IHasPK<string>, IClonable<ProductStockState>
 
     public void ReduceQuantity(int quantity)
     {
-        if (quantity < 0)
+        if (quantity <= 0)
             throw new InvalidOperationException("Quantity must be a positive value.");
 
         if(quantity > Quantity)

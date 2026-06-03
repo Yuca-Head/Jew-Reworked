@@ -1,15 +1,16 @@
 
 using Jew.Applications.InventoryMovements;
+using Jew.Applications.InventoryMovements.Commands;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.Sales.Entities;
 using Jew.Domain.Sales.Exceptions;
 using Jew.Domain.Sales.Transactions;
 
-namespace Jew.Applications.Sales;
+namespace Jew.Applications.Sales.Services;
 
-public class SaleSevices(MovementService movements)
+public class SaleSevices(MovementCommands movements)
 {
-    private readonly MovementService _movements = movements;
+    private readonly MovementCommands _movements = movements;
 
     public void RegisterSale(Client client, Sale sale)
     {

@@ -13,9 +13,6 @@ public sealed class InMemoryProducts(Dictionary<string, Product> products) : InM
     {
         ArgumentNullException.ThrowIfNull(entity);
 
-        if(_entities.Values.Any(p => string.Equals(p.Category.Name, entity.Category.Name, StringComparison.OrdinalIgnoreCase) 
-        && string.Equals(p.Name, entity.Name, StringComparison.OrdinalIgnoreCase)))
-            throw new ProductException("Ya existe este producto", ProductException.Field.name);
         if(Exist(entity.Code))
             throw new ProductException("Ya existe un producto con ese código", ProductException.Field.code);
 
@@ -28,10 +25,10 @@ public sealed class InMemoryProducts(Dictionary<string, Product> products) : InM
     => _entities.Values.FirstOrDefault(p => string.Equals(p.Code, code, StringComparison.OrdinalIgnoreCase));
 
     public IEnumerable<Product> GetFromCategory(Category category)
-    => GetFromCategory(category.Key);
+    => GetFromCategory(category.Name);
 
-    public IEnumerable<Product> GetFromCategory(int categoryId)
-    => [.. _entities.Values.Where(p => p.Category.Key == categoryId)];
+    public IEnumerable<Product> GetFromCategory(string categoryId)
+    => [.. _entities.Values.Where(p => p.CategoryId == categoryId)];
 
 
 }

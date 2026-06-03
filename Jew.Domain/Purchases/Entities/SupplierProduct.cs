@@ -15,6 +15,15 @@ namespace Jew.Domain.Purchases.Entities;
 /// </summary>
 public class SupplierProduct : IHasPK<SupplierProductPK>
 {
+
+    public SupplierProduct(string productid, int supplierId, decimal price)
+    {
+        ProductId = productid;
+        Price = price;
+        SupplierId = supplierId;
+        Key = new(supplierId, productid);
+    }
+    
     /// <summary>
     /// Supplier Id
     /// </summary>
@@ -37,12 +46,6 @@ public class SupplierProduct : IHasPK<SupplierProductPK>
 
     public SupplierProductPK Key {get; init;}
 
-    public SupplierProduct(string productid, int supplierId, decimal price)
-    {
-        ProductId = productid;
-        Price = price;
-        SupplierId = supplierId;
-        Key = new(supplierId, productid);
-    }
+
 
 }

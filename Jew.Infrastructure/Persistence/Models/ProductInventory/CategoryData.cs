@@ -1,4 +1,4 @@
 
 namespace Jew.Infrastructure.Persistence.Models.ProductInventory;
 
-public sealed record CategoryData(int Key, string Name, string Description);
+public sealed record CategoryData(string Name, string Description);

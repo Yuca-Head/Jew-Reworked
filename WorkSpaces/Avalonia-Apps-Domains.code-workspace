@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../Jew.Avalonia"
+		},
+		{
+			"path": "../Jew.Applications"
+		},
+		{
+			"path": "../Jew.Domain"
+		},
+		{
+			"path": "../Jew.Infrastructure"
+		}
+	],
+	"settings": {}
+}

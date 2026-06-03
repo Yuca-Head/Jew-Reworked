@@ -11,7 +11,7 @@ public sealed class InMemoryClients(Dictionary<CodeKey, Client> entities) : InMe
     public override void Add(Client entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
-       if(_entities.TryAdd(entity.Key, entity))
+        if(!_entities.TryAdd(entity.Key, entity))
             throw new PersonException("Ya existe un cliente con ese identificador");
     }
 

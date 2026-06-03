@@ -8,8 +8,8 @@ namespace Jew.Infrastructure.Persistence.Mappers.ProductInventory;
 public sealed class ProductMapper : IMapper<Product, ProductData>
 {
     public Product ToEntity(ProductData data)
-    => new(data.Code, data.Name, data.Category, data.Active, data.CreatedDate);
+    => new(data.Code, data.Name, data.CategoryId, data.Active, data.CreatedDate);
 
     public ProductData ToModel(Product domain)
-    => new(domain.Code, domain.Name, domain.Category, domain.Active, domain.CreatedDate);
+    => new(domain.Code, domain.Name, domain.CategoryId, domain.Active, domain.CreatedDate);
 }

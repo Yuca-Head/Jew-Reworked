@@ -60,9 +60,9 @@ public abstract class UnitOfWork : IUnitOfWork
 
     private readonly IRepository[] _repositories;
 
-    public void SaveChanges()
+    public virtual void SaveChanges()
     => Array.ForEach(_repositories, x => x.SaveChanges());
     
-    public void Load()
+    public virtual void Load()
     => Array.ForEach(_repositories, x => x.Load());
 }

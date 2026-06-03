@@ -1,0 +1,29 @@
+<UserControl 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Products.Menus"
+    xmlns:Views="using:Jew.Avalonia.Views.Products"
+    x:Class="Jew.Avalonia.Views.Products.ProductsMenuView"
+    x:DataType="vm:ProductsMenuViewModel"
+>
+    <Grid ShowGridLines="True" RowDefinitions="*, 400" Background="Transparent">
+
+        <Grid Grid.Row="1" RowDefinitions="*, 250" Background="Transparent">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="10" Margin="20">
+
+                <StackPanel Margin="50,0,0,0">
+
+                    <TextBlock Text="Filtrar por categoría:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiLight" Foreground="Black"/>
+                    <ComboBox ItemsSource="{Binding SearchProduct.CategoriesFilter}" 
+                    SelectedItem="{Binding SearchProduct.SelectedCategory}"  Width="200" Classes="common"/>
+
+                </StackPanel>
+                
+                <Button Content="+ Agregar Producto" Background="#BE63DE" Foreground="White" Margin="350,0,0,0"/>
+
+            </StackPanel>
+            <Views:ProductListCard DataContext="{Binding}" Grid.Row="1"  Width="600"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

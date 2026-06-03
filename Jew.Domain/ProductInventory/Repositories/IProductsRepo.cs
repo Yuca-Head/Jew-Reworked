@@ -5,8 +5,7 @@ namespace Jew.Domain.ProductInventory.Repositories;
 
 public interface IProductsRepo : IRepository<Product, string>
 {
-    IEnumerable<Product> GetFromCategory(Category category);
-    IEnumerable<Product> GetFromCategory(int categoryId);
+    IEnumerable<Product> GetFromCategory(string categoryId);
     Product? GetByCode(string code);
     
 }

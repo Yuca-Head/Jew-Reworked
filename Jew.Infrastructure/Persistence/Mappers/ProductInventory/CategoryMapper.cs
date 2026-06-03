@@ -8,12 +8,8 @@ namespace Jew.Infrastructure.Persistence.Mappers.ProductInventory;
 public sealed class CategoryMapper : IMapper<Category, CategoryData>
 {
     public Category ToEntity(CategoryData data)
-    {
-        var result = new Category(data.Name, data.Description);
-        result.SetId(data.Key);
-        return result;
-    }
+    => new (data.Name, data.Description);
 
     public CategoryData ToModel(Category domain)
-    => new(domain.Key, domain.Name, domain.Description);
+    => new(domain.Name, domain.Description);
 }

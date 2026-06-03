@@ -15,18 +15,15 @@ public sealed class JsonStorageService<T>(string path, JsonSerializerOptions? op
         path ??= _path;
         string json = JsonSerializer.Serialize(values, _options);
         File.WriteAllText(path, json);
-    
-        File.WriteAllText(path, json);
-
     }
     
     public IEnumerable<T> Load(IEnumerable<T>? defaultValues = null, string? path = null)
     {
         path ??= _path;
-        if (!File.Exists(path))
+        string json;
+        if (!File.Exists(path) || string.IsNullOrWhiteSpace(json= File.ReadAllText(path)))
             return defaultValues ?? [];
 
-        string json = File.ReadAllText(path);
         return JsonSerializer.Deserialize<IEnumerable<T>>(json, _options) ?? [];
     }
 

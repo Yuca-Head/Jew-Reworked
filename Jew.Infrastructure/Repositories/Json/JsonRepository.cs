@@ -58,5 +58,9 @@ public abstract class JsonRepository<TKey, TEntity, TModel>
     public virtual void ClearMemory()
     {
         StorageService.Clear();
+        ClearCache();
     }
+
+    public virtual IEnumerable<TKey> GetKeys()
+    => InMemoryRepo.GetKeys();
 }

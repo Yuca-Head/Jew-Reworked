@@ -22,6 +22,6 @@ public sealed class JsonProductsRepo(Enums.Environment enviroment, string? fileN
     public IEnumerable<Product> GetFromCategory(Category category)
     => InMemoryRepo.GetFromCategory(category);
 
-    public IEnumerable<Product> GetFromCategory(int categoryId)
+    public IEnumerable<Product> GetFromCategory(string categoryId)
     => InMemoryRepo.GetFromCategory(categoryId);
 }

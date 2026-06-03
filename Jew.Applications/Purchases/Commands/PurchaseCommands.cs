@@ -1,16 +1,17 @@
 
 using Jew.Applications.InventoryMovements;
+using Jew.Applications.InventoryMovements.Commands;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.Purchases.Entities;
 using Jew.Domain.Purchases.Exceptions;
 using Jew.Domain.Purchases.Transactions;
 
-namespace Jew.Applications.Purchases;
+namespace Jew.Applications.Purchases.Commands;
 
-public class PurchaseService(MovementService movements)
+public class PurchaseCommands(MovementCommands movements)
 {
 
-    private readonly MovementService _movements = movements;
+    private readonly MovementCommands _movements = movements;
 
     public void RegisterPurchase(Supplier supplier, List<PurchaseItem> items)
     {

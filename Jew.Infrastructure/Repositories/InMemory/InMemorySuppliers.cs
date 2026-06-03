@@ -15,7 +15,8 @@ public sealed class InMemorySuppliers(Dictionary<int, Supplier> entities) : InMe
     {
         ArgumentNullException.ThrowIfNull(entity);
         
-        entity.SetId(_identity.Next(this));
+        if(entity.Key == 0)
+            entity.SetId(_identity.Next(this));
         _entities.Add(entity.Key, entity);
     }
 

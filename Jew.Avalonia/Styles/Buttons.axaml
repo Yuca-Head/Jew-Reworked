@@ -9,9 +9,39 @@
 
     </Style>
 
+    <!--Botones Principales-->
     <Style Selector="Button.main">
         <Setter Property="Background" Value="Navy"/>
         <Setter Property="Foreground" Value="lightgray"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
+
+
+    <!--Botones de la barra lateral-->
+    <Style Selector="Button.sidebar">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    
+    <!--
+    <Style Selector="Button.sidebar:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="Gray"/>     
+        <Setter Property="Opacity" Value="0.5"/>
+    </Style>
+    -->
+
+    <Style Selector="Button.sidebar:focus /template/ ContentPresenter">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#BF2CBF"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <!--/Barra lateral-->
+
 </Styles>

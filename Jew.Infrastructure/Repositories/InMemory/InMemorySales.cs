@@ -8,8 +8,9 @@ public sealed class InMemorySales(Dictionary<Guid, Sale> entities) : InMemoryRep
 {
     public override void Add(Sale entity)
     {
+        //Intencional, porque la generación debería ser, en teoría, aleatoria.
         if(!_entities.TryAdd(entity.TransactionId, entity))
             throw new DomainException("Se ha producido un error, el número de transacción ya existe"); 
-            //Intencional, porque la generación debería ser, en teoría, aleatoria.
+
     }
 }

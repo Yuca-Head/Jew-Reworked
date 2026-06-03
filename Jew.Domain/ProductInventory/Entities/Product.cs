@@ -14,7 +14,7 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
 
     private bool active;
 
-    private Category category;
+    private string categoryId;
 
     public DateTime CreatedDate
     {get; init;} 
@@ -25,13 +25,19 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
     /// </summary>
     [JsonConstructor]
     public Product(){}
-    public Product(string code, string name, Category category)
+    public Product(string code, string name, string categoryId)
     {
         Code = code;
         Name = name;
         CreatedDate = DateTime.Now;
         active = true;
-        Category = category;
+        CategoryId = categoryId;
+    }
+
+    public Product(string code, string name, Category category):
+    this(code, name, category.Name)
+    {
+        
     }
 
     //PARA NO TOMAR LA REFERENCIA DIRECTA
@@ -40,14 +46,14 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
         Code = original.Code;
         Name = original.Name;
         Active = original.Active;
-        Category = original.Category;
+        CategoryId = original.CategoryId;
         CreatedDate = original.CreatedDate;
     }
 
-    internal Product(string code, string name, Category category, bool active, DateTime creation) :
-    this (code, name, category)
+    internal Product(string code, string name, string categoryId, bool active, DateTime creation) :
+    this (code, name, categoryId)
     {
-        this.active = Active;
+        this.Active = active;
         this.CreatedDate = creation;
     }
 
@@ -112,13 +118,13 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
     }
 
 
-    public Category Category
+    public string CategoryId
     {
-        get => category;
+        get => categoryId;
         set
         {
-            ArgumentNullException.ThrowIfNull(value, nameof(category));
-            category = value;
+            ArgumentException.ThrowIfNullOrWhiteSpace(value);
+            categoryId = value;
         }
     }
 

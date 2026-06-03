@@ -5,7 +5,6 @@ using Jew.Domain.Shared.Common;
 
 namespace Jew.Domain.ProductInventory.Repositories;
 
-public interface ICategoriesRepo : IRepository<Category, int>
+public interface ICategoriesRepo : IRepository<Category, string>
 {
-    Category? GetByName(string name);
 }

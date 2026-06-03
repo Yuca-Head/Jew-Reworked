@@ -2,11 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Jew.Avalonia.App"
              xmlns:local="using:Jew.Avalonia"
+             xmlns:productViews="using:Jew.Avalonia.Views.Products"
+             xmlns:productVM="using:Jew.Avalonia.ViewModels.Products.Menus"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <DataTemplate DataType="productVM:ProductsMenuViewModel">
+                <productViews:ProductsMenuView/>
+        </DataTemplate>
+        <!--local:ViewLocator/-->
     </Application.DataTemplates>
   
     <Application.Styles>
@@ -17,4 +22,6 @@
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Collections.axaml"/>
     </Application.Styles>
 
+
+    
 </Application>

@@ -1,10 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui">
 
+
+<!-- Error Text Style -->
 <Style Selector="TextBlock.error">
     <Setter Property="Foreground" Value="Red"/>
     <Setter Property="FontSize" Value="12"/>
 </Style>
 
+<!-- Header de algo -->
 <Style Selector="TextBlock.header">
     <Setter Property="Background" Value="Navy"/>
     <Setter Property="FontSize" Value="15"/>
@@ -13,9 +16,19 @@
     <Setter Property="FontWeight" Value="DemiBold"/>
 </Style>
 
+<!-- TextBlock que se estira para llenar el espacio disponible -->
 <Style Selector="TextBlock.stretch">
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
+</Style>
+
+<!-- TextBlock para el Header De la lista del menú de productos -->
+<Style Selector="TextBlock.menu-list-header">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+    <Setter Property="FontWeight" Value="Bold"/>
 </Style>
 
 </Styles>

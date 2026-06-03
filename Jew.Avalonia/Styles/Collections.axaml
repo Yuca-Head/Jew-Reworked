@@ -3,19 +3,42 @@
 
 
 <!--ComboBox Common-->
+
+
+<!--Por fuera-->
+
+<Style Selector="ComboBox.common">
+    <Setter Property="Background" Value="White"/>
+    <Setter Property="Foreground" Value="Black"/>
+</Style>
+
+<Style Selector="ComboBox.common:pointerover /template/ Border">
+    <Setter Property="Opacity" Value="0.8"/>
+    <Setter Property="Background" Value="#59D6D6"/>
+</Style>
+
+<Style Selector="ComboBox.common:pointerover">
+    <Setter Property="Foreground" Value="Gray"/>
+</Style>
+
+<!--/Por fuera-->
+
+<!--Items dentro del ComboBox-->
+
+
 <Style Selector="ComboBox.common ComboBoxItem">
     <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="Foreground" Value="Black"/>
 </Style>
 
 <!--Cuando el item es seleccionado-->
 <Style Selector="ComboBox.common ComboBoxItem:selected /template/ ContentPresenter">
-    <Setter Property="Background" Value="Teal"/>
+    <Setter Property="Background" Value="#0E9D9D"/>
 </Style>
 
 <!--Cuando el ratón está encima del item-->
 <Style Selector="ComboBox.common ComboBoxItem:pointerover /template/ ContentPresenter">
-    <Setter Property="Background" Value="Teal"/>
+    <Setter Property="Background" Value="#0E9D9D"/>
     <Setter Property="Opacity" Value="0.5"/>
 </Style>
 
@@ -26,17 +49,24 @@
 
 <!--Como se ve el fondo del interior de la lista (detrás de los items)-->
 <Style Selector="ComboBox.common /template/ Popup Border">
-    <Setter Property="Background" Value="DarkGray"/>
+    <Setter Property="Background" Value="White"/>
 </Style>
+
+
+<!--/Items dentro del ComboBox-->
+
+
+
+
 <!--/ComboBox Common-->
+
+
 
 <!--ListBox Common-->
 <Style Selector="ListBox.common ListBoxItem">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Foreground" Value="White"/>
 </Style>
-
-
 
 
 

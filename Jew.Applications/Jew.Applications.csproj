@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Jew.Domain\Jew.Domain.csproj" />
+    <ProjectReference Include="..\Jew.Infrastructure\Jew.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
   </ItemGroup>
   
 </Project>

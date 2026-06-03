@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Jew.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03b89528d43f199a3b9570010ed3c0adac683698")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fef183e6c02d78bfa0d1e13b7689d58cce5d17d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Jew.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Jew.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

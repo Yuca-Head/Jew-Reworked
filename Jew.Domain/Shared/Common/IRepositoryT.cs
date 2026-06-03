@@ -10,5 +10,6 @@ public interface IRepository<TValue, TKey>  : IRepository where TValue : IHasPK<
     virtual void Remove(TKey key){throw new NotImplementedException("No se puede remover este item.");} 
     bool Exist(TKey key);
 
+    IEnumerable<TKey> GetKeys();
 
 }

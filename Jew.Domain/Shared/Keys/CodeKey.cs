@@ -6,15 +6,7 @@ public readonly record struct CodeKey
 {
     private readonly int _length = 0;
     private readonly string _key = string.Empty;
-    public string Key 
-    {
-        get => _key;
-        init
-        {
-            ArgumentOutOfRangeException.ThrowIfNotEqual(value.Length, Length, nameof(Key));
-            _key = value;
-        }
-    }
+    
     public int Length
     {
         get => _length;
@@ -22,6 +14,16 @@ public readonly record struct CodeKey
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value, nameof(Length));
             _length = value;
+        }
+    }
+
+    public string Key 
+    {
+        get => _key;
+        init
+        {
+            ArgumentOutOfRangeException.ThrowIfNotEqual(value.Length, Length, nameof(Key));
+            _key = value;
         }
     }
 

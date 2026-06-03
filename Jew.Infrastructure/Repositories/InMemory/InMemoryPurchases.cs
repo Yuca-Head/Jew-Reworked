@@ -11,8 +11,9 @@ InMemoryRepository<Purchase, Guid>(entities), IPurchasesRepo
 
     public override void Add(Purchase entity)
     {
+        //Intencional, porque la generación debería ser, en teoría, aleatoria.
         if(!_entities.TryAdd(entity.TransactionId, entity))
             throw new DomainException("Se ha producido un error, el número de transacción ya existe"); 
-            //Intencional, porque la generación debería ser, en teoría, aleatoria.
+
     }
 }

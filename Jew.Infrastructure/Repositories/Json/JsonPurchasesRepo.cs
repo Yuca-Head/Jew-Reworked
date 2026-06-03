@@ -14,5 +14,5 @@ JsonRepository<Guid, Purchase, PurchaseData>(fileName ?? defaultFileName, new Pu
 {   
     private const string defaultFileName = "Purchases.json";
     protected override InMemoryPurchases InMemoryRepo {get;} = new([]);
-
+    
 }

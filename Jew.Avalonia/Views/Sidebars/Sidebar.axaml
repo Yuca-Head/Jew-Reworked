@@ -1,0 +1,30 @@
+<UserControl 
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Jew.Avalonia.ViewModels.SideBar"
+        x:Class="Jew.Avalonia.Views.Sidebars.Sidebar"
+        x:DataType="vm:SidebarViewModel">
+
+
+        <Border  CornerRadius="0, 20, 20, 0" Margin="0">
+                
+                <Border.Background >
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                <GradientStop Offset="0" Color="#9966FF"/>
+                                <GradientStop Offset="100" Color="#8c52ff"/>
+                        </LinearGradientBrush>
+                </Border.Background>
+               <StackPanel Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Spacing="10" Background="Transparent">
+                        <Button Classes="sidebar" Content="Dashboard"/>
+                        <Button Classes="sidebar" Content="Inventario"/>
+                        <Button Classes="sidebar" Content="Productos" Command="{Binding ShowProductsCommand}"/>
+                        <Button Classes="sidebar" Content="Categorías"/>
+                        <Button Classes="sidebar" Content="Proveedores"/>
+                        <Button Classes="sidebar" Content="Clientes"/>
+                        <Button Classes="sidebar" Content="Compras"/>
+                        <Button Classes="sidebar" Content="Ventas"/>
+                        <Button Classes="sidebar" Content="Movimientos"/>
+                </StackPanel>           
+        </Border>
+</UserControl>
+
