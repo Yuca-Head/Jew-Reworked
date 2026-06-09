@@ -1,3 +1,6 @@
+using Jew.Applications.ProductInventory.DTOs;
+using Jew.Applications.Purchases.Commands;
+using Jew.Applications.Purchases.DTOs.Suppliers;
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.Shared.Keys;
 using Jew.Infrastructure.Repositories.Json;
@@ -49,5 +52,16 @@ public class JsonTests
         context.Load();
         //Asserts
         Assert.NotNull(context.Categories.GetById("Tech"));
+    }
+
+    [Fact]
+    public void SaveProdutsToSupplier()
+    {
+        JsonUnitOfWork context = new(Jew.Infrastructure.Enums.Environment.Test);
+        context.Load();
+        SupplierCommands commands = new(context);
+        SupplierDto miguelazo = new(1, "Miguelazo.Com");
+        commands.AddProduct(new(miguelazo, ProductDto.From(context.Products.GetById("Carne-Mol")), 20));
+        context.SaveChanges();
     }
 }

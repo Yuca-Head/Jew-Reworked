@@ -3,6 +3,12 @@ using System;
 
 namespace Jew.Avalonia;
 
+/*
+    TODO:
+    ° Investigar ArgumentNullException al registrar
+    después de limpiar el formulario; Linea aprox: 71 PurchaseMenuVM.
+
+*/
 sealed class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any

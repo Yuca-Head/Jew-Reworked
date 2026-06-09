@@ -28,7 +28,6 @@ public class SaleSevices(MovementCommands movements)
                 item.Quantity,
                 item.UnitPrice,
                 MovementType.Out,
-                client,
                 transactionId 
             )
             );

@@ -1,0 +1,38 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    xmlns:space="using:Jew.Avalonia.Views.Purchases"
+    x:Class="Jew.Avalonia.Views.Purchases.PurchaseMenuView"
+    x:DataType="vm:PurchasesMenuViewModel"
+    Height="792.8" Width="1336">
+    <!--Recordar de quitar las dimensiones harcodeadas para cada card y esta ventana-->
+    <Grid ColumnDefinitions="*,400"  RowDefinitions="50,*" ShowGridLines="False" Background="White">
+        
+        <StackPanel Grid.Row="  0" Grid.Column="0" Grid.RowSpan="1" Orientation="Horizontal"  >
+                <Border Width="16" Height="40" Background="#141223"
+                CornerRadius="8" Margin="10,0,0,0"/>
+            <TextBlock Text="Compras" FontSize="20" Margin= "10,12,0,0"  Foreground="Black"/>
+        </StackPanel>    
+
+        <Grid Grid.Row="1" RowDefinitions="130,*,250" Background="#f1f1f1" Margin="5" ShowGridLines="False">
+            <!--
+            <Line StartPoint="50,0"
+            EndPoint="600,0"
+            Stroke="Gray"
+            StrokeThickness="1"
+            StrokeDashArray="4,4" Grid.Row="1"/> -->           
+            
+            <space:PurchaseSupplierCard Grid.Row="0" DataContext="{Binding SupplierCardVM}"/>
+
+            <space:PurchaseProductsCartCard Grid.Row="1" DataContext="{Binding Cart}"/>
+
+            <space:PurchaseDetailsCard Grid.Row="2" DataContext="{Binding Details}"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Background="#f1f1f1">
+            <space:PurchaseSummaryCard DataContext="{Binding Summary}"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

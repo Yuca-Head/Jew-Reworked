@@ -1,0 +1,22 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    x:Class="Jew.Avalonia.Views.Purchases.PurchaseDetailsCard"
+    x:DataType="vm:PurchaseDetailsCardVM">
+
+    <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10">
+        <StackPanel Orientation="Horizontal">
+            <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock Text="3"/>
+            </Border>
+            <TextBlock Text="Información Adicional" Foreground="Black" FontSize="30" Margin="10,0,0,0" FontWeight="SemiBold"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Descripción de la compra (opcional)" Foreground="Black" FontSize="14"/>
+            <TextBox Background="#d5d5d5" Width="600" HorizontalAlignment="Left"  AcceptsReturn="True" Height="100"
+            Watermark="Ingrese una descripción o detalle de la compra." Classes="searchbar" Text="{Binding Details}"
+            MaxLines="5" MaxLength="600" AcceptsTab="True" TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,5 +1,12 @@
 <Styles xmlns="https://github.com/avaloniaui">
 
+<Design.PreviewWith>
+    <StackPanel>
+        <Border Classes="output-generated" Margin="10" Height="50" Width="200">
+            <TextBlock Text="TEXTO DE EJEMPLO"/>
+        </Border>
+    </StackPanel>
+</Design.PreviewWith>
 
 <!-- Error Text Style -->
 <Style Selector="TextBlock.error">
@@ -30,5 +37,24 @@
     <Setter Property="TextAlignment" Value="Center"/>
     <Setter Property="FontWeight" Value="Bold"/>
 </Style>
+
+
+
+<!-- Output auto generated Text Style -->
+
+<Style Selector="Border.output-generated">
+    <Setter Property="Background" Value="#b7b5b4"/>
+    <Setter Property="CornerRadius" Value="5"/>
+</Style>
+
+<Style Selector="Border.output-generated /template/ TextBlock"> 
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="Margin" Value="0,15,0,0"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Padding" Value="5"/>
+</Style>
+
 
 </Styles>

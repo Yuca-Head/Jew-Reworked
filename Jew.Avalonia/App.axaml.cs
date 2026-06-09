@@ -17,6 +17,11 @@ using Jew.Avalonia.ViewModels.SideBar;
 using Jew.Applications.ProductInventory.Commands;
 using Jew.Applications.InventoryMovements.Queries;
 using Jew.Avalonia.ViewModels.Products.Services;
+using Jew.Avalonia.Shared.Contexts;
+using System.Dynamic;
+using Jew.Avalonia.ViewModels.Purchases.Menus;
+using Jew.Applications.Purchases.Queries;
+using Jew.Applications.Purchases.Commands;
 
 namespace Jew.Avalonia;
 
@@ -82,9 +87,16 @@ public partial class App : Application
         services.AddSingleton<MovementCommands>();
         services.AddSingleton<InventoryQueryService>();
         services.AddSingleton<InventoryCommands>();
+        services.AddSingleton<SupplierQueryService>();
+        services.AddSingleton<PurchaseCommands>();
+
+        //UI Services
+        services.AddSingleton<InventoryState>();
 
         // ViewModels
         services.AddTransient<MainWindow>();
+        services.AddSingleton<PurchaseSupplierCardVM>();
+        services.AddSingleton<PurchasesMenuViewModel>();
         services.AddSingleton<ProductsMenuViewModel>();
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<SearchProductViewModel>();

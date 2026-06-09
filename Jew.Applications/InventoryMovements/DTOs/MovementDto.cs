@@ -5,9 +5,8 @@ namespace Jew.Applications.InventoryMovements.DTOs;
 
 
 public sealed record MovementDto(string ProductId, int Quantity, decimal UnitCost, MovementType MovementType,
-IParty? Party, Guid TransactionId)
+Guid TransactionId)
 {
     public static MovementDto From(InventoryMovement movement)
-    => 
-    new (movement.ProductId, movement.Quantity, movement.UnitCost, movement.MovementType, movement.Party, movement.TransactionId);
+    => new (movement.ProductId, movement.Quantity, movement.UnitCost, movement.MovementType, movement.TransactionId);
 }

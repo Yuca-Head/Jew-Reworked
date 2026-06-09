@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui">
+
+    <Style Selector="TextBox.numeric ItemsPresenter#PART_ItemsPresenter">
+        <Setter Property="IsVisible" Value="false"/>
+    </Style>
+
+    <!--SearchBar También tipo común-->
+    <Style Selector="TextBox.searchbar:focus /template/ Border">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#7436F1"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+    </Style>
+
+    <Style Selector="TextBox.searchbar:focus /template/ ContentPresenter#PART_WatermarkPresenter">
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+
+    <Style Selector="TextBox.searchbar:focus /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style Selector="TextBox.searchbar:pointerover /template/ Border">
+        <Setter Property="Background" Value="#8c52ff"/>
+        <Setter Property="BorderBrush" Value="#8247F8"/>
+    </Style>
+    
+
+    <Style Selector="TextBox.searchbar">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="CaretBrush" Value="#9966FF"/>
+        <Setter Property="SelectionBrush" Value="#CB4747E9"/>
+    </Style>
+    <!--/SearchBar-->
+</Styles>

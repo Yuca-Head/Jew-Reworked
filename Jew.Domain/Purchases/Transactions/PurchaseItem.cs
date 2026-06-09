@@ -13,8 +13,8 @@ public readonly record struct PurchaseItem
     {
         if(string.IsNullOrWhiteSpace(productId))
             throw new PurchaseException("Código de producto no válido");
-        if(quantity < 0)
-            throw new PurchaseException("Se agregar al menos un item.", nameof(Quantity));
+        if(quantity <= 0)
+            throw new PurchaseException("Se debe agregar al menos un item para la compra.", nameof(Quantity));
         if(unitCost < 1)
             throw new PurchaseException("El precio es muy bajo.", nameof(UnitCost));
         Quantity = quantity;

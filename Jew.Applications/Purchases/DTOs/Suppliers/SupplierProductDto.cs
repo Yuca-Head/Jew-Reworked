@@ -4,4 +4,4 @@ using Jew.Domain.Purchases.Entities;
 
 namespace Jew.Applications.Purchases.DTOs.Suppliers;
 
-public sealed record SupplierProductDto(SupplierDto Supplier, ProductDto Product);
+public sealed record SupplierProductDto(SupplierDto Supplier, ProductDto Product, decimal Price = 0);

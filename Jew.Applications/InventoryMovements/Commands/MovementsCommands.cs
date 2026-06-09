@@ -12,4 +12,9 @@ public class MovementCommands(IUnitOfWork context)
         _context.StockState.ApplyMovement(movement);
         _context.Movements.Add(movement);
     }
+
+    public void RemoveMovements(params  IEnumerable<InventoryMovement> movements)
+    {
+        
+    }
 }

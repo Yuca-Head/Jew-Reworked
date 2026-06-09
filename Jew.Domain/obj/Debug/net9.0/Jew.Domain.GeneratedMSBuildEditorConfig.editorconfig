@@ -1,5 +1,16 @@
 is_global = true
 build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.RuntimeIdentifier = 
+build_property.NETCoreSdkPortableRuntimeIdentifier = win-x64
+build_property.IsTestProject = 
+build_property.ProjectAssetsFile = c:\Users\Eduardo\Documents\GitHub\Jew\Jew.Domain\obj\project.assets.json
+build_property.IntermediateOutputPath = obj\Debug\net9.0\
+build_property.AvaloniaMainPackageVersion = 
+build_property.HasAvaloniaDiagnosticsSupport = 
+build_property.AvaloniaUseCompiledBindingsByDefault = 
+build_property.AvaloniaPreviewerNetCoreToolPath = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
 build_property.ProjectTypeGuids = 

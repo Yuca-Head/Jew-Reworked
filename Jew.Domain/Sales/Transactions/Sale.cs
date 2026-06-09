@@ -3,7 +3,7 @@ using Jew.Domain.Shared.Common;
 using Jew.Domain.Shared.Keys;
 
 namespace Jew.Domain.Sales.Transactions;
-public readonly record struct Sale(CodeKey ClientKey, IReadOnlyList<SaleItem> Items, Guid TransactionId, DateTime Date) 
+public readonly record struct Sale(CodeKey ClientKey, IReadOnlyList<SaleItem> Items, Guid TransactionId,  string? Description, DateTime Date) 
 : IHasPK<Guid>, IIsTransaction
 {
     public decimal TotalAmount => Items.Sum(i => i.UnitPrice * i.Quantity);

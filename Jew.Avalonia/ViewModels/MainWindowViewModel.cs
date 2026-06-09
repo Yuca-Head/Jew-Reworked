@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Jew.Avalonia.ViewModels.Products.Menus;
+using Jew.Avalonia.ViewModels.Purchases.Menus;
 using Jew.Avalonia.ViewModels.SideBar;
 
 namespace Jew.Avalonia.ViewModels;

@@ -6,7 +6,7 @@
     x:Class="Jew.Avalonia.Views.Products.ProductsMenuView"
     x:DataType="vm:ProductsMenuViewModel"
 >
-    <Grid ShowGridLines="True" RowDefinitions="*, 400" Background="Transparent">
+    <Grid ShowGridLines="False" RowDefinitions="*, 400" Background="Transparent">
 
         <Grid Grid.Row="1" RowDefinitions="*, 250" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="10" Margin="20">

@@ -12,15 +12,19 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Jew.Avalonia">
 
+    <!--
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) ->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+    -->
 
-    <Grid ShowGridLines="True" ColumnDefinitions="200, *" RowDefinitions="*" Background="#ECECED">
+    <!--Quedan 1080px libres de ancho y son 720px de alto-->
+    <Grid ShowGridLines="False" ColumnDefinitions="200, *" RowDefinitions="*" Background="#ECECED">
       <sdViews:Sidebar DataContext="{Binding SideBar}" Grid.Column="0"/>
       <ContentControl Content="{Binding SideBar.CurrentViewModel}" Grid.Column="1" Grid.Row="0"/>
+      <Grid/>
     </Grid>
 
 

@@ -2,17 +2,31 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jew.Avalonia.ViewModels.Products.Menus;
+using Jew.Avalonia.ViewModels.Purchases.Menus;
 using Jew.Avalonia.Views.Products;
 
 namespace Jew.Avalonia.ViewModels.SideBar;
 
-public partial class SidebarViewModel(ProductsMenuViewModel productMenuVM) : ViewModelBase
+public partial class SidebarViewModel(ProductsMenuViewModel productMenuVM, PurchasesMenuViewModel purchasesMenu) : ViewModelBase
 {
     [ObservableProperty]
     private ViewModelBase? _currentViewModel;
-
+    
+    
     [RelayCommand]
     private void ShowProducts()
-        => CurrentViewModel = productMenuVM;
+    {
+        if(CurrentViewModel != productMenuVM)
+            CurrentViewModel = productMenuVM;
+    }
+    
+    [RelayCommand]
+    private void ShowPurchases()
+    {
+        if(CurrentViewModel == purchasesMenu)
+            return;
+        CurrentViewModel = purchasesMenu;
+        purchasesMenu.ClearForm();
+    }
 
 }

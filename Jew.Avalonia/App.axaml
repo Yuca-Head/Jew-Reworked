@@ -1,15 +1,19 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Jew.Avalonia.App"
-             xmlns:local="using:Jew.Avalonia"
              xmlns:productViews="using:Jew.Avalonia.Views.Products"
              xmlns:productVM="using:Jew.Avalonia.ViewModels.Products.Menus"
+             xmlns:purchaseVM="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+             xmlns:purchaseViews= "using:Jew.Avalonia.Views.Purchases"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <DataTemplate DataType="productVM:ProductsMenuViewModel">
                 <productViews:ProductsMenuView/>
+        </DataTemplate>
+        <DataTemplate DataType="purchaseVM:PurchasesMenuViewModel">
+                <purchaseViews:PurchaseMenuView/>
         </DataTemplate>
         <!--local:ViewLocator/-->
     </Application.DataTemplates>
@@ -20,6 +24,8 @@
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Cards.axaml"/>
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Text.axaml"/>
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Collections.axaml"/>
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Decoration.axaml"/>
+        <StyleInclude Source="avares://Jew.Avalonia/Styles/Inputs.axaml"/>
     </Application.Styles>
 
 

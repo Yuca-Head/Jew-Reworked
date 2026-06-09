@@ -32,4 +32,5 @@ public partial class ProductDetailsViewModel : ProductViewModelBase
     :this(new ProductDto(product.Code, product.Name, 
     product.Category!.Name, product.Active, product.CreatedDate), product.Category)
     {}
+
 }

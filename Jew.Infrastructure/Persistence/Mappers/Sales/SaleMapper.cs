@@ -9,8 +9,8 @@ public sealed class SaleMapper : IMapper<Sale, SaleData>
     private static readonly SaleItemMapper _itemMapper = new();
 
     public Sale ToEntity(SaleData data)
-    => new(data.ClientKey, [..data.Items.Select(_itemMapper.ToEntity)], data.TransactionId, data.Date);
+    => new(data.ClientKey, [..data.Items.Select(_itemMapper.ToEntity)], data.TransactionId, data.Description, data.Date);
 
     public SaleData ToModel(Sale domain)
-    => new(domain.ClientKey, [..domain.Items.Select(_itemMapper.ToModel)], domain.TransactionId, domain.Date);
+    => new(domain.ClientKey, [..domain.Items.Select(_itemMapper.ToModel)], domain.TransactionId, domain.Description, domain.Date);
 }

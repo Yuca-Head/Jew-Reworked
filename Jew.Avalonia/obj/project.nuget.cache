@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aXhR1+eJCac=",
+  "dgSpecHash": "SeAO3ohZ7ZE=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
+  "projectFilePath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Avalonia\\Jew.Avalonia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Eduardo\\.nuget\\packages\\automapper\\16.1.1\\automapper.16.1.1.nupkg.sha512",
     "C:\\Users\\Eduardo\\.nuget\\packages\\avalonia\\11.3.6\\avalonia.11.3.6.nupkg.sha512",

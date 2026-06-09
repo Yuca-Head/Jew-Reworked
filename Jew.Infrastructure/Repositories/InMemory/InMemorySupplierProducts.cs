@@ -11,7 +11,7 @@ public sealed class InMemorySupplierProducts(Dictionary<SupplierProductPK, Suppl
     {
         ArgumentNullException.ThrowIfNull(entity);
 
-        if(_entities.TryAdd(entity.Key, entity))
+        if(!_entities.TryAdd(entity.Key, entity))
             throw new SupplierException("Este proveedor ya contiene este producto", nameof(entity.Key));
     }
 

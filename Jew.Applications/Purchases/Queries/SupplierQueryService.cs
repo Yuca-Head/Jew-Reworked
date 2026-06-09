@@ -34,6 +34,9 @@ public class SupplierQueryService(IUnitOfWork context, ProductQueryService produ
         return new(supp, prodcut);
     } 
 
+    public bool SupplierExists(int id)
+    => _context.Suppliers.Exist(id);
+
     private SupplierProductDto ConvertSupplierProductToDto(SupplierProduct product)
     => ConvertSupplierProductToDto(product.SupplierId, product.ProductId);
     
@@ -77,8 +80,6 @@ public class SupplierQueryService(IUnitOfWork context, ProductQueryService produ
     {
         var exists = _context.Suppliers.GetById(supplierId) 
         ?? throw new SupplierException("Proveedor no encontrado", nameof(supplierId));
-
-        var dto = SupplierDto.From(exists);
 
         foreach (var item in GetProductsFromSupplier(exists.Key))
             yield return item;

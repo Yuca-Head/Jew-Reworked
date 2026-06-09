@@ -1,1 +1,0 @@
-namespace Jew.Avalonia.ViewModels.Purchases.Outputs;

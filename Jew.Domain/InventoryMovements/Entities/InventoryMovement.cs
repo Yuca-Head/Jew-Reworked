@@ -19,10 +19,10 @@ public readonly record struct InventoryMovement : IHasId, IIsTransaction
     public decimal UnitCost { get; init;}
     public DateTime Date { get; init;}
     public MovementType MovementType { get; init;}
-    public IParty? Party {get; init;}
     public Guid TransactionId {get; init;}
     public readonly int Key{get; init;}
-
+    
+    public string? Description {get; init;}
 
     public int SignedQuantity =>
         MovementType == MovementType.In ? Quantity : -Quantity;
@@ -30,10 +30,10 @@ public readonly record struct InventoryMovement : IHasId, IIsTransaction
     public decimal Total =>
         Quantity * UnitCost;
 
-    public InventoryMovement(string productId, int quantity, decimal unitCost, MovementType movementType,
-    IParty? party, Guid transactionId)
+
+    public InventoryMovement(string productId, int quantity, decimal unitCost, MovementType movementType, Guid transactionId)
     {
-        if(quantity < 0)
+        if(quantity <= 0)
             throw new InventoryMovementException("Debe ingresar al menos un producto para realizar el movimiento", nameof(Quantity));
         if(unitCost <= 0)
             throw new InventoryMovementException("El costo no del movimiento no puede ser de 0", nameof(UnitCost));
@@ -44,7 +44,6 @@ public readonly record struct InventoryMovement : IHasId, IIsTransaction
         Quantity = quantity;
         MovementType = movementType;
         Date = DateTime.Now;
-        Party = party;
         TransactionId = transactionId;
     }
 

@@ -1,0 +1,49 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    x:Class="Jew.Avalonia.Views.Purchases.PurchaseSupplierCard"
+    x:DataType="vm:PurchaseSupplierCardVM"
+    >
+
+    <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10"> 
+        <StackPanel Orientation="Horizontal">
+            <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock Text="1"/>
+            </Border>
+            <TextBlock Text="Proveedores" Foreground="Black" FontSize="30" Margin="10,0,0,0" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                
+                <StackPanel>
+                    <TextBlock Text="Proveedor" FontSize="20" FontWeight="Bold" Margin="0,0,0,0" Foreground="Black"/>
+                    <ComboBox ItemsSource="{Binding Suppliers}" Width="300" SelectedItem="{Binding SupplierSelected}" Classes="common">
+                        <ComboBox.ItemTemplate> 
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>  
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Text="Fecha de compra"  FontSize="20" FontWeight="Bold" Margin="50,0,0,0" Foreground="Black"/>
+                    <DatePicker SelectedDate="{Binding OrderDate}" Classes="common"/>
+                </StackPanel>
+                
+
+                <StackPanel Margin="10,0,0,0">
+                    <TextBlock Text="No. de factura/ Documento" FontSize="20" FontWeight="Bold" Foreground="Black"/>
+                    <Border Classes="output-generated" Height="30">
+                        <TextBlock Text="{Binding TransactionId}" FontSize="12" HorizontalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+    
+
+
+</UserControl>

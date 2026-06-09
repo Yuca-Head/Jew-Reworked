@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
       "projectName": "Jew.Infrastructure",
-      "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\Jew.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Eduardo\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Eduardo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -51,8 +51,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
-              "projectPath": "c:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
+            "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj": {
+              "projectPath": "C:\\Users\\Eduardo\\Documents\\GitHub\\Jew\\Jew.Domain\\Jew.Domain.csproj"
             }
           }
         }

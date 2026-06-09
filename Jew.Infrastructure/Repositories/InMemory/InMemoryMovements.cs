@@ -6,7 +6,8 @@ using Jew.Infrastructure.Repositories.Shared;
 
 namespace Jew.Infrastructure.Repositories.InMemory;
 
-public sealed class InMemoryMovements(Dictionary<int, InventoryMovement> movements) : InMemoryRepository<InventoryMovement, int>(movements), IMovementsRepo
+public sealed class InMemoryMovements(Dictionary<int, InventoryMovement> movements) : 
+InMemoryRepository<InventoryMovement, int>(movements), IMovementsRepo
 {
     private readonly IncrementalKeyGenerator _identity = new(IncrementalKeyGenerator.GetLastKey(movements.Keys));
     public override void Add(InventoryMovement entity)
@@ -23,5 +24,4 @@ public sealed class InMemoryMovements(Dictionary<int, InventoryMovement> movemen
 
     public IEnumerable<Guid> GetTransactionsId()
     => _entities.Values.Select(m => m.TransactionId).Distinct();
-
 }

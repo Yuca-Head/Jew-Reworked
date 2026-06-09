@@ -4,10 +4,21 @@
 
     <!--Botones Comunes-->
     <Style Selector="Button.common" >
-        <Setter Property="Background" Value="DarkCyan"/>
+        <Setter Property="Background" Value="#8c52ff"/>
         <Setter Property="Foreground" Value="White"/>
-
     </Style>
+
+    <Style Selector="Button.common:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#8245FB"/>
+        <Setter Property="Opacity" Value="0.8"/>
+    </Style>
+
+    <Style Selector="Button.common:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="#7937FC"/>
+        <Setter Property="Opacity" Value="0.5"/>
+    </Style>
+
+    <!--/Botones Comunes-->
 
     <!--Botones Principales-->
     <Style Selector="Button.main">
@@ -43,5 +54,18 @@
     </Style>
 
     <!--/Barra lateral-->
+
+    <!--Warning-->
+    <Style Selector="Button.warning:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Opacity" Value="0.8"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Button.warning:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="#BE0000"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <!--/Warning-->
 
 </Styles>

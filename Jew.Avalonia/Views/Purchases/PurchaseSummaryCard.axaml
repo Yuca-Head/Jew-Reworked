@@ -1,0 +1,31 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    x:Class="Jew.Avalonia.Views.Purchases.PurchaseSummaryCard"
+    x:DataType="vm:PurchaseSummaryCardVM">
+
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Foreground="#8c52ff" Text="Resumen de la compra" FontSize="30"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+                <TextBlock Foreground="#555252" Text="Total de la compra:" FontSize="20"/>
+                <TextBlock Text="{Binding Total, StringFormat='{}{0:C}'}" Margin="10,0,0,0" Foreground="#64E964" FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+                <TextBlock Foreground="#555252" Text="Cantidad de Productos:" FontSize="15"/>
+                <TextBlock Text="{Binding ItemsCount}" Margin="10,0,0,0" Foreground="#B664E9" FontSize="12"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Margin="0, 300, 0, 0">
+            <TextBlock Text="{Binding ErrorMessage}" Name="ErrorMessage" IsVisible="{Binding HasError}" Classes="error" FontSize="15"/>
+            <Button Command="{Binding RegisterPurchaseCommand}" Content="Realizar Compra" HorizontalContentAlignment="Center" 
+            Width="300" Height="60" FontSize="30" Classes="common" HorizontalAlignment="Center"/>
+            <Button Command="{Binding ClearFormCommand}" Content="Cancelar" Margin="0,30,0,0" Width="300" Classes="warning"  Height="60" FontSize="30" Foreground="#8c52ff"
+              HorizontalAlignment="Center" Background="White" HorizontalContentAlignment="Center"/>
+        </StackPanel>   
+    </StackPanel>   
+</UserControl>

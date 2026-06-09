@@ -1,0 +1,35 @@
+<Styles xmlns="https://github.com/avaloniaui">
+
+<Design.PreviewWith>
+    <StackPanel>
+        <Border Classes="circle-number" Margin="10">
+            <TextBlock Text="1"/>
+        </Border>
+    </StackPanel>
+</Design.PreviewWith>
+
+<!--Circulos Enumerados-->
+<Style Selector="Border.circle-number">
+    <Setter Property="Width" Value="40"/>
+    <Setter Property="Height" Value="40"/>
+    <Setter Property="Background" Value="#8c52ff"/>
+    <Setter Property="CornerRadius" Value="25"/>
+</Style>
+
+<Style Selector="Border.circle-number TextBlock">
+    <Setter Property="FontSize" Value="30"/>
+    <Setter Property="Margin" Value="12,2,0,0"/>
+    <Setter Property="Foreground" Value="White"/>
+</Style>
+
+
+
+
+
+
+<!--Custom NumericUpDown-->
+<Style Selector="NumericUpDown /template/ RepeatButton ContentPresenter">
+    <Setter Property="Content" Value="  "/>
+</Style>
+<!--/Custom NumericUpDown-->
+</Styles>
