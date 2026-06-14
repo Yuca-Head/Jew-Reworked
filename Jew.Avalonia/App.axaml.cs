@@ -22,6 +22,11 @@ using System.Dynamic;
 using Jew.Avalonia.ViewModels.Purchases.Menus;
 using Jew.Applications.Purchases.Queries;
 using Jew.Applications.Purchases.Commands;
+using Jew.Avalonia.ViewModels.Inventory.Menus;
+using Jew.Avalonia.ViewModels.Sales.Menus;
+using Jew.Applications.Sales.Queries;
+using Jew.Applications.Sales.Commands;
+using Jew.Domain.InventoryMovements.Entities;
 
 namespace Jew.Avalonia;
 
@@ -89,8 +94,12 @@ public partial class App : Application
         services.AddSingleton<InventoryCommands>();
         services.AddSingleton<SupplierQueryService>();
         services.AddSingleton<PurchaseCommands>();
+        services.AddSingleton<ClientQueryService>();
+        services.AddSingleton<SaleCommands>();
+        services.AddSingleton<ProductStockState>();
 
         //UI Services
+        services.AddSingleton<ProductState>();
         services.AddSingleton<InventoryState>();
 
         // ViewModels
@@ -101,5 +110,7 @@ public partial class App : Application
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<SearchProductViewModel>();
         services.AddSingleton<SidebarViewModel>();
+        services.AddSingleton<InventoryMenuViewModel>();
+        services.AddSingleton<SalesMenuViewModel>();
     }   
 }

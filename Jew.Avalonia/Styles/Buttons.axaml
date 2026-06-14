@@ -68,4 +68,23 @@
     </Style>
     <!--/Warning-->
 
+    <!--ChechkBox: common-->
+
+    
+    <Style Selector="CheckBox.common /template/ Border#NormalRectangle">
+        <Setter Property="BorderBrush" Value="#8245FB"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+    <Style Selector="CheckBox.common:checked /template/ Border#NormalRectangle">
+        <Setter Property="Background" Value="#8245FB"/>
+        <Setter Property="BorderBrush" Value="White"/>
+    </Style>
+
+    <Style Selector="CheckBox.common:pointerover /template/ Border#NormalRectangle">
+        <Setter Property="Background" Value="#7937FC"/>
+        <Setter Property="Opacity" Value="0.5"/>
+    </Style>
+    <!--/ChechkBox: common-->
+
 </Styles>

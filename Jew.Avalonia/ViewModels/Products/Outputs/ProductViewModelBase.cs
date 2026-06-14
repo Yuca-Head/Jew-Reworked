@@ -15,7 +15,8 @@ public partial  class ProductViewModelBase : ViewModelBase
     private string _name = "";
 
     [ObservableProperty]
-    private CategoryViewModel? _category;    
+    private CategoryViewModel? _category;
+
 
     public ProductViewModelBase(ProductDto productDto, CategoryViewModel category)
     {

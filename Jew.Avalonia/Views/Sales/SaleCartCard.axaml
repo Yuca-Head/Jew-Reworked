@@ -1,0 +1,64 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Sales.Menus"
+    xmlns:trans="using:Jew.Avalonia.Views.Transactions"
+    x:Class="Jew.Avalonia.Views.Sales.SaleCartCard"
+    x:DataType="vm:SaleCartCardVM"
+    >
+
+    <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10">
+
+        <trans:CartCard Grid.Row="1"/>
+        
+        <StackPanel Orientation="Horizontal">
+            <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock Text="2"/>
+            </Border>
+
+            <TextBlock Text="Productos" Foreground="Black" FontSize="30" Margin="10,0,0,0" FontWeight="SemiBold"/>
+
+            <StackPanel Margin="350,0,0,0" MaxWidth="300">
+                <TextBox Text="{Binding SearchCode, Mode=TwoWay}" MinWidth="300" Margin="0,10,0,0" Classes="searchbar" Watermark="Buscar Por Código"/>
+
+                <ListBox ItemsSource="{Binding Suggestions}" Classes="common">
+                    <ListBox.Styles>
+                        <Style Selector="ListBox /template/ Border">
+                            <Setter Property="MaxHeight" Value="200"/>
+                            <Setter Property="MaxWidth" Value="300"/>
+                        </Style>
+                    </ListBox.Styles>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+
+                            <Button Command="{Binding $parent[UserControl].DataContext.SelectProductCommand}"
+                            CommandParameter="{Binding Code}" Background="Transparent" BorderBrush="Transparent">
+                                <Button.Styles>
+                                    <Style Selector="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Style>
+
+                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Style>
+                                </Button.Styles>
+                                
+
+                                <StackPanel Orientation="Horizontal" Background="Transparent">   
+                                    <TextBlock Text="{Binding Code}"/>
+                                    <TextBlock Text=" - "/>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+
+
+                            </Button>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

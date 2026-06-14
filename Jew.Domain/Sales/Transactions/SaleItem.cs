@@ -20,7 +20,7 @@ public readonly record struct SaleItem
         if(unitPrice <= 0)
             throw new SaleException("Ingrese un precio válido mayor que 0", nameof(UnitPrice));
         if(quantity <= 0)
-            throw new SaleException("Debe de vender más de un artículo para realizar la operación");   
+            throw new SaleException($"Debe de vender más de un artículo ({productId}) para realizar la operación");   
         ProductId = productId;
         UnitPrice = unitPrice;
         Quantity = quantity;

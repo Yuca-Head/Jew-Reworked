@@ -7,6 +7,7 @@
     >
 
     <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10"> 
+        
         <StackPanel Orientation="Horizontal">
             <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock Text="1"/>

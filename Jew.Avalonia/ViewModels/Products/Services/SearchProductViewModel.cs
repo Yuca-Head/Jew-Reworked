@@ -8,41 +8,48 @@ using Jew.Avalonia.ViewModels.Products.Outputs;
 
 namespace Jew.Avalonia.ViewModels.Products.Services;
 
+/// <summary>
+/// Actually it is just a Category Filter.
+/// </summary>
 public partial class SearchProductViewModel : ViewModelBase
 {
 
-    public SearchProductViewModel(InventoryState inventoryState)
+    public SearchProductViewModel(ProductState inventoryState)
     {
         _inventoryState = inventoryState;
-
+        
         CategoriesFilter = ["Todos", .._inventoryState.Categories.Select(x => x.Name)];
         
         ApplyFilter();
     }
-    private readonly InventoryState _inventoryState;
+    private readonly ProductState _inventoryState;
     
     //Filtered list.
     public ObservableCollection<ProductViewModelBase> DisplayList {get; set;} = [];
+
+    public const string DefaultValue = "Todos";
    
     [ObservableProperty]
     private ObservableCollection<string> _categoriesFilter = [];
 
     [ObservableProperty]
-    private string _selectedCategory = "Todos";
+    private string _selectedCategory = DefaultValue;
 
     private void ApplyFilter()
     {
         var products =
             _inventoryState.Products;   
 
-        if (SelectedCategory != "Todos")
+        if (SelectedCategory != DefaultValue)
             products = [..products.Where(
                 p => p.CategoryDto.Name == SelectedCategory)];
 
         DisplayList.Clear();
 
         foreach(var p in products)
+        {
             DisplayList.Add(new ProductViewModelBase(p));
+        }
     }   
 
     partial void OnSelectedCategoryChanged(string? oldValue, string newValue)

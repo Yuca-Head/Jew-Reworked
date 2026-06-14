@@ -8,11 +8,12 @@ using Jew.Applications.Purchases.Queries;
 using Jew.Avalonia.ViewModels.Products.Outputs;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
 using Jew.Avalonia.ViewModels.Suppliers.Outputs;
+using Jew.Avalonia.ViewModels.Transactions;
 using Jew.Domain.Purchases.Entities;
 
 namespace Jew.Avalonia.ViewModels.Purchases.Menus;
 
-public partial class PurchaseProductsCartVM : ViewModelBase
+public partial class PurchaseProductsCartVM : CartProductsVM
 {
     public PurchaseProductsCartVM(SupplierQueryService supplierQuery, SupplierViewModel supplier)
     {
@@ -22,13 +23,15 @@ public partial class PurchaseProductsCartVM : ViewModelBase
     }
 
     private readonly SupplierQueryService _supplierQuery;
+    
     [ObservableProperty]
     private SupplierViewModel _supplier;
+
     [ObservableProperty]
     private ObservableCollection<SupplierProductViewModel> _supplierProducts  = [];
     public List<SupplierProductViewModel> _allProducts = [];
-    [ObservableProperty]
-    private ObservableCollection<AddProductPurchaseVM> _cartProducts = [];
+
+
 
     //Busqueda
     [ObservableProperty]
@@ -52,7 +55,7 @@ public partial class PurchaseProductsCartVM : ViewModelBase
     private void UpdateSupplierProducts()
     {
         SupplierProducts.Clear();
-        var selectedKeys = CartProducts
+        var selectedKeys = Cart
         .Select(x => x.Code)
         .ToHashSet();
 
@@ -81,7 +84,7 @@ public partial class PurchaseProductsCartVM : ViewModelBase
     private void UpdateItemsNumber()
     {
         int count = 0;
-        foreach(var item in CartProducts)
+        foreach(var item in Cart)
             item.ItemNumber = ++count; 
             
     }
@@ -100,20 +103,19 @@ public partial class PurchaseProductsCartVM : ViewModelBase
 
 
     private void AddItemToCart(ProductViewModelBase product)
-    => CartProducts.Add(new(product){ItemNumber = CartProducts.Count + 1});
+    => Cart.Add(new(product){ItemNumber = Cart.Count + 1});
     
 
-    [RelayCommand]
-    private void RemoveItem(AddProductPurchaseVM item)
+    protected override void  RemoveItem(AddItemCartVM item)
     {
-        CartProducts.Remove(item);
+        Cart.Remove(item);
         UpdateItemsNumber();
         UpdateSupplierProducts();
     }
 
     public void Clear()
     {
-        CartProducts.Clear();
+        Cart.Clear();
         _allProducts.Clear();
         UpdateSupplierProducts();
         UpdateItemsNumber();

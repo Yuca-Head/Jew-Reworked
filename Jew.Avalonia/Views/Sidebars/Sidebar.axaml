@@ -15,14 +15,14 @@
                         </LinearGradientBrush>
                 </Border.Background>
                <StackPanel Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Spacing="10" Background="Transparent">
-                        <Button Classes="sidebar" Content="Dashboard"/>
-                        <Button Classes="sidebar" Content="Inventario"/>
-                        <Button Classes="sidebar" Content="Productos" Command="{Binding ShowProductsCommand}"/>
-                        <Button Classes="sidebar" Content="Categorías"/>
-                        <Button Classes="sidebar" Content="Proveedores"/>
-                        <Button Classes="sidebar" Content="Clientes"/>
+                        <TextBlock Height="40"/>
+                        <Button Classes="sidebar" Content="Inventario" Command="{Binding ShowInventoryCommand}"/>
+                        <!--Button Classes="sidebar" Content="Productos" Command="{Binding ShowProductsCommand}"/-->
+                        <!--Button Classes="sidebar" Content="Categorías"/-->
+                        <!--Button Classes="sidebar" Content="Proveedores"/-->
+                        <!--Button Classes="sidebar" Content="Clientes"/-->
                         <Button Classes="sidebar" Content="Compras" Command="{Binding ShowPurchasesCommand}"/>
-                        <Button Classes="sidebar" Content="Ventas"/>
+                        <Button Classes="sidebar" Content="Ventas" Command="{Binding ShowSalesCommand}"/>
                         <Button Classes="sidebar" Content="Movimientos"/>
                 </StackPanel>           
         </Border>

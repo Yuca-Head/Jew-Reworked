@@ -1,18 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel.__Internals;
-using CommunityToolkit.Mvvm.Input;
 using Jew.Applications.Purchases.Commands;
 using Jew.Applications.Purchases.Queries;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
-using Jew.Avalonia.ViewModels.Suppliers.Outputs;
-using Jew.Domain.Purchases.Entities;
-using Jew.Domain.Purchases.Exceptions;
+using Jew.Avalonia.ViewModels.Transactions;
 using Jew.Domain.Purchases.Transactions;
 
 namespace Jew.Avalonia.ViewModels.Purchases.Menus;
@@ -29,18 +22,18 @@ public partial class PurchasesMenuViewModel : ViewModelBase
         _summary = new(purchaseCommands, CreatePurchase(), ClearForm);
         SupplierCardVM.PropertyChanged += SupplierCard_PropertyChanged;
 
-        Cart.CartProducts.CollectionChanged += (_, e) =>
+        Cart.Cart.CollectionChanged += (_, e) =>
         {
             if (e.NewItems is not null)
             {
-                foreach (AddProductPurchaseVM item in e.NewItems)
+                foreach (AddItemCartVM item in e.NewItems)
                 {
                     item.PropertyChanged += (_, _) =>
-                        Summary.UpdateDisplayedValues(Cart.CartProducts);
+                        Summary.UpdateDisplayedValues(Cart.Cart);
                 }
             }
 
-            Summary.UpdateDisplayedValues(Cart.CartProducts);
+            Summary.UpdateDisplayedValues(Cart.Cart);
         };
     }
 
@@ -51,7 +44,7 @@ public partial class PurchasesMenuViewModel : ViewModelBase
     [ObservableProperty]
     private PurchaseProductsCartVM _cart;
     [ObservableProperty]
-    private PurchaseDetailsCardVM _details;
+    private TransactionDetailsCardVM _details;
     [ObservableProperty]
     private PurchaseSummaryCardVM _summary;
 
@@ -64,13 +57,14 @@ public partial class PurchasesMenuViewModel : ViewModelBase
             nameof(PurchaseSupplierCardVM.SupplierSelected))
         {
             Cart.Supplier = SupplierCardVM.SupplierSelected;
-            Cart.CartProducts.Clear();
+            Cart.Cart.Clear();
         }
     }
 
     private Func<Purchase> CreatePurchase()
     //Esta línea tira la excepción excepcional
-    => () => new(SupplierCardVM.SupplierSelected.Id, [..Cart.CartProducts.Select(x => new PurchaseItem(x.Code, x.Quantity, x.UnitCost))],
+    => () => new(SupplierCardVM.SupplierSelected.Id, 
+        [..Cart.Cart.Select(x => new PurchaseItem(x.Code, x.Quantity, x.UnitCost))],
         SupplierCardVM.TransactionId, Details.Details, SupplierCardVM.OrderDate!.Value.DateTime);
     
     

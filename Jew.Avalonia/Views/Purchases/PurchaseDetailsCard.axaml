@@ -1,9 +1,9 @@
 <UserControl     
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Transactions"
     x:Class="Jew.Avalonia.Views.Purchases.PurchaseDetailsCard"
-    x:DataType="vm:PurchaseDetailsCardVM">
+    x:DataType="vm:TransactionDetailsCardVM">
 
     <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10">
         <StackPanel Orientation="Horizontal">

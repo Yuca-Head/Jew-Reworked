@@ -2,78 +2,13 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Jew.Avalonia.ViewModels.Purchases.Menus"
+    xmlns:trans="using:Jew.Avalonia.Views.Transactions"
     x:Class="Jew.Avalonia.Views.Purchases.PurchaseProductsCartCard"
     x:DataType="vm:PurchaseProductsCartVM">
     
     <Grid Background="Transparent" RowDefinitions="55,*" ShowGridLines="False" Margin="10">
 
-        
-
-        <Grid Grid.Row="1" RowDefinitions="Auto,*" ShowGridLines="False">
-            <Border Classes="output-generated" CornerRadius="0">
-
-                <Grid ColumnDefinitions="30,*,*,120,120,*,30">
-                    <Grid.Styles>
-                        <Style Selector="Grid TextBlock">
-                            <Setter Property="FontSize" Value="13"/>
-                        </Style>
-                    </Grid.Styles>
-                    <TextBlock Text="#" Classes="menu-list-header stretch" Grid.Column="0" Foreground="Black"/>
-                    <TextBlock Text="Producto" Classes="menu-list-header stretch" Grid.Column="1" Foreground="Black"/>
-                    <TextBlock Text="Código" Classes="menu-list-header stretch" Grid.Column="2" Foreground="Black"/>
-                    <TextBlock Text="Cantidad" Classes="menu-list-header stretch" Grid.Column="3" Foreground="Black"/>
-                    <TextBlock Text="Precio unitario" Classes="menu-list-header stretch" Grid.Column="4" Foreground="Black"/>
-                    <TextBlock Text="SubTotal" Classes="menu-list-header stretch" Grid.Column="5" Foreground="Black"/>
-                    <TextBlock Text="X" Classes="menu-list-header stretch" Grid.Column="6" Foreground="Black"/>
-                </Grid> 
-            </Border>
-
-            <Border Background="#d5d5d5" Grid.Row="1">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                    HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl ItemsSource="{Binding CartProducts}">
-                    <ItemsControl.ItemTemplate>
-                        
-                        <DataTemplate>
-                            
-                            <Grid ColumnDefinitions="30,*,*,120,120,*,30" ShowGridLines="False">
-                                
-                                <Grid.Styles>
-                                    <Style Selector="Grid TextBlock">
-                                        <Setter Property="Foreground" Value="black"/>
-                                        <Setter Property="TextAlignment" Value="Center"/>
-                                        <Setter Property="FontSize" Value="17"/>
-                                        <Setter Property="MaxWidth" Value="140"/>
-                                    </Style>
-                                </Grid.Styles>
-                                
-                                <TextBlock Text="{Binding ItemNumber}" Grid.Column="0"/>
-                                <TextBlock Text="{Binding Name}" Grid.Column="1"/>
-                                <TextBlock Text="{Binding Code}" Grid.Column="2"/>
-
-
-                                <TextBox Text="{Binding Quantity, Mode=TwoWay}" Classes="searchbar numeric" Grid.Column="3" 
-                                BorderBrush="Black" BorderThickness="1"/>
-                                <TextBox Text="{Binding UnitCost, Mode=TwoWay}" Classes="searchbar numeric" Grid.Column="4"
-                                BorderBrush="Black" BorderThickness="1"/>
-                                <TextBlock Text="{Binding SubTotal, StringFormat='{}{0:C}'}" Grid.Column="5"/>
-                                <Border Classes="circle-number" Grid.Column="6" Width="20" Height="20" Background="Red">
-                                <Button Command="{Binding $parent[UserControl].DataContext.RemoveItemCommand}" HorizontalAlignment="Right" 
-                                 CommandParameter="{Binding}">
-                                    <Button.Content>
-                                            <TextBlock Text="-" FontSize="20" Margin="0"/>
-                                    </Button.Content>
-                                </Button>
-                                </Border>
-                            </Grid>
-                            
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                </ScrollViewer>
-            </Border>
-        </Grid>
-
+        <trans:CartCard Grid.Row="1"/>
         <StackPanel Orientation="Horizontal">
             <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock Text="2"/>

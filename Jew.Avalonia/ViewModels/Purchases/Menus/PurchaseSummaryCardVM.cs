@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.Purchases.Commands;
+using Jew.Avalonia.Messaging;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
 using Jew.Avalonia.ViewModels.Purchases.Outputs;
 using Jew.Domain.Purchases.Transactions;
@@ -35,17 +37,19 @@ public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands, Fu
         //Aquí trato de registrar una venta
         try
         {
-            _purchaseCommands.RegisterPurchase(_createPurchase.Invoke());
+            var purchase = _createPurchase();
+            _purchaseCommands.RegisterPurchase(purchase);
+            WeakReferenceMessenger.Default.Send(new StockStateUpdatedMessage(purchase.Items.Select(x => x.ProductId)));
             ClearForm();
         }catch(DomainException e)
         {
-            ErrorMessage  = e.Message;
+            ErrorMessage  = e.Message;  
 
         }
         //error completamente innesperado que no he podido resolver por eso está, pero lo dejo por falta de tiempo
         catch(NullReferenceException e)
         {
-            System.Console.WriteLine("Error inevitable de vez en cuando: "+e.Message);
+            System.Console.WriteLine("Error inevitable de vez en cuando: " + e.Message);
             ErrorMessage = "Debe rellenar el formulario para realizar una compra";
         }
     }
@@ -57,7 +61,7 @@ public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands, Fu
         OnPropertyChanged(nameof(HasError));
     }
 
-    internal void UpdateDisplayedValues(IEnumerable<AddProductPurchaseVM> cartProducts)
+    internal void UpdateDisplayedValues(IEnumerable<AddItemCartVM> cartProducts)
     {
         Total = cartProducts.Sum(p => p.SubTotal);
         ItemsCount = cartProducts.Sum(p => p.Quantity);

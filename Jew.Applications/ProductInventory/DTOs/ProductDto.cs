@@ -1,4 +1,3 @@
-using AutoMapper;
 using Jew.Applications.Shared;
 using Jew.Domain.ProductInventory.Entities;
 

@@ -32,7 +32,6 @@
 <!-- TextBlock para el Header De la lista del menú de productos -->
 <Style Selector="TextBlock.menu-list-header">
     <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="FontSize" Value="14"/>
     <Setter Property="Foreground" Value="White"/>
     <Setter Property="TextAlignment" Value="Center"/>
     <Setter Property="FontWeight" Value="Bold"/>

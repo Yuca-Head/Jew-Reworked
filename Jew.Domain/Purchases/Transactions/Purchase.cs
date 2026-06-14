@@ -10,4 +10,5 @@ public readonly record struct Purchase
 IIsTransaction, IHasPK<Guid>
 {
     public Guid Key => TransactionId;
+    
 }

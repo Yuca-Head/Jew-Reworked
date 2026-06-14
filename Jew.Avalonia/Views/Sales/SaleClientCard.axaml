@@ -1,0 +1,63 @@
+<UserControl     
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Sales.Menus"
+    x:Class="Jew.Avalonia.Views.Sales.SaleClientCard"
+    x:DataType="vm:SaleClientCardVM"
+    >
+
+        
+    
+    <Grid RowDefinitions="55,*" Margin="10" >
+            
+        <StackPanel Orientation="Horizontal">
+            <Border Classes="circle-number"  VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock Text="1"/>
+            </Border>
+            <TextBlock Text="Cliente" Foreground="Black" FontSize="30" Margin="10,0,0,0" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+
+            <StackPanel.Styles>
+                <Style Selector="StackPanel StackPanel">
+                    <Setter Property="Margin" Value="15,0,0,0"/>
+                </Style>
+            </StackPanel.Styles>
+
+            <StackPanel>
+                <TextBlock Text="N° de Venta" FontSize="20" FontWeight="Bold" Foreground="Black"/>
+                <Border Classes="output-generated" Height="30">
+                    <TextBlock Text="{Binding TransactionId}" FontSize="12" HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+
+            
+            <StackPanel>
+                <TextBlock Text="Fecha de compra"  FontSize="20" FontWeight="Bold" Margin="50,0,0,0" Foreground="Black"/>
+                <DatePicker SelectedDate="{Binding OrderDate}" Classes="common"/>
+            </StackPanel>
+            
+
+            <StackPanel>
+                <TextBlock Text="Cliente" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,0" Foreground="Black"/>
+                <ComboBox ItemsSource="{Binding Clients}" Width="300" SelectedItem="{Binding ClientSelected}" Classes="common">
+                    <ComboBox.ItemTemplate> 
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding CodeKey.Key}"/>
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+
+    
+
+
+</UserControl>

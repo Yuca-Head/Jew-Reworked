@@ -14,9 +14,9 @@ public readonly record struct PurchaseItem
         if(string.IsNullOrWhiteSpace(productId))
             throw new PurchaseException("Código de producto no válido");
         if(quantity <= 0)
-            throw new PurchaseException("Se debe agregar al menos un item para la compra.", nameof(Quantity));
+            throw new PurchaseException($"Se debe de comprar al menos un producto de {productId}.", nameof(Quantity));
         if(unitCost < 1)
-            throw new PurchaseException("El precio es muy bajo.", nameof(UnitCost));
+            throw new PurchaseException($"El precio ingresado de {productId} es muy bajo.", nameof(UnitCost));
         Quantity = quantity;
         UnitCost = unitCost;
         ProductId = productId;

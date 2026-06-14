@@ -12,12 +12,14 @@ using Jew.Infrastructure.UnitOfWork;
 
 namespace Jew.Applications.Purchases.Commands;
 
-public class PurchaseCommands(IUnitOfWork context, MovementCommands movements, SupplierQueryService supplierQuery, ProductQueryService productQuery)
+public class PurchaseCommands
+(IUnitOfWork context, MovementCommands movements, 
+SupplierQueryService supplierQuery, ProductQueryService productQuery)
 {
 
     private readonly MovementCommands _movements = movements;
     private readonly SupplierQueryService _supplierQuery = supplierQuery;
-    private readonly ProductQueryService _porductQuery = productQuery;
+    private readonly ProductQueryService _productQuery = productQuery;
     private readonly IUnitOfWork _context = context;
 
     //Valida cosas generales de lista y que no pueda válidar por si solo el dominio (a veces redundancias útiles)
@@ -36,8 +38,10 @@ public class PurchaseCommands(IUnitOfWork context, MovementCommands movements, S
         //Lista para 
         foreach (var item in purchase.Items)
         {
-            if(!_porductQuery.ProductExists(item.ProductId))
+            if(!_productQuery.ProductExists(item.ProductId))
                 throw new PurchaseException($"Produto con código {item.ProductId} no encontrado", nameof(item.ProductId));
+
+
             
             var movement = new InventoryMovement(
                 item.ProductId,

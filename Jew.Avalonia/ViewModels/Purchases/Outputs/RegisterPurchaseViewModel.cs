@@ -16,7 +16,7 @@ public partial class RegisterPurchaseViewModel : ViewModelBase
     [ObservableProperty]
     private int _itemsCount;    
 
-    public void UpdateDisplayedValues(IEnumerable<AddProductPurchaseVM> products)
+    public void UpdateDisplayedValues(IEnumerable<AddItemCartVM> products)
     {
         Total = products.Sum(x => x.SubTotal);
         ItemsCount = products.Sum(x => x.Quantity);

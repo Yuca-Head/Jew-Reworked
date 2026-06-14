@@ -17,6 +17,10 @@
     <Setter Property="Background" Value="#8c52ff"/>
 </Style>
 
+<Style Selector="ComboBox.common:focus:not(:pointerover) Border">
+    <Setter Property="Background" Value="#8147F4"/>
+</Style>
+
 
 <!--/Por fuera-->
 
@@ -214,6 +218,13 @@
 
 <!--/ListBox Common-->
 
-
+<!--ProductList-->
+    <Style Selector="Grid.productList TextBlock">
+        <Setter Property="Foreground" Value="black"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="MaxWidth" Value="160"/>
+    </Style>
+<!--/ProductList-->
 
 </Styles>

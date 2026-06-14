@@ -11,6 +11,10 @@ public sealed class InMemoryClients(Dictionary<CodeKey, Client> entities) : InMe
     public override void Add(Client entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
+
+        if(entity.Key.Length != 5)
+            throw new PersonException("La longitud del código del cliente debe ser mayor que 5");
+
         if(!_entities.TryAdd(entity.Key, entity))
             throw new PersonException("Ya existe un cliente con ese identificador");
     }

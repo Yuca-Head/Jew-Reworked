@@ -5,6 +5,10 @@
              xmlns:productVM="using:Jew.Avalonia.ViewModels.Products.Menus"
              xmlns:purchaseVM="using:Jew.Avalonia.ViewModels.Purchases.Menus"
              xmlns:purchaseViews= "using:Jew.Avalonia.Views.Purchases"
+             xmlns:inventoryVM= "using:Jew.Avalonia.ViewModels.Inventory.Menus"
+             xmlns:inventoryViews  = "using:Jew.Avalonia.Views.Inventory"
+             xmlns:saleVM="using:Jew.Avalonia.ViewModels.Sales.Menus"
+             xmlns:saleViews="using:Jew.Avalonia.Views.Sales"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -14,6 +18,12 @@
         </DataTemplate>
         <DataTemplate DataType="purchaseVM:PurchasesMenuViewModel">
                 <purchaseViews:PurchaseMenuView/>
+        </DataTemplate>
+        <DataTemplate DataType="inventoryVM:InventoryMenuViewModel">
+                <inventoryViews:InventoryMenuView/>
+        </DataTemplate>
+        <DataTemplate DataType="saleVM:SalesMenuViewModel">
+                <saleViews:SaleMenuView/>
         </DataTemplate>
         <!--local:ViewLocator/-->
     </Application.DataTemplates>

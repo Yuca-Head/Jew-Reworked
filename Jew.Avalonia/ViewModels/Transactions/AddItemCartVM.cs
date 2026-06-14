@@ -6,9 +6,9 @@ using Jew.Domain.Purchases.Transactions;
 namespace Jew.Avalonia.ViewModels.Purchases.Inputs;
 
 //Posible cambio para las propiedades no modificables como ItemNumber, Nombre y Categoria.
-public partial class AddProductPurchaseVM() : ViewModelBase
+public partial class AddItemCartVM() : ViewModelBase
 {
-    public AddProductPurchaseVM(ProductViewModelBase @base) : this()
+    public AddItemCartVM(ProductViewModelBase @base) : this()
     {
         Name = @base.Name;
         Code = @base.Code;

@@ -18,13 +18,19 @@ public sealed class InventoryQueryService(CategoryQueryService categoryQuery, Pr
 
 
     #region Compounds
-    public ProductWithCategoryDto ToProductWithCategory(string productId, string categoryId)
-    => new(_productQuery.GetProductByCode(productId), _categoryQuery.GetCategoryById(categoryId));
+    public ProductWithCategoryDto GetProductWithCategory(string productId)
+    {
+        var p = _productQuery.GetProductByCode(productId);
 
-    public ProductInventoryDto ToProductInventory(string productCode, string categoryId)
-    => 
-    new(new(_productQuery.GetProductByCode(productCode), _categoryQuery.GetCategoryById(categoryId)),
-    _stockState.GetStock(productCode), _stockState.GetProductCost(productCode));
+        return new(p, _categoryQuery.GetCategoryById(p.CategoryId));
+    }
+
+    public ProductInventoryDto GetProductInventory(string productCode)
+    {
+        var p = _productQuery.GetProductByCode(productCode);
+        return new(new(p, _categoryQuery.GetCategoryById(p.CategoryId)),
+        _stockState.GetStock(productCode), _stockState.GetProductCost(productCode));
+    }
 
     public IEnumerable<ProductWithCategoryDto> GetProductsWithCategories()
     {
@@ -48,5 +54,11 @@ public sealed class InventoryQueryService(CategoryQueryService categoryQuery, Pr
             
         }
     }
+
+    public IEnumerable<ProductInventoryDto> GetPurchasedProductsOnly()
+    => _stockState.PurchasedOnes().Select(GetProductInventory);
+
+    public IEnumerable<ProductInventoryDto> GetAvailableProducts()
+    => GetPurchasedProductsOnly().Where(p => p.Product.ProductDto.Active);
     #endregion
 }
