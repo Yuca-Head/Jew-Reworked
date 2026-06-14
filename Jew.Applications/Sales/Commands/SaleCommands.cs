@@ -47,6 +47,8 @@ public sealed class SaleCommands
                 throw new SaleException($"Produto con código {item.ProductId} no encontrado", nameof(item.ProductId));
             if(item.Quantity <= 0)
                 throw new SaleException($"Debe ingresar al menos un producto {item.ProductId} para realizar la venta");
+            if(item.UnitPrice <= 0)
+                throw new SaleException($"El precio del producto {item.UnitPrice} debe ser mayor a 0");
 
             var state = _stockSateQuery.GetProductState(item.ProductId);
 

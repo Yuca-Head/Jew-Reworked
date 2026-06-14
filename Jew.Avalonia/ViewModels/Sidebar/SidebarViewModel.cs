@@ -16,7 +16,7 @@ public partial class SidebarViewModel
 ) : ViewModelBase
 {
     [ObservableProperty]
-    private ViewModelBase? _currentViewModel;
+    private ViewModelBase? _currentViewModel = inventoryMenu;
     
     
     [RelayCommand]
