@@ -30,7 +30,7 @@ SupplierQueryService supplierQuery, ProductQueryService productQuery)
             throw new PurchaseException("Ingrese una fecha válida de compra");
         if(!_supplierQuery.SupplierExists(purchase.SupplierId))
             throw new PurchaseException("Debe ingresar un proveedor para realizar la compra");
-        if (purchase.Items.Count == 0)
+        if (!purchase.Items.Any())
             throw new PurchaseException("La compra debe tener al menos un producto");
 
         var addedMovements = new List<InventoryMovement>();

@@ -22,7 +22,11 @@ public partial class InventoryMenuViewModel : ViewModelBase
     {
         CatFilter = new(productState);
         _inventoryState = inventoryState;
-        _inventoryState.StateChanged += (_, _) => ApplyFilters();
+        _inventoryState.StateChanged += (_, _) => 
+        {
+            ApplyFilters();
+            UpdateUnfilteredInfo();
+        };
         CatFilter.PropertyChanged += (_,e) =>
         {
             if(e.PropertyName is nameof(CatFilter.SelectedCategory))
@@ -32,6 +36,7 @@ public partial class InventoryMenuViewModel : ViewModelBase
         };
 
         ApplyFilters();
+        UpdateUnfilteredInfo();
     }
 
 
@@ -66,7 +71,7 @@ public partial class InventoryMenuViewModel : ViewModelBase
 
     private static 
     Func<IEnumerable<ProductInventoryViewModel>, IEnumerable<ProductInventoryViewModel>> GetLowStock()
-    => (query) => query.Where(x => x.Stock <= 50);
+    => (query) => query.Where(x => x.Stock <= 15);
 
     partial void OnLowStockOnlyChanged(bool oldValue, bool newValue)
     {
@@ -112,6 +117,13 @@ public partial class InventoryMenuViewModel : ViewModelBase
     {
         TotalInventory = DisplayedProducts.Sum(x => x.Total);
         TotalStock = DisplayedProducts.Sum(x => x.Stock);
+
+    }
+    private void UpdateUnfilteredInfo()
+    {
+        var lowStocks =  GetLowStock()(_inventoryState.Products);
+        LowStockCount = lowStocks.Count();
+        ProductsWithoutExistence = lowStocks.Count(x => x.Stock == 0);
     }
 
     private void ApplyFilters()

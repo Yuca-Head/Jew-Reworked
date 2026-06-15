@@ -10,7 +10,7 @@ using Jew.Avalonia.ViewModels.Transactions;
 
 namespace Jew.Avalonia.ViewModels.Sales.Menus;
 
-        public partial class SalesMenuViewModel : ViewModelBase
+    public partial class SalesMenuViewModel : ViewModelBase
 {
     
     public SalesMenuViewModel(ClientQueryService clientQuery, InventoryState inventoryState, SaleCommands commands)

@@ -30,7 +30,10 @@ public sealed class InventoryState
 
     private void Update(IEnumerable<string>? args)
     {
-        CodesChanged = (IReadOnlyCollection<string>?)args;
+        if(args is null)
+            CodesChanged = null;
+        else
+            CodesChanged = [..args];
         if(args is null)
         {
             Products.Clear();
