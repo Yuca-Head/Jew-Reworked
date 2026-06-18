@@ -11,7 +11,7 @@ namespace Jew.Infrastructure.Repositories.Json;
 public sealed class JsonCategoriesRepo(Enums.Environment environment, string? fileName = null) 
 : JsonRepository<string, Category, CategoryData>(fileName ?? defaultFileName, new CategoryMapper(), environment), ICategoriesRepo
 {
-    protected override InMemoryCategories InMemoryRepo { get; } = new InMemoryCategories([]);
+    protected override InMemoryCategories InMemoryRepo { get; } = new InMemoryCategories();
     private const string defaultFileName = "Categories.json";
 
 }

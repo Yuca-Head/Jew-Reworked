@@ -100,7 +100,6 @@ public sealed class MovementsState
                     party = t.SupplierId.ToString();
                     date = t.Date;
                     description = t.Description;
-
                 }
                 else
                 {

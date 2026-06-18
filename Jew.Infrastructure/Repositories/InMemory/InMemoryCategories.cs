@@ -8,16 +8,20 @@ using Jew.Infrastructure.Repositories.Test;
 
 namespace Jew.Infrastructure.Repositories.InMemory;
 
-public sealed class InMemoryCategories(Dictionary<string, Category> entities) : InMemoryRepository<Category, string>(entities), ICategoriesRepo   
+public sealed class InMemoryCategories() 
+: InMemoryRepository<Category, string>(new Dictionary<string, Category>(StringComparer.OrdinalIgnoreCase)), ICategoriesRepo   
 {
 
     public override void Add(Category entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
         
-        if(!_entities.TryAdd(entity.Name, entity))
-            throw new InventoryException("Ya existe ya existe esa categoria", nameof(entity.Name));
+        if(Exist(entity.Name))
+            throw new InventoryException($"Ya existe ya existe la categoria {entity.Name}", nameof(entity.Name));
+
+        _entities.Add(entity.Name, entity);
     }
+    
 
 
 }

@@ -2,28 +2,158 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Jew.Avalonia.ViewModels.Products.Menus"
-    xmlns:Views="using:Jew.Avalonia.Views.Products"
     x:Class="Jew.Avalonia.Views.Products.ProductsMenuView"
     x:DataType="vm:ProductsMenuViewModel"
 >
-    <Grid ShowGridLines="False" RowDefinitions="*, 400" Background="Transparent">
+    <Grid ShowGridLines="False" RowDefinitions="50,*" Background="Transparent">
 
-        <Grid Grid.Row="1" RowDefinitions="*, 250" Background="Transparent">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Spacing="10" Margin="20">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Classes="menu-header" Orientation="Horizontal">
+            <Border/>
+            <TextBlock Text="Productos"/>
+        </StackPanel>    
 
-                <StackPanel Margin="50,0,0,0">
+        <Grid Grid.Row="1" ShowGridLines="False"  Margin="15"
+        ColumnDefinitions="*,550" Background="Transparent">
+            
+            <Border Background="#31C1ABED" CornerRadius="8" Padding="15" Margin="5">
+                <Grid RowDefinitions="*,220">
 
-                    <TextBlock Text="Filtrar por categoría:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiLight" Foreground="Black"/>
-                    <ComboBox ItemsSource="{Binding SearchProduct.CategoriesFilter}" 
-                    SelectedItem="{Binding SearchProduct.SelectedCategory}"  Width="200" Classes="common"/>
+                    <StackPanel>
+                        <StackPanel Margin="0,10">
 
-                </StackPanel>
-                
-                <Button Content="+ Agregar Producto" Background="#BE63DE" Foreground="White" Margin="350,0,0,0"/>
+                            <TextBlock Text="Filtrar por categoría:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiLight" Foreground="Black"/>
+                            <ComboBox ItemsSource="{Binding CategoryFilter.CategoriesFilter}" Background="#d5d5d5"
+                            SelectedItem="{Binding CategoryFilter.SelectedCategory}"  Width="200" Classes="common"/>
 
-            </StackPanel>
-            <Views:ProductListCard DataContext="{Binding}" Grid.Row="1"  Width="600"/>
+                        </StackPanel>
+
+
+                        <DataGrid ItemsSource="{Binding CategoryFilter.DisplayList}" Classes="common" 
+                        BorderBrush="Black" BorderThickness="1"
+                        IsReadOnly="True"  Background="#f1f1f1" VerticalAlignment="Bottom" Height="300">
+
+                            <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Código"
+                                    Binding="{Binding Code}" Width="*"/>
+                                    <DataGridTextColumn Header="Descripción"
+                                    Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Categoría"
+                                    Binding="{Binding Category.Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Estado"
+                                    Binding="{Binding ActiveToString}"/> 
+                                    <DataGridTextColumn Header="Ingreso"
+                                    Binding="{Binding CreatedDate}" Width="*"/> 
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Border Background="#d5d5d5" CornerRadius="8" Margin="0,15,0,0" Height="25">
+                            <TextBlock Text="{Binding CategoryFilter.DisplayList.Count, StringFormat='Productos Registrados: {0:N0}'}" 
+                            FontSize="15" Foreground="Black" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1">
+                        <DataGrid ItemsSource="{Binding CategoryFilter.CategoriesFilter}" Classes="common" Height="150"
+                        BorderBrush="Black" BorderThickness="1"
+                        IsReadOnly="True"  Background="#f1f1f1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+
+                            <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Categorias"
+                                    Binding="{Binding}" Width="*" CanUserSort="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Border Background="#d5d5d5" CornerRadius="8" Margin="0,15,0,0" Height="25">
+                            <TextBlock Text="{Binding CategoryFilter.CategoriesFilter.Count, StringFormat='Categorías Registradas: {0:N0}'}" 
+                            FontSize="15" Foreground="Black" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Margin="15" RowDefinitions="*,250" Grid.Column="1" ShowGridLines= "False">
+                <Grid.Styles>
+                    <Style Selector="Grid TextBlock">
+                        <Setter Property="Foreground" Value="#868686"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="20"/>
+                    </Style>
+                    <Style Selector="Grid StackPanel">
+                        <Setter Property="Spacing" Value="10"/>
+                        <Setter Property="Margin" Value="15,10"/>
+                    </Style>
+                </Grid.Styles>
+                <Border Background="#31C1ABED" CornerRadius="8" Padding="10" Margin="10" Height= "350"> 
+                    <Grid ShowGridLines="False" RowDefinitions="Auto,*,*,40,*"  ColumnDefinitions="*,*">
+                        
+                    
+                        <TextBlock Text="Crear Producto" Grid.ColumnSpan="2" FontSize="20" Classes="header"/>
+
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="Código"/>
+                            <TextBox Text="{Binding CreateProductCard.Product.Code}" Classes="searchbar"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <TextBlock Text="Descripción (Nombre)"/>
+                            <TextBox Text="{Binding CreateProductCard.Product.Name}" Classes="searchbar"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="1">
+                            <TextBlock Text="Categoría"/>
+                            <ComboBox Classes="common" Width="200" SelectedItem="{Binding CreateProductCard.Product.Category}"
+                            ItemsSource="{Binding CreateProductCard.ProductState.Categories}">
+                                <ComboBox.Styles>
+                                    <Style Selector="ComboBox TextBlock">
+                                        <Setter Property="Foreground" Value="black"/>
+                                        <Setter Property="FontSize" Value="15"/>
+                                    </Style>
+                                </ComboBox.Styles>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Classes="error" FontSize="15" Text="{Binding CreateProductCard.ErrorMessage}" IsVisible="{Binding CreateProductCard.HasError}" VerticalAlignment="Top"/>
+                        
+                        
+                        <Button Grid.Row="4" Classes="common" Content="Registrar Producto" Height="40" Width="200" Command="{Binding CreateProductCard.CreateProductCommand}"
+                        HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Button Grid.Row="4" Grid.Column="1" Classes="common warning" Content="Cancelar" Height="40" VerticalAlignment="Center"  Width="200"  Command="{Binding CreateProductCard.ClearCommand}"
+                        HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        
+                    
+                    </Grid>
+                </Border>
+
+                <Border Background="#31C1ABED" Grid.Row="1" CornerRadius="8" Margin="10" Padding="10"> 
+                    <Grid ShowGridLines="False" RowDefinitions="Auto,*,40,*">
+                        <TextBlock Text="Crear Categoría" FontSize="20" Classes="header"/>
+
+                        <StackPanel Grid.Row= "1">
+                            <TextBlock Text="Nombre"/>
+                            <TextBox Classes="searchbar" Text="{Binding CreateCategoryCard.Category.Name}"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="2" Classes="error" FontSize="15" Text="{Binding CreateCategoryCard.ErrorMessage}" IsVisible="{Binding CreateCategoryCard.HasError}" VerticalAlignment="Top"/>
+                        <Grid ColumnDefinitions= "*,*" Grid.Row="3">
+
+                            <Button  Classes="common" Content="Registrar Producto" Height="40" Width="200" Command="{Binding CreateCategoryCard.CreateCategoryCommand}"
+                            HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+
+                            <Button  Grid.Column="1" Classes="common warning" Content="Cancelar" Height="40" VerticalAlignment="Center"  Width="200"  Command="{Binding CreateCategoryCard.ClearCommand}"
+                            HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
+        
     </Grid>
 
 </UserControl>

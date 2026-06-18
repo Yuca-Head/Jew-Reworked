@@ -50,8 +50,7 @@ public sealed class InventoryQueryService(CategoryQueryService categoryQuery, Pr
         foreach(var pAc in GetProductsWithCategories())
         {
             var code = pAc.ProductDto.Code;
-            yield return new(pAc, _stockState.GetStock(code), _stockState.GetProductCost(code));
-            
+            yield return new(pAc, _stockState.GetStock(code), _stockState.GetProductCost(code));   
         }
     }
 

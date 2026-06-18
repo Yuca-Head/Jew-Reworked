@@ -21,6 +21,15 @@ public sealed class InventoryState
         Update(null);
         WeakReferenceMessenger.Default.Register<StockStateUpdatedMessage>(this,
         (_, message) => Update(message.ProductsChangedCode));
+
+        
+        WeakReferenceMessenger.Default.Register<ProductUpdateMessage>(this,
+        (_,e) =>
+        {
+            if(e.Action is ProductUpdateMessage.Activator.Modified)
+                Update(e.ProductsChangedCode);
+        });
+
     }
 
     private readonly InventoryQueryService _queryService;
@@ -35,10 +44,10 @@ public sealed class InventoryState
             CodesChanged = null;
         else
             CodesChanged = [..args];
-        if(args is null)
+        if(args is null)    
         {
             Products.Clear();
-            foreach(var p in _queryService.GetPurchasedProductsOnly().Select(x => new ProductInventoryViewModel(x)))
+            foreach(var p in _queryService.GetAvailableProducts().Select(x => new ProductInventoryViewModel(x)))
                 Products.Add(p);
         }
         else
@@ -48,14 +57,18 @@ public sealed class InventoryState
                 var item = _queryService.GetProductInventory(code);
 
                 var vm = Products.FirstOrDefault(x => x.Code == code);
-
+                
                 if(vm is null)
                     Products.Add(new(item));
                 else
-                {
-                    vm.Stock = item.Stock;
-                    vm.AverageCost = item.Cost;
-                }   
+                    if(item.Product.ProductDto.Active)
+                    {
+                        vm.Stock = item.Stock;
+                        vm.AverageCost = item.Cost;
+                    }
+                    else
+                        Products.Remove(vm);
+                   
             }
         }
 

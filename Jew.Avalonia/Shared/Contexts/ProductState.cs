@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -28,16 +29,20 @@ public sealed partial class ProductState
     public ObservableCollection<ProductWithCategoryDto> Products { get; private set;} = [];
     public ObservableCollection<CategoryDto> Categories { get; private set; } = [];
 
+    public event EventHandler? ProductsChanged;
+
+    public event EventHandler? CategoriesChanged;
+
     public ProductWithCategoryDto? GetProductById(string id)
     => Products.FirstOrDefault(x => x.ProductDto.Code == id);
 
-    public void UpdateBoth()
+    private void UpdateBoth()
     {
         UpdateProducts(null);
         UpdateCategories(null);
     }
 
-    public void UpdateProducts(IEnumerable<string>? args)
+    private void UpdateProducts(IEnumerable<string>? args)
     {
         if(args is null)
             foreach(var p in _service.GetProductsWithCategories())
@@ -48,17 +53,19 @@ public sealed partial class ProductState
                 var vm = Products.FirstOrDefault(x => x.ProductDto.Code==code);
 
                 if(vm is null)
-                {
                     Products.Add(_service.GetProductWithCategory(code));
-                    return;
-                }
-                var item = _service.GetProductInventory(code);
+                else
+                {
+                    var item = _service.GetProductInventory(code);
 
-                vm = item.Product;
+                    vm = item.Product;
+                }
             }
+
+        ProductsChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void UpdateCategories(IEnumerable<string>? args)
+    private void UpdateCategories(IEnumerable<string>? args)
     {
         if(args is null)
             foreach(var c in _categoryQuery.GetCategories())
@@ -69,13 +76,15 @@ public sealed partial class ProductState
                 var vm = Categories.FirstOrDefault(x => x.Name == id);
 
                 if(vm is null)
-                {
                     Categories.Add(_categoryQuery.GetCategoryById(id));
-                    return;
-                }
-                var item = _categoryQuery.GetCategoryById(id);
+                
+                else
+                {
+                    var item = _categoryQuery.GetCategoryById(id);
 
-                vm = item;
+                    vm = item;
+                }
             }
+        CategoriesChanged?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -14,14 +14,22 @@ namespace Jew.Avalonia.ViewModels.Products.Services;
 public partial class SearchProductViewModel : ViewModelBase
 {
 
-    public SearchProductViewModel(ProductState inventoryState)
+    public static SearchProductViewModel Clone(SearchProductViewModel original)
+    => new(original._inventoryState, original.ExcludeDefaultValue);
+    public SearchProductViewModel(ProductState productState, bool excludeDefault = false)
     {
-        _inventoryState = inventoryState;
+        _inventoryState = productState;
         
-        CategoriesFilter = ["Todos", .._inventoryState.Categories.Select(x => x.Name)];
-        
-        ApplyFilter();
+        _inventoryState.CategoriesChanged  += (_,_) => Update();
+        _inventoryState.ProductsChanged += (_,_) => ApplyFilter();
+        ExcludeDefaultValue = excludeDefault;
+        Update();
     }
+
+
+    [ObservableProperty]
+    private bool _excludeDefaultValue;
+
     private readonly ProductState _inventoryState;
     
     //Filtered list.
@@ -29,16 +37,15 @@ public partial class SearchProductViewModel : ViewModelBase
 
     public const string DefaultValue = "Todos";
    
-    [ObservableProperty]
-    private ObservableCollection<string> _categoriesFilter = [];
+    
+    public ObservableCollection<string> CategoriesFilter {get;} = [];
 
     [ObservableProperty]
     private string _selectedCategory = DefaultValue;
 
     private void ApplyFilter()
     {
-        var products =
-            _inventoryState.Products;   
+        var products = _inventoryState.Products;   
 
         if (SelectedCategory != DefaultValue)
             products = [..products.Where(
@@ -54,6 +61,23 @@ public partial class SearchProductViewModel : ViewModelBase
 
     partial void OnSelectedCategoryChanged(string? oldValue, string newValue)
     {
+        ApplyFilter();
+    }
+
+    partial void OnExcludeDefaultValueChanged(bool value)
+    {
+        Update();
+    }
+    private void Update()
+    {
+        var temp = SelectedCategory;
+        CategoriesFilter.Clear();
+        foreach(var c in ExcludeDefaultValue ? 
+        _inventoryState.Categories.Select(x => x.Name)  :
+        [DefaultValue, .._inventoryState.Categories.Select(x => x.Name)])
+            CategoriesFilter.Add(c);
+        
+        SelectedCategory = temp;
         ApplyFilter();
     }
 

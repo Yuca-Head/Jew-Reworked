@@ -28,6 +28,7 @@ public partial class SaleCartCardVM : CartProductsVM
 
         _inventoryState.StateChanged += (_,_) => UpdateAllowedProducts();
         UpdateAllowedProducts();
+        OnSearchCodeChanged("");
     }
 
     
@@ -39,7 +40,7 @@ public partial class SaleCartCardVM : CartProductsVM
         var changedCodes = _inventoryState.CodesChanged;
         if (changedCodes is null)
         {
-            _allowedProducts.Clear();
+            _allowedProducts.Clear();   
 
             foreach (var p in _inventoryState.Products.Where(x => x.Stock > 0))
             {

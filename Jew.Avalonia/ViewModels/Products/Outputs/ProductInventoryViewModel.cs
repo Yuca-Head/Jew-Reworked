@@ -4,7 +4,7 @@ using Jew.Avalonia.ViewModels.Categories.Outputs;
 
 namespace Jew.Avalonia.ViewModels.Products.Outputs;
 
-public partial class ProductInventoryViewModel : ProductDetailsViewModel
+public partial class ProductInventoryViewModel : ProductViewModelBase
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Total))]
@@ -18,7 +18,7 @@ public partial class ProductInventoryViewModel : ProductDetailsViewModel
         AverageCost = product.Cost;
         Stock = product.Stock;
     }
-    public ProductInventoryViewModel(ProductDetailsViewModel product) : base(product){}
+    public ProductInventoryViewModel(ProductInventoryViewModel product) : base(product){}
         
     public decimal Total => AverageCost * Stock;
 }

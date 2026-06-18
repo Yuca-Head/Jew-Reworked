@@ -80,7 +80,7 @@
                                 Binding="{Binding Product.CategoryDto.Name}"/>
 
                                 <DataGridTextColumn Header="Cantidad"
-                                Binding="{Binding Movement.Quantity}"/>
+                                Binding="{Binding Movement.Quantity, StringFormat='{}{0:N0}'}"/>
 
                                 <DataGridTextColumn Header="Costo"
                                 Binding="{Binding Movement.Cost, StringFormat='{}{0:C}'}"/>
@@ -100,7 +100,7 @@
                                                 </Style>
                                         </Grid.Styles>
                                         <TextBlock Text="Cantidad Total:" />
-                                        <TextBlock Text="{Binding Amount}" Foreground="#4141CC" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding Amount, StringFormat='{}{0:N0}'}" Foreground="#4141CC" Grid.Column="1"/>
                                         <TextBlock Text="Total:" Grid.Column="2"/>
                                         <TextBlock Text="{Binding Total, StringFormat='{}{0:C}'}" Foreground="#3D943D" Grid.Column="3"/>
                                 </Grid>

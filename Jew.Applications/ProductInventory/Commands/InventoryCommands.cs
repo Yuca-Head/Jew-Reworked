@@ -15,6 +15,9 @@ public class InventoryCommands(IUnitOfWork context)
     {
         ArgumentNullException.ThrowIfNull(product);
 
+        if(string.IsNullOrWhiteSpace(product.Code))
+            throw new InventoryException("Debe ingresar un código para crear el producto");
+
         if(_context.Products.Exist(product.Code))
             throw new InventoryException("Ya existe un producto con ese código", ProductException.GetFieldName(ProductException.Field.code));
 
@@ -22,36 +25,27 @@ public class InventoryCommands(IUnitOfWork context)
         _context.Products.SaveChanges();
     }
 
-    public void Activate(Product product)
+    public void ModifyProduct(ModifyProductDto productDto)
     {
-        ArgumentNullException.ThrowIfNull(product);
-
-        var exists = _context.Products.GetById(product.Code) ??
+        var existing = _context.Products.GetById(productDto.Code)??
             throw new InventoryException("Producto no existente");
-    
-        exists.Activate();
-        _context.Products.SaveChanges();
+        
+        if(productDto.NewState is not null)
+            if(productDto.NewState == true)
+                existing.Activate();
+            else    
+                existing.Deactivate();
+        
+        if(productDto.NewName is not null)
+            existing.Name = productDto.NewName;
     }
 
 
-    public void Deactivate(Product product)
-    {
-        ArgumentNullException.ThrowIfNull(product);
-
-
-        var exists = _context.Products.GetById(product.Code)??
-            throw new InventoryException("Producto no existente");
-    
-        exists.Deactivate();
-        _context.Products.SaveChanges();
-    }
-
-
-    public void AddCategory(Category category)
+    public void AddCategory(CategoryDto category)
     {
         ArgumentNullException.ThrowIfNull(category);
         
-        _context.Categories.Add(category);
+        _context.Categories.Add(new(category.Name, category.Description));
         _context.Categories.SaveChanges();
     } 
 

@@ -54,6 +54,6 @@ public partial class TransactionViewModel: ViewModelBase
     private string _description;
     public string TranslatedMovement => MovementType == MovementType.In ? "Entrada" : "Salida";
     public string ShortDescription =>
-    Description.Length > 30 ? Description[..30] + "..." : Description;
+    Description.Length > 40 ? Description[..40] + "..." : Description;
     public ObservableCollection<MovementViewModel> Movements {get;} = [];
 }   

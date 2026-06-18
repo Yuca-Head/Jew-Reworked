@@ -1,3 +1,4 @@
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Avalonia.ViewModels.Categories.Outputs;
@@ -13,6 +14,7 @@ public partial class ProductSaleViewModel : ProductViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SubTotal))]
     private int _stock;
+
     
     public decimal SubTotal
     => Price * Stock;

@@ -21,7 +21,7 @@
                     <Image Source="avares://Jew.Avalonia/Assets/3dBoxIcon.png" Width="70" Height="70"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
                         <TextBlock Text="Total de Productos" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="15"/>
-                        <TextBlock Text="{Binding Products.Count}" FontSize="20" Foreground="Black"/>
+                        <TextBlock Text="{Binding Products.Count, StringFormat='{}{0:N0}'}" FontSize="20" Foreground="Black"/>
                         <TextBlock Text="Produtos Ingresados" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="13"/>
                     </StackPanel>
                 </StackPanel>
@@ -68,7 +68,7 @@
                                 <Image Source="avares://Jew.Avalonia/Assets/InStockIcon.png" Width="60" Height="60"/>
                                 <StackPanel VerticalAlignment="Center" Margin="10">
                                     <TextBlock Text="Stock de Inventario" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="15"/>
-                                    <TextBlock Text="{Binding TotalStock}" FontSize="20" Foreground="Black"/>
+                                    <TextBlock Text="{Binding TotalStock, StringFormat='{}{0:N0}'}" FontSize="20" Foreground="Black"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -101,6 +101,10 @@
                         <TextBlock Text="Solo bajo Stock" Foreground="Black" FontSize="15" FontWeight="SemiBold"/>
                         <CheckBox IsChecked="{Binding LowStockOnly}" Classes="common" HorizontalAlignment="Center"/>
                     </StackPanel>
+
+                    <Button Command="{Binding RemoveFiltersCommand}" Margin="300,20,0,0"  Classes="common" Content= "Remover Filtros" 
+                    Height="40" VerticalContentAlignment= "Center" FontSize= "25"
+                    HorizontalContentAlignment= "Center"/>
                 </StackPanel>
                 
                 <!--/Filters-->
@@ -149,19 +153,19 @@
                 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Código"
-                        Binding="{Binding Code}" />
+                        Binding="{Binding Code}"  />
                         <DataGridTextColumn Header="Producto"
                         Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Categoría"
                         Binding="{Binding Category.Name}" />
                         <DataGridTextColumn Header="Stock"
-                        Binding="{Binding Stock}" />
+                        Binding="{Binding Stock, StringFormat='{}{0:N0}'}" />
                         <DataGridTextColumn Header="Costo Unitario"
                         Binding="{Binding AverageCost, StringFormat='{}{0:C}'}" />
                         <DataGridTextColumn Header="Valor Total"
                         Binding="{Binding Total, StringFormat='{}{0:C}'}"/>
                         <DataGridTextColumn Header="Ingreso"
-                        Binding="{Binding CreatedDate}"/>
+                        Binding="{Binding CreatedDate}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             

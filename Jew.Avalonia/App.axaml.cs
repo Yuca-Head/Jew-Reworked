@@ -118,6 +118,11 @@ public partial class App : Application
         services.AddSingleton<InventoryMenuViewModel>();
         services.AddSingleton<SalesMenuViewModel>();
         services.AddSingleton<MovementsMenuViewModel>();
+
+        //TransientsVM
+        services.AddTransient<SearchProductViewModel>();
+        services.AddTransient<CreateProductCardVM>();
+        services.AddTransient<CreateCategoryCardVM>();
         
     }   
 }

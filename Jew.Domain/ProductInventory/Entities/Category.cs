@@ -32,7 +32,8 @@ public sealed class Category : IHasPK<string>, IClonable<Category>
     { 
         get => name; init
         {
-            ExceptionHelper.ThrowIfNullOrEmpty(value, ExceptionType.Category, ProductException.GetFieldName(ProductException.Field.name));   
+            if(string.IsNullOrWhiteSpace(value))
+                throw new DomainException("Debe ingresar un nombre para crear una categoría");  
             name = value.Trim();
         } 
     }

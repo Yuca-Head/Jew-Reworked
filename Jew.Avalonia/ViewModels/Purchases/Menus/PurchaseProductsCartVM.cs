@@ -20,6 +20,7 @@ public partial class PurchaseProductsCartVM : CartProductsVM
         _supplierQuery = supplierQuery;
 
         Supplier = supplier;
+        OnSearchCodeChanged("","");
     }
 
     private readonly SupplierQueryService _supplierQuery;

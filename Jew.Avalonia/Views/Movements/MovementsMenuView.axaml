@@ -25,7 +25,7 @@
                     <Image Source="avares://Jew.Avalonia/Assets/BlueArrowDownIcon.png" Width="70" Height="70"/>
                     <StackPanel VerticalAlignment="Center" Margin="0">
                         <TextBlock Text="Entradas" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="15"/>
-                        <TextBlock Text="{Binding InAmount}" FontSize="20" Foreground="Black"/>
+                        <TextBlock Text="{Binding InAmount, StringFormat='{}{0:N0}'}" FontSize="20" Foreground="Black"/>
 
 
                         <TextBlock Text="Total" Foreground="#a5a5a5" Margin="3"/>
@@ -40,11 +40,11 @@
                     <Image Source="avares://Jew.Avalonia/Assets/GreenArrowUpIcon.png" Width="70" Height="70"/>
                     <StackPanel VerticalAlignment="Center" Margin="0">
                         <TextBlock Text="Salidas" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="15"/>
-                        <TextBlock Text="{Binding OutAmount}" FontSize="20" Foreground="Black"/>
+                        <TextBlock Text="{Binding OutAmount, StringFormat='{}{0:N0}'}" FontSize="20" Foreground="Black"/>
 
    
                         <TextBlock Text="Total" Foreground="#a5a5a5" Margin="3"/>
-                        <TextBlock Text="{Binding OutTotal, StringFormat='{}{0:C}'}" Foreground="Red"/>
+                        <TextBlock Text="{Binding OutTotal, StringFormat='{}{0:C}'}" Foreground="#3232F3"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -54,77 +54,77 @@
                     <Image Source="avares://Jew.Avalonia/Assets/DoubleArrowIcon.png" Width="70" Height="70"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
                         <TextBlock Text="Movimientos Totales" Foreground="#a5a5a5" TextWrapping="Wrap" FontSize="15"/>
-                        <TextBlock Text="{Binding MovementState.Movements.Count}" FontSize="20" Foreground="Black"/>
+                        <TextBlock Text="{Binding MovementState.Movements.Count, StringFormat='{}{0:N0}'}" FontSize="20" Foreground="Black"/>
                     </StackPanel>
                 </StackPanel>
             </Border>   
 
         </Grid>
+        <!--/Shared Header-->
 
-
-        <StackPanel Background="#f1f1f1" Grid.Row="2" Margin="15">
-
-            <!--Filters-->
-            <StackPanel>
-                <TextBlock Text="Filtros" Classes="header" FontSize="20" Margin="0,0,0,20"/>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Margin="10,0,50,20">    
-                        <TextBlock Text="Buscar Desde" 
-                        HorizontalAlignment="Center" Foreground="Black"/>
-                        <DatePicker SelectedDate="{Binding DateSince}" Classes="common"/>
-                    </StackPanel>  
-                    <StackPanel Margin="50,0,10,20">    
-                        <TextBlock Text="Buscar Hasta" 
-                        HorizontalAlignment="Center" Foreground="Black"/>
-                        <DatePicker SelectedDate="{Binding DateTil}" Classes="common"/>
-                    </StackPanel>   
-                    
-                    
-                    <StackPanel Margin="50,0,10,20">    
-                        <TextBlock Text="Tipo de Movimiento" 
-                        HorizontalAlignment="Center" Foreground="Black"/>
-                        <ComboBox Classes="common" SelectedItem="{Binding SelectedType}" Width="130"
-                        ItemsSource="{Binding MovementTypes}" BorderBrush= "Black" BorderThickness= "1"/>
-                    </StackPanel>   
-    
-                    <Button Command="{Binding AddFiltersCommand}" Classes="common" Content="Filtrar"
-                    Width="150" Height="35" VerticalContentAlignment= "Center" FontSize= "20"
-                    HorizontalContentAlignment= "Center" Margin= "20,0,0,0"/>
-                    <Button Command="{Binding RemoveFiltersCommand}"  Classes="common" Content= "Remover Filtros" 
-                    Width="150" Height="35" VerticalContentAlignment= "Center" FontSize= "18"
-                    HorizontalContentAlignment= "Center" Margin= "20,0,0,0"/>
-
-                </StackPanel>
-            </StackPanel>
-            <!--/Filters-->
-
-
-            <!--Table-->
-            <DataGrid Name="MovementsGrid" ItemsSource="{Binding DisplayedTransactions}" 
-            AutoGenerateColumns="false" IsReadOnly="True" Classes="common" SelectedItem="{Binding SelectedTransaction}" 
-            DoubleTapped="DataGrid_DoubleTapped" Height= "350">
-                <!---->  
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Fecha"
-                    Binding="{Binding Date}"/>
-                    <DataGridTextColumn Header="Tipo"
-                    Binding="{Binding TranslatedMovement}" />
-                    <DataGridTextColumn Header="Documento"
-                    Binding="{Binding TransactionId}" />
-                    <DataGridTextColumn Header="Proveedor/Cliente"
-                    Binding="{Binding Party}" />
-                    <DataGridTextColumn Header="Cantidad"
-                    Binding="{Binding Amount}" />
-                    <DataGridTextColumn Header="Total"
-                    Binding="{Binding Total, StringFormat='{}{0:C}'}"/>
-                    <DataGridTextColumn Header="Descripción" CanUserSort="False"
-                    Binding="{Binding ShortDescription}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <!--/Table-->
-
-        </StackPanel>
+        <Border Padding="10" Background="#f1f1f1"  Grid.Row="2" Margin="15">
+            <StackPanel >
+            
+                <!--Filters-->
+                <StackPanel>
+                    <TextBlock Text="Filtros" Classes="header" FontSize="20" Margin="0,0,0,20"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="10,0,50,20">    
+                            <TextBlock Text="Buscar Desde" 
+                            HorizontalAlignment="Center" Foreground="Black"/>
+                            <DatePicker SelectedDate="{Binding DateSince}" Classes="common"/>
+                        </StackPanel>  
+                        <StackPanel Margin="50,0,10,20">    
+                            <TextBlock Text="Buscar Hasta" 
+                            HorizontalAlignment="Center" Foreground="Black"/>
+                            <DatePicker SelectedDate="{Binding DateTil}" Classes="common"/>
+                        </StackPanel>   
+                        
+                        
+                        <StackPanel Margin="50,0,10,20">    
+                            <TextBlock Text="Tipo de Movimiento" 
+                            HorizontalAlignment="Center" Foreground="Black"/>
+                            <ComboBox Classes="common" SelectedItem="{Binding SelectedType}" Width="130"
+                            ItemsSource="{Binding MovementTypes}" BorderBrush= "Black" BorderThickness= "1"/>
+                        </StackPanel>   
         
+                        <Button Command="{Binding AddFiltersCommand}" Classes="common" Content="Filtrar"
+                        Width="150" Height="35" VerticalContentAlignment= "Center" FontSize= "20"
+                        HorizontalContentAlignment= "Center" Margin= "20,0,0,0"/>
+                        <Button Command="{Binding RemoveFiltersCommand}"  Classes="common" Content= "Remover Filtros" 
+                        Width="150" Height="35" VerticalContentAlignment= "Center" FontSize= "18"
+                        HorizontalContentAlignment= "Center" Margin= "20,0,0,0"/>
+
+                    </StackPanel>
+                </StackPanel>
+                <!--/Filters-->
+
+
+                <!--Table-->
+                <DataGrid Name="MovementsGrid" ItemsSource="{Binding DisplayedTransactions}" 
+                AutoGenerateColumns="false" IsReadOnly="True" Classes="common" SelectedItem="{Binding SelectedTransaction}" 
+                DoubleTapped="DataGrid_DoubleTapped" Height= "350">
+                    <!---->  
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Fecha"
+                        Binding="{Binding Date}"/>
+                        <DataGridTextColumn Header="Tipo"
+                        Binding="{Binding TranslatedMovement}" />
+                        <DataGridTextColumn Header="Documento"
+                        Binding="{Binding TransactionId}" />
+                        <DataGridTextColumn Header="Proveedor/Cliente"
+                        Binding="{Binding Party}" />
+                        <DataGridTextColumn Header="Cantidad"
+                        Binding="{Binding Amount}" />
+                        <DataGridTextColumn Header="Total"
+                        Binding="{Binding Total, StringFormat='{}{0:C}'}"/>
+                        <DataGridTextColumn Header="Descripción" CanUserSort="False"
+                        Binding="{Binding ShortDescription}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--/Table-->
+            </StackPanel>
+        </Border>
     </Grid>
 
 </UserControl>

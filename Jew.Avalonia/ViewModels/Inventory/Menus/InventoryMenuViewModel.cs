@@ -18,9 +18,9 @@ namespace Jew.Avalonia.ViewModels.Inventory.Menus;
 public partial class InventoryMenuViewModel : ViewModelBase
 {
    public InventoryMenuViewModel
-    (ProductState productState, InventoryState inventoryState)
+    (InventoryState inventoryState, SearchProductViewModel catfilter)
     {
-        CatFilter = new(productState);
+        CatFilter = catfilter;
         _inventoryState = inventoryState;
         _inventoryState.StateChanged += (_, _) => 
         {
@@ -102,7 +102,7 @@ public partial class InventoryMenuViewModel : ViewModelBase
             return query;
         
         return
-        query.Where(x => string.Equals(x.Category.Name,CatFilter.SelectedCategory, StringComparison.OrdinalIgnoreCase));
+        query.Where(x => string.Equals(x.Category.Name, CatFilter.SelectedCategory, StringComparison.OrdinalIgnoreCase));
         
     }
 
@@ -124,6 +124,15 @@ public partial class InventoryMenuViewModel : ViewModelBase
         var lowStocks =  GetLowStock()(_inventoryState.Products);
         LowStockCount = lowStocks.Count();
         ProductsWithoutExistence = lowStocks.Count(x => x.Stock == 0);
+    }
+
+    [RelayCommand]
+    private void RemoveFilters()
+    {
+        CatFilter.SelectedCategory = SearchProductViewModel.DefaultValue;
+        SearchCode = "";
+        LowStockOnly = false;
+        ApplyFilters();
     }
 
     private void ApplyFilters()

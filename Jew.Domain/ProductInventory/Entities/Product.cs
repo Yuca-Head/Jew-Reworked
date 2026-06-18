@@ -71,7 +71,8 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
         get => code;
         init
         {
-            ExceptionHelper.ThrowIfNullOrEmpty(value, ExceptionType.Product, ProductException.GetFieldName(ProductException.Field.code));
+            if(string.IsNullOrWhiteSpace(value))
+                throw new ProductException("Debe ingresar un código para el producto");
 
             code = value.Trim();
         }
@@ -82,10 +83,11 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
         get => name;
         set
         {
-            ExceptionHelper.ThrowIfNullOrEmpty(value, ExceptionType.Product, ProductException.GetFieldName(ProductException.Field.name));
 
+            if(string.IsNullOrWhiteSpace(value))
+                throw new ProductException("Debe ingresar un nombre para el producto");
             if(!value.Any(char.IsLetter))
-                throw new ProductException("El nombre debe contener al menos una letra", ProductException.Field.name);
+                throw new ProductException("El nombre del producto debe contener al menos una letra", ProductException.Field.name);
             name = value.Trim();
 
         }
@@ -123,13 +125,15 @@ public sealed class Product : IHasPK<string>, IClonable<Product>
         get => categoryId;
         set
         {
+            if(string.IsNullOrWhiteSpace(value))
+                throw new ProductException("Ingrese una categoría para el producto");
             ArgumentException.ThrowIfNullOrWhiteSpace(value);
             categoryId = value;
         }
     }
 
     public override bool Equals(object? obj)  
-    => obj is Product p && p.Code == Code;  
+    => obj is Product p && p.Code == Code;      
 
 
     public override int GetHashCode()  
