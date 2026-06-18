@@ -9,10 +9,9 @@
 
     <Grid ColumnDefinitions="*,400"  RowDefinitions="50,*" ShowGridLines="False" Background="White">
         
-        <StackPanel Grid.Row="  0" Grid.Column="0" Grid.RowSpan="1" Orientation="Horizontal"  >
-                <Border Width="16" Height="40" Background="#141223"
-                CornerRadius="8" Margin="10,0,0,0"/>
-            <TextBlock Text="Compras" FontSize="20" Margin= "10,12,0,0"  Foreground="Black"/>
+        <StackPanel Grid.Row="0"  Classes="menu-header" Grid.Column="0" Grid.RowSpan="1" Orientation="Horizontal"  >
+                <Border/>
+            <TextBlock Text="Compras"/>
         </StackPanel>    
 
         <Grid Grid.Row="1" RowDefinitions="130,*,250" Background="#f1f1f1" Margin="5" ShowGridLines="False">

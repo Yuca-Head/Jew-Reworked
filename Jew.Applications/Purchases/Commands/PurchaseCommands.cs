@@ -2,6 +2,7 @@
 using Jew.Applications.InventoryMovements;
 using Jew.Applications.InventoryMovements.Commands;
 using Jew.Applications.ProductInventory.Queries;
+using Jew.Applications.Purchases.DTOs.Purchases;
 using Jew.Applications.Purchases.Queries;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.Purchases.Entities;
@@ -23,7 +24,7 @@ SupplierQueryService supplierQuery, ProductQueryService productQuery)
     private readonly IUnitOfWork _context = context;
 
     //Valida cosas generales de lista y que no pueda válidar por si solo el dominio (a veces redundancias útiles)
-    public void RegisterPurchase(Purchase purchase)
+    public void RegisterPurchase(PurchaseDto purchase)
     {
         //Para evitar problemas de milisegundos
         if(purchase.Date > DateTime.Now.AddMinutes(5))
@@ -55,7 +56,7 @@ SupplierQueryService supplierQuery, ProductQueryService productQuery)
         foreach(var movement in addedMovements)
             _movements.AddMovement(movement);
 
-        _context.Purchases.Add(purchase);
+        _context.Purchases.Add(PurchaseDto.To(purchase));
         _context.SaveChanges();
     }
 

@@ -7,5 +7,5 @@ public interface IMovementsRepo : IRepository<InventoryMovement, int>
 {
     IEnumerable<InventoryMovement> GetByTransactionId(Guid Id);
     IEnumerable<InventoryMovement> GetByType(MovementType type);
-    IEnumerable<Guid> GetTransactionsId();
+    IEnumerable<Guid> GetTransactionIds();
 }

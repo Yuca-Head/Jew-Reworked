@@ -9,7 +9,7 @@ namespace Jew.Domain.InventoryMovements.Entities;
 public enum MovementType
 {
     In,
-    Out
+    Out ,
 }
 
 public readonly record struct InventoryMovement : IHasId, IIsTransaction

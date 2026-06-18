@@ -40,8 +40,12 @@ public partial class SaleSummaryCardVM
             var sale = _createSale();
             if(sale is null)
                 return;
+
+            ShowUnsafeSaleOption = false;
+            
             registerSale.Invoke(sale);
             WeakReferenceMessenger.Default.Send(new StockStateUpdatedMessage([..sale.Items.Select(x => x.ProductId)]));
+            WeakReferenceMessenger.Default.Send(new MovementUpdateMessage(null, sale.TransactionId));
             ClearForm();    
         }catch(DomainException e)
         {

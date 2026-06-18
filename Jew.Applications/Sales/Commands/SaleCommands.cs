@@ -48,7 +48,7 @@ public sealed class SaleCommands
             if(item.Quantity <= 0)
                 throw new SaleException($"Debe ingresar al menos un producto {item.ProductId} para realizar la venta");
             if(item.UnitPrice <= 0)
-                throw new SaleException($"El precio del producto {item.UnitPrice} debe ser mayor a 0");
+                throw new SaleException($"El precio del producto {item.ProductId} debe ser mayor a 0");
 
             var state = _stockSateQuery.GetProductState(item.ProductId);
 
@@ -64,7 +64,7 @@ public sealed class SaleCommands
             var movement = new InventoryMovement(
                 item.ProductId,
                 item.Quantity,
-                item.UnitPrice,
+                state.AverageCost,
                 MovementType.Out,
                 sale.TransactionId);
             addedMovements.Add(movement);

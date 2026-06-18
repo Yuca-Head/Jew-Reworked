@@ -2,9 +2,7 @@
 
 <Design.PreviewWith>
     <StackPanel>
-        <Border Classes="output-generated" Margin="10" Height="50" Width="200">
-            <TextBlock Text="TEXTO DE EJEMPLO"/>
-        </Border>
+        <TextBlock Text="TEXTO DE PRUEBA" Classes="header"/>
     </StackPanel>
 </Design.PreviewWith>
 
@@ -16,9 +14,9 @@
 
 <!-- Header de algo -->
 <Style Selector="TextBlock.header">
-    <Setter Property="Background" Value="Navy"/>
+    <Setter Property="Background" Value="Transparent"/>
     <Setter Property="FontSize" Value="15"/>
-    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="Foreground" Value="#8c52ff"/>
     <Setter Property="TextAlignment" Value="Center"/>
     <Setter Property="FontWeight" Value="DemiBold"/>
 </Style>

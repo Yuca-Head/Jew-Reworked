@@ -21,6 +21,6 @@ JsonRepository<int, InventoryMovement, MovementData>(fileName ?? defaultFileName
     public IEnumerable<InventoryMovement> GetByType(MovementType type)
     => InMemoryRepo.GetByType(type);
 
-    public IEnumerable<Guid> GetTransactionsId()
-    => InMemoryRepo.GetTransactionsId();
+    public IEnumerable<Guid> GetTransactionIds()
+    => InMemoryRepo.GetTransactionIds();
 }

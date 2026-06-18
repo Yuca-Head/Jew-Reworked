@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Jew.Applications.Purchases.Commands;
+using Jew.Applications.Purchases.DTOs.Purchases;
 using Jew.Applications.Purchases.Queries;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
 using Jew.Avalonia.ViewModels.Transactions;
@@ -61,10 +62,10 @@ public partial class PurchasesMenuViewModel : ViewModelBase
         }
     }
 
-    private Func<Purchase> CreatePurchase()
+    private Func<PurchaseDto> CreatePurchase()
     //Esta línea tira la excepción excepcional
     => () => new(SupplierCardVM.SupplierSelected.Id, 
-        [..Cart.Cart.Select(x => new PurchaseItem(x.Code, x.Quantity, x.UnitCost))],
+        [..Cart.Cart.Select(x => new PurchaseItemDto(x.Code, x.Quantity, x.UnitCost))],
         SupplierCardVM.TransactionId, Details.Details, SupplierCardVM.OrderDate!.Value.DateTime);
     
     

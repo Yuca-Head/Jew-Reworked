@@ -9,6 +9,8 @@
              xmlns:inventoryViews  = "using:Jew.Avalonia.Views.Inventory"
              xmlns:saleVM="using:Jew.Avalonia.ViewModels.Sales.Menus"
              xmlns:saleViews="using:Jew.Avalonia.Views.Sales"
+             xmlns:movementVM="using:Jew.Avalonia.ViewModels.Movements.Menus"
+             xmlns:movementViews="using:Jew.Avalonia.Views.Movements"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -25,6 +27,9 @@
         <DataTemplate DataType="saleVM:SalesMenuViewModel">
                 <saleViews:SaleMenuView/>
         </DataTemplate>
+        <DataTemplate DataType="movementVM:MovementsMenuViewModel">
+                <movementViews:MovementsMenuView/>
+        </DataTemplate>
         <!--local:ViewLocator/-->
     </Application.DataTemplates>
   
@@ -36,6 +41,8 @@
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Collections.axaml"/>
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Decoration.axaml"/>
         <StyleInclude Source="avares://Jew.Avalonia/Styles/Inputs.axaml"/>
+
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
 
 

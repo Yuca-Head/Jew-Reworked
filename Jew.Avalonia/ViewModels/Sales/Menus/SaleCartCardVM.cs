@@ -99,31 +99,40 @@ public partial class SaleCartCardVM : CartProductsVM
     {
         Suggestions.Clear();
 
-        if(string.IsNullOrWhiteSpace(value))
-            return;
-
         var selectedKeys = Cart
         .Select(x => x.Code)
         .ToHashSet();
-
-        foreach(var product in _allowedProducts
-            .Where
-            (x => x.Key.StartsWith(value, StringComparison.OrdinalIgnoreCase) && !selectedKeys.Contains(x.Key))
-            .Take(10)
-            )
+        
+        if(string.IsNullOrEmpty(value))
         {
-            Suggestions.Add
-            (new ProductViewModelBase(new(product.Key, product.Value.Name, product.Value.Category.Name, product.Value.Active, product.Value.CreatedDate), product.Value.Category));
+            FilterSuggestions(x => !selectedKeys.Contains(x.Key));
+            return;
         }
+
+
+        FilterSuggestions(x => !selectedKeys.Contains(x.Key) && (x.Key.StartsWith(value, StringComparison.OrdinalIgnoreCase) ||
+                x.Value.Name.Contains(value, StringComparison.OrdinalIgnoreCase)));
+    }
+    
+
+    private void FilterSuggestions(Func<KeyValuePair<string, ProductInventoryViewModel>, bool> selector)
+    {
+        foreach(var product in _allowedProducts
+        .Where
+        (selector)
+        .Take(10)
+        )
+            Suggestions.Add
+            (new ProductViewModelBase(new(product.Key, product.Value.Name, 
+            product.Value.Category.Name, product.Value.Active, product.Value.CreatedDate), product.Value.Category));
+    
     }
 
     [RelayCommand]
     private void SelectProduct(string code)
     {
         AddItemToCart(code);
-
-        SearchCode = "";
-        Suggestions.Clear();
+        OnSearchCodeChanged("");
     }
 
     #endregion

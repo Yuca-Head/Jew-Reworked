@@ -18,7 +18,7 @@
 
             <TextBlock Text="Productos" Foreground="Black" FontSize="30" Margin="10,0,0,0" FontWeight="SemiBold"/>
 
-            <StackPanel Margin="350,0,0,0" MaxWidth="300">
+            <StackPanel Margin="350,0,0,0" MaxWidth="300" Classes="search-container">
                 <TextBox Text="{Binding SearchCode, Mode=TwoWay}" MinWidth="300" Margin="0,10,0,0" Classes="searchbar" Watermark="Buscar Por Código"/>
 
                 <ListBox ItemsSource="{Binding Suggestions}" Classes="common">

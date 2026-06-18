@@ -18,7 +18,7 @@ public sealed class ProductQueryService(IUnitOfWork context)
 
     public ProductDto GetProductByCode(string code)
     => ProductDto.From(_context.Products.GetByCode(code) ??
-    throw new InventoryException("Producto no encontrado"));
+    throw new InventoryException($"Producto {code} no encontrado"));
 
     public bool ProductExists(string code)
     => _context.Products.Exist(code);

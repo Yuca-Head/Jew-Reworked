@@ -12,7 +12,7 @@ using Jew.Avalonia.ViewModels.Products.Outputs;
 
 namespace Jew.Avalonia.Shared.Contexts;
 
-public sealed partial class ProductState : ViewModelBase
+public sealed partial class ProductState
 {
     public ProductState(InventoryQueryService inventoryQueryService, CategoryQueryService categoryQuery)
     {  
@@ -28,6 +28,8 @@ public sealed partial class ProductState : ViewModelBase
     public ObservableCollection<ProductWithCategoryDto> Products { get; private set;} = [];
     public ObservableCollection<CategoryDto> Categories { get; private set; } = [];
 
+    public ProductWithCategoryDto? GetProductById(string id)
+    => Products.FirstOrDefault(x => x.ProductDto.Code == id);
 
     public void UpdateBoth()
     {

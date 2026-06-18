@@ -1,0 +1,118 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Jew.Avalonia.ViewModels.Movements.Outputs"
+        Width="600" Height="700"
+        MinWidth="400" MinHeight="500" 
+        MaxWidth="2560" MaxHeight="1440"
+        x:Class="Jew.Avalonia.Views.Movements.MovementDetailsWindow"
+        x:DataType="vm:DetailedTransactionViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding TransactionId, StringFormat='# Documento: {0}'}"
+        Background= "White">
+        
+        <Window.Styles>
+                <Style Selector="Window TextBlock">
+                        <Setter Property="Foreground" Value="Black"/>
+                </Style>
+        </Window.Styles>
+        <ScrollViewer>
+                <StackPanel Margin="10">
+                        <Border Height="120" Background="#EAE9E9" CornerRadius="8" Padding="15">
+
+                                <Border.Styles>
+                                        <Style Selector="TextBlock.lil-header">
+                                                <Setter Property="Foreground" Value="Black"/>
+                                        </Style>
+                                        <Style Selector="Border TextBlock">
+                                                <Setter Property="Foreground" Value="#6C6C6C"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                </Border.Styles>
+
+                                <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*,*" ShowGridLines="False">
+                                        <StackPanel Grid.ColumnSpan="4" HorizontalAlignment="Center">
+                                                <TextBlock Text="# Documento" Classes="lil-header"/>
+                                                <TextBlock Text="{Binding TransactionId}"/>
+                                        </StackPanel>
+
+                                <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                                                <StackPanel>
+                                                        <TextBlock Text="Fecha" Classes="lil-header"/>
+                                                        <TextBlock Text="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+                                                </StackPanel>
+                                                <StackPanel>
+                                                        <TextBlock Text="Hora" Classes="lil-header"/>
+                                                        <TextBlock Text="{Binding Date.TimeOfDay}"/>
+                                                </StackPanel>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Column="0" Grid.Row="1">
+                                                <TextBlock Text="Tipo de Transacción" Classes="lil-header"/>
+                                                <TextBlock Text="{Binding TranslatedMovement}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                                <TextBlock Text="Party" x:Name="PartyType" Classes="lil-header"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding PartyName}" TextWrapping="Wrap" MaxHeight="30" MaxWidth="80"/>
+                                                        <TextBlock Text="{Binding Party, StringFormat='({0})'}"/>
+                                                </StackPanel>
+                                        </StackPanel>
+                                        
+                                </Grid>
+                        </Border>
+                        <DataGrid ItemsSource="{Binding DetailedMovements}" Margin="0,50,0,0" Background="#F4F4F4" Padding="8" IsReadOnly="True"
+                        AutoGenerateColumns="False" Classes="common">
+
+                                <DataGrid.Styles>
+                                        <Style Selector="DataGrid DataGridColumnHeadersPresenter DataGridColumnHeader">
+                                                <Setter Property="Background" Value="#D8D8D8"/>
+                                        </Style>
+                                </DataGrid.Styles>
+                                <DataGrid.Columns>
+                                
+                                <DataGridTextColumn Header="Código"
+                                Binding="{Binding Movement.ProductCode}"/>
+
+                                <DataGridTextColumn Header="Producto"
+                                Binding="{Binding Product.ProductDto.Name}"/>
+
+                                <DataGridTextColumn Header="Categoria"
+                                Binding="{Binding Product.CategoryDto.Name}"/>
+
+                                <DataGridTextColumn Header="Cantidad"
+                                Binding="{Binding Movement.Quantity}"/>
+
+                                <DataGridTextColumn Header="Costo"
+                                Binding="{Binding Movement.Cost, StringFormat='{}{0:C}'}"/>
+
+                                <DataGridTextColumn Header="Total"
+                                Binding="{Binding Movement.Total, StringFormat='{}{0:C}'}"/>
+
+                
+                                </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Border CornerRadius="8" Background="#EAE9E9" Margin="20,50,20,50" Padding="10">
+                                <Grid ColumnDefinitions="Auto,*,Auto,*">
+                                        <Grid.Styles>
+                                                <Style Selector="Grid TextBlock">
+                                                        <Setter Property="FontSize" Value="14"/>
+                                                </Style>
+                                        </Grid.Styles>
+                                        <TextBlock Text="Cantidad Total:" />
+                                        <TextBlock Text="{Binding Amount}" Foreground="#4141CC" Grid.Column="1"/>
+                                        <TextBlock Text="Total:" Grid.Column="2"/>
+                                        <TextBlock Text="{Binding Total, StringFormat='{}{0:C}'}" Foreground="#3D943D" Grid.Column="3"/>
+                                </Grid>
+                        </Border>
+                        
+                        <TextBlock Classes="header" Text="Descripción" HorizontalAlignment="Center"/>
+
+                        <Border CornerRadius="8" Background="#EAE9E9" Margin="20,0,20,0" Padding="10">
+                                <TextBox BorderThickness="0"
+                                IsReadOnly="True" Classes="searchbar" Background="Transparent" Text="{Binding Description}" TextWrapping="Wrap"/>
+                        </Border>
+                                
+                </StackPanel>
+        </ScrollViewer>
+</Window>

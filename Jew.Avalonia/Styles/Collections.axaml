@@ -227,4 +227,21 @@
     </Style>
 <!--/ProductList-->
 
+<!--DataGrid Common-->
+<Style Selector="DataGrid.common DataGridColumnHeadersPresenter">
+    <Setter Property="Background" Value="#b7b5b4"/>
+</Style>
+<Style Selector="DataGrid.common DataGridColumnHeadersPresenter DataGridColumnHeader">
+    <Setter Property="Foreground" Value="Black"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Background" Value="Transparent"/>
+</Style>
+<Style Selector="DataGrid.common DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+    <Setter Property="Fill" Value="#9460FC"/>   
+</Style>
+<Style Selector="DataGrid.common DataGridRow">
+    <Setter Property="Foreground" Value="#1D1D1D"/>   
+</Style>
+<!--/DataGrid Common-->
 </Styles>

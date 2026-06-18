@@ -23,7 +23,7 @@
                         <!--Button Classes="sidebar" Content="Clientes"/-->
                         <Button Classes="sidebar" Content="Compras" Command="{Binding ShowPurchasesCommand}"/>
                         <Button Classes="sidebar" Content="Ventas" Command="{Binding ShowSalesCommand}"/>
-                        <Button Classes="sidebar" Content="Movimientos"/>
+                        <Button Classes="sidebar" Content="Movimientos" Command="{Binding ShowMovementsCommand}"/>
                 </StackPanel>           
         </Border>
 </UserControl>

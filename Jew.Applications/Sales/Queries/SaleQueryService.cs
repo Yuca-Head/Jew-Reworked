@@ -19,6 +19,7 @@ public sealed class SaleQueryService(IUnitOfWork context)
 
         return SaleDto.From(result);
     }
+    
 
     public IEnumerable<SaleDto> GetSales()
     => _context.Sales.GetAll().Select(SaleDto.From);

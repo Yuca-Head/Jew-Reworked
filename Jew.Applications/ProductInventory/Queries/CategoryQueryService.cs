@@ -12,7 +12,7 @@ public sealed class CategoryQueryService(IUnitOfWork context)
     #region Categories
     public CategoryDto GetCategoryById(string id)
     => CategoryDto.From(_context.Categories.GetById(id) ??
-    throw new InventoryException("No se encontró la categoría", nameof(id)));
+    throw new InventoryException($"No se encontró la categoría: {id}", nameof(id)));
 
 
     public IEnumerable<CategoryDto> GetCategoriesInUse()

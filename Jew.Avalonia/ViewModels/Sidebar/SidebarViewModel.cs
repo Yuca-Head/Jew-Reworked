@@ -2,6 +2,7 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jew.Avalonia.ViewModels.Inventory.Menus;
+using Jew.Avalonia.ViewModels.Movements.Menus;
 using Jew.Avalonia.ViewModels.Products.Menus;
 using Jew.Avalonia.ViewModels.Purchases.Menus;
 using Jew.Avalonia.ViewModels.Sales.Menus;
@@ -12,7 +13,7 @@ namespace Jew.Avalonia.ViewModels.SideBar;
 public partial class SidebarViewModel
 (
     ProductsMenuViewModel productMenuVM, PurchasesMenuViewModel purchasesMenu, InventoryMenuViewModel inventoryMenu,
-    SalesMenuViewModel salesMenuVM
+    SalesMenuViewModel salesMenuVM, MovementsMenuViewModel movementsMenuVM
 ) : ViewModelBase
 {
     [ObservableProperty]
@@ -46,6 +47,13 @@ public partial class SidebarViewModel
     {
         if(CurrentViewModel != salesMenuVM)
             CurrentViewModel = salesMenuVM;
+    }
+    
+    [RelayCommand]
+    private void ShowMovements()
+    {
+        if(CurrentViewModel != movementsMenuVM)
+            CurrentViewModel = movementsMenuVM;
     }
 
 }

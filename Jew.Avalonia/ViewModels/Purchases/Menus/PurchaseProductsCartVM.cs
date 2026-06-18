@@ -47,8 +47,10 @@ public partial class PurchaseProductsCartVM : CartProductsVM
         _allProducts.Clear();
         foreach(var item in _supplierQuery.GetSupplierProducts(Supplier.Id))
             _allProducts.Add(SupplierProductViewModel.From(item));
-        
+
         UpdateSupplierProducts();
+        Suggestions.Clear();
+        TakeInitialSuggestions();
     }
 
 
@@ -63,22 +65,29 @@ public partial class PurchaseProductsCartVM : CartProductsVM
             .Where(p => !selectedKeys.Contains(p.Product.Code))];
     }
 
-    
-    partial void OnSearchCodeChanged(string value)
+
+    partial void OnSearchCodeChanged(string? oldValue, string newValue)
     {
         Suggestions.Clear();
 
-        if(string.IsNullOrWhiteSpace(value))
-            return;
+        if(string.IsNullOrEmpty(newValue))
+            TakeInitialSuggestions();
 
-        foreach(var product in SupplierProducts
-            .Where(x => x.Product.Code.StartsWith(value, StringComparison.OrdinalIgnoreCase))
-            .Take(10)
-            .Select(p => p.Product)
-            )
-        {
-            Suggestions.Add(new(product));
-        }
+        else
+            foreach(var product in SupplierProducts
+                .Where(x => x.Product.Code.StartsWith(newValue, StringComparison.OrdinalIgnoreCase)    ||
+                x.Product.Name.Contains(newValue, StringComparison.OrdinalIgnoreCase))
+                .Take(10)
+                .Select(p => p.Product)
+                )
+                Suggestions.Add(new(product));
+        
+    }
+
+    private void TakeInitialSuggestions()
+    {
+        foreach(var pr in SupplierProducts.Take(10).Select(p => p.Product))
+            Suggestions.Add(pr);
     }
 
     private void UpdateItemsNumber()
@@ -96,8 +105,7 @@ public partial class PurchaseProductsCartVM : CartProductsVM
 
         UpdateSupplierProducts();
 
-        SearchCode = "";
-        Suggestions.Clear();
+        OnSearchCodeChanged("","");
     }
 
 

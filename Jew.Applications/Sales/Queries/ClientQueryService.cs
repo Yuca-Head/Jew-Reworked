@@ -15,6 +15,9 @@ public sealed class ClientQueryService(IUnitOfWork context)
         throw new ClientException("Tipo de código no válido (debe contener 5 caracteres)") : 
         ClientExists(new CodeKey(5, code.Take(5).ToString()));
 
+    public ClientDto GetClient(CodeKey key)
+    => ClientDto.From(context.Clients.GetById(key) ?? 
+    throw new ClientException($"Cliente con código {key.Key} no encontrado "));
     public IEnumerable<ClientDto> GetClients()
     => context.Clients.GetAll().Select(ClientDto.From);
 }

@@ -27,6 +27,7 @@ using Jew.Avalonia.ViewModels.Sales.Menus;
 using Jew.Applications.Sales.Queries;
 using Jew.Applications.Sales.Commands;
 using Jew.Domain.InventoryMovements.Entities;
+using Jew.Avalonia.ViewModels.Movements.Menus;
 
 namespace Jew.Avalonia;
 
@@ -97,10 +98,14 @@ public partial class App : Application
         services.AddSingleton<ClientQueryService>();
         services.AddSingleton<SaleCommands>();
         services.AddSingleton<ProductStockState>();
+        services.AddSingleton<MovementQueryService>();
+        services.AddSingleton<SaleQueryService>();
+        services.AddSingleton<PurchaseQueryService>();
 
         //UI Services
         services.AddSingleton<ProductState>();
         services.AddSingleton<InventoryState>();
+        services.AddSingleton<MovementsState>();
 
         // ViewModels
         services.AddTransient<MainWindow>();
@@ -112,5 +117,7 @@ public partial class App : Application
         services.AddSingleton<SidebarViewModel>();
         services.AddSingleton<InventoryMenuViewModel>();
         services.AddSingleton<SalesMenuViewModel>();
+        services.AddSingleton<MovementsMenuViewModel>();
+        
     }   
 }

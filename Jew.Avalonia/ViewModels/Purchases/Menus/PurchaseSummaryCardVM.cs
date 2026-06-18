@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.Purchases.Commands;
+using Jew.Applications.Purchases.DTOs.Purchases;
 using Jew.Avalonia.Messaging;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
 using Jew.Avalonia.ViewModels.Purchases.Outputs;
@@ -15,7 +16,8 @@ using Jew.Domain.Shared.Exceptions;
 
 namespace Jew.Avalonia.ViewModels.Purchases.Menus;
 
-public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands, Func<Purchase> createPurchase, Action clearForm) : ViewModelBase
+public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands,
+Func<PurchaseDto> createPurchase, Action clearForm) : ViewModelBase
 {
     private readonly PurchaseCommands _purchaseCommands = purchaseCommands;
 
@@ -29,7 +31,7 @@ public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands, Fu
 
     private readonly Action _clearForm = clearForm;
 
-    private readonly Func<Purchase> _createPurchase = createPurchase;
+    private readonly Func<PurchaseDto> _createPurchase = createPurchase;
 
     [RelayCommand]
     private void RegisterPurchase()
@@ -40,6 +42,7 @@ public partial class PurchaseSummaryCardVM(PurchaseCommands purchaseCommands, Fu
             var purchase = _createPurchase();
             _purchaseCommands.RegisterPurchase(purchase);
             WeakReferenceMessenger.Default.Send(new StockStateUpdatedMessage(purchase.Items.Select(x => x.ProductId)));
+            WeakReferenceMessenger.Default.Send(new MovementUpdateMessage(null, purchase.TransactionId));
             ClearForm();
         }catch(DomainException e)
         {

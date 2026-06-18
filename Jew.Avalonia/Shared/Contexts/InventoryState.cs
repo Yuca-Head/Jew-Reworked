@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.InventoryMovements.Queries;
 using Jew.Applications.ProductInventory.DTOs;
@@ -23,11 +24,11 @@ public sealed class InventoryState
     }
 
     private readonly InventoryQueryService _queryService;
-    //Le cambié el nombre
     public IReadOnlyCollection<string>? CodesChanged {get; private set;}
     public event EventHandler? StateChanged;
     public ObservableCollection<ProductInventoryViewModel> Products {get;} = [];
 
+   
     private void Update(IEnumerable<string>? args)
     {
         if(args is null)

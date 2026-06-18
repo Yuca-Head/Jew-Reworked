@@ -31,5 +31,13 @@
         <Setter Property="CaretBrush" Value="#9966FF"/>
         <Setter Property="SelectionBrush" Value="#CB4747E9"/>
     </Style>
+
+    <Style Selector="StackPanel.search-container ListBox">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <Style Selector="StackPanel.search-container:focus-within ListBox">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
     <!--/SearchBar-->
 </Styles>
