@@ -20,7 +20,10 @@ public class InventoryCommands(IUnitOfWork context)
 
         if(_context.Products.Exist(product.Code))
             throw new InventoryException("Ya existe un producto con ese código", ProductException.GetFieldName(ProductException.Field.code));
-
+        
+        if(!_context.Categories.Exist(product.CategoryId))
+            throw new InventoryException($"Categoría {product.CategoryId} no encontrada");
+            
         _context.Products.Add(new(product.Code, product.Name, product.CategoryId));
         _context.Products.SaveChanges();
     }

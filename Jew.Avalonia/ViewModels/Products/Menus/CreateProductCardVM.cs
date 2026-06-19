@@ -1,3 +1,6 @@
+using System.Collections.ObjectModel;
+using System.Linq;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -16,24 +19,27 @@ public partial class CreateProductCardVM : ViewModelBase
     public CreateProductCardVM(ProductState productState, InventoryCommands commands)
     {
         _commands = commands;
-        ProductState = productState;
+        _productState = productState;
+        _productState.CategoriesChanged += (_,_) => UpdateCategories();
+        Categories = [];
+        UpdateCategories();
     }   
 
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
     private readonly InventoryCommands _commands;
 
-    public ProductState ProductState {get;}
+    private readonly ProductState _productState;
 
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasError))]
     private string? _errorMessage;
     
-    [ObservableProperty]
-    private SearchProductViewModel _categoryFilter;
 
     [ObservableProperty]
     private CreateProductViewModel _product = new();
+    
+    public ObservableCollection<string> Categories {get;} = [];
     
     [RelayCommand]
     private void CreateProduct()
@@ -54,8 +60,14 @@ public partial class CreateProductCardVM : ViewModelBase
     [RelayCommand]
     private void Clear()
     {
-        CategoryFilter.SelectedCategory = "Escoger Categoría";
         Product = new();    
         ErrorMessage = "";
+    }
+
+    private void UpdateCategories()
+    {
+        Categories.Clear();
+        foreach(var c in _productState.Categories.Select(x => x.Name))
+            Categories.Add(c);
     }
 }

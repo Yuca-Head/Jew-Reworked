@@ -102,18 +102,13 @@
                         <StackPanel Grid.Row="2" Grid.Column="1">
                             <TextBlock Text="Categoría"/>
                             <ComboBox Classes="common" Width="200" SelectedItem="{Binding CreateProductCard.Product.Category}"
-                            ItemsSource="{Binding CreateProductCard.ProductState.Categories}">
+                            ItemsSource="{Binding CreateProductCard.Categories}">
                                 <ComboBox.Styles>
                                     <Style Selector="ComboBox TextBlock">
                                         <Setter Property="Foreground" Value="black"/>
                                         <Setter Property="FontSize" Value="15"/>
                                     </Style>
                                 </ComboBox.Styles>
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
                         
