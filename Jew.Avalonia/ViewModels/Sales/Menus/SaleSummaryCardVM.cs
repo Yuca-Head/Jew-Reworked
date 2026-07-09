@@ -58,13 +58,13 @@ public partial class SaleSummaryCardVM
 
     [RelayCommand]
     private void RegisterSafeSale()
-    => RegisterSale(_saleCommands.RegisterSafeSale);
+    => RegisterSale(async x => await _saleCommands.RegisterSafeSale(x));
     [RelayCommand]
     private void RegisterUnsafeSale()
-    => RegisterSale(_saleCommands.RegisterUnsafeSale);
+    => RegisterSale(async x => await _saleCommands.RegisterUnsafeSale(x));
 
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
-
+ 
     partial void OnErrorMessageChanged(string value)
     {
         OnPropertyChanged(nameof(HasError));

@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -40,13 +41,13 @@ public partial class CreateProductCardVM : ViewModelBase
     private CreateProductViewModel _product = new();
     
     public ObservableCollection<string> Categories {get;} = [];
-    
+        
     [RelayCommand]
-    private void CreateProduct()
+    private async Task CreateProduct()
     {
         try
         {
-            _commands.AddProduct(new(Product.Code, Product.Name, Product.Category));
+            await _commands.AddProduct(new(Product.Code, Product.Name, Product.Category));
             WeakReferenceMessenger.Default.Send(new ProductUpdateMessage(Product.Code){ Action = ProductUpdateMessage.Activator.Added});
             Clear();
         }

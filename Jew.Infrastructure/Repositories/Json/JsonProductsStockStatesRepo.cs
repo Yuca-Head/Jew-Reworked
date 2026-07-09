@@ -17,11 +17,12 @@ public sealed class JsonProductsStockStates
 
     private const string defaultFileName = "ProductStockStates.json";
 
-    public void ApplyMovement(InventoryMovement movement)
-    => InMemoryRepo.ApplyMovement(movement);
+    public Task ApplyMovementAsync(InventoryMovement movement)
+    => InMemoryRepo.ApplyMovementAsync(movement);
 
+    public Task<ProductStockState> GetOrCreateAsync(string productId)
+    => InMemoryRepo.GetOrCreateAsync(productId);
 
-
-    public ProductStockState GetOrCreate(string productId)
-    => InMemoryRepo.GetOrCreate(productId);
+    public Task ApplyMovementsAsync(IEnumerable<InventoryMovement> movements)
+    => InMemoryRepo.ApplyMovementsAsync(movements);
 }

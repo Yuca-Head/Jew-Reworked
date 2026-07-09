@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -22,11 +23,11 @@ public partial class CreateCategoryCardVM(InventoryCommands commands) : ViewMode
 
 
     [RelayCommand]
-    private void CreateCategory()
+    private async Task CreateCategory()
     {
         try
         {
-            commands.AddCategory(new(Category.Name, Category.Description));
+            await commands.AddCategory(new(Category.Name, Category.Description));
             WeakReferenceMessenger.Default.Send(new CategoryUpdateMessage(Category.Name));
             Clear();
         }

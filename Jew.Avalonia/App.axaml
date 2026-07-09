@@ -30,6 +30,7 @@
         <DataTemplate DataType="movementVM:MovementsMenuViewModel">
                 <movementViews:MovementsMenuView/>
         </DataTemplate>
+        
         <!--local:ViewLocator/-->
     </Application.DataTemplates>
   

@@ -1,10 +1,10 @@
+using System.Threading.Tasks;
 using Jew.Applications.InventoryMovements.Queries;
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Applications.ProductInventory.Mappers;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.ProductInventory.Exceptions;
-using Jew.Infrastructure.UnitOfWork;
 
 namespace Jew.Applications.ProductInventory.Queries;
 
@@ -18,46 +18,67 @@ public sealed class InventoryQueryService(CategoryQueryService categoryQuery, Pr
 
 
     #region Compounds
-    public ProductWithCategoryDto GetProductWithCategory(string productId)
+    public async Task<ProductWithCategoryDto> GetProductWithCategory(string productId)
     {
-        var p = _productQuery.GetProductByCode(productId);
+        var p = await _productQuery.GetProductByCode(productId);
 
-        return new(p, _categoryQuery.GetCategoryById(p.CategoryId));
+        return new(p, await _categoryQuery.GetCategoryById(p.CategoryId));
     }
 
-    public ProductInventoryDto GetProductInventory(string productCode)
+    public async Task<ProductInventoryDto> GetProductInventory(string productCode)
     {
-        var p = _productQuery.GetProductByCode(productCode);
-        return new(new(p, _categoryQuery.GetCategoryById(p.CategoryId)),
-        _stockState.GetStock(productCode), _stockState.GetProductCost(productCode));
+        var p = await _productQuery.GetProductByCode(productCode);
+        
+        var categoryTask = _categoryQuery.GetCategoryById(p.CategoryId);
+        var stockTask = _stockState.GetStock(productCode);
+        var costTask = _stockState.GetProductCost(productCode);
+
+        await Task.WhenAll(categoryTask, stockTask, costTask);
+
+        return new(
+            new(p, await categoryTask),
+            await stockTask,
+            await costTask);
     }
 
-    public IEnumerable<ProductWithCategoryDto> GetProductsWithCategories()
+    public async Task<IEnumerable<ProductWithCategoryDto>> GetProductsWithCategories()
     {
-        /*
-        Se mantiene si no se encuentra el formato querido.
-        foreach(var cat in _categoryQuery.GetCategories())
-            foreach (var pr in _productQuery.GetProductFromCategory(cat.Name))
-                yield return new(pr, cat);  
-        */
 
-        foreach(var product in _productQuery.GetProducts())
-            yield return new(product, _categoryQuery.GetCategoryById(product.CategoryId));
+
+        var productsTask = _productQuery.GetProducts();
+        var categoriesTask = _categoryQuery.GetCategories();
+
+        await Task.WhenAll(productsTask, categoriesTask);
+
+        var products = await productsTask;
+        var categories = (await categoriesTask).ToDictionary(c => c.Name);
+
+        return products.Select(p =>
+            new ProductWithCategoryDto(
+                p,
+                categories[p.CategoryId]));
     }
 
-    public IEnumerable<ProductInventoryDto> GetProductInventoryDtos()
+    public async Task<IEnumerable<ProductInventoryDto>> GetProductInventoryDtos()
     {
-        foreach(var pAc in GetProductsWithCategories())
+        List<ProductInventoryDto> result = [];
+        foreach(var pAc in await GetProductsWithCategories())
         {
             var code = pAc.ProductDto.Code;
-            yield return new(pAc, _stockState.GetStock(code), _stockState.GetProductCost(code));   
+            result.Add(new(pAc, await _stockState.GetStock(code), await _stockState.GetProductCost(code)));   
         }
+        return result; 
     }
 
-    public IEnumerable<ProductInventoryDto> GetPurchasedProductsOnly()
-    => _stockState.PurchasedOnes().Select(GetProductInventory);
+    public async Task<IEnumerable<ProductInventoryDto>> GetPurchasedProductsOnly()
+    {
+        var codes = await _stockState.PurchasedOnes();
 
-    public IEnumerable<ProductInventoryDto> GetAvailableProducts()
-    => GetPurchasedProductsOnly().Where(p => p.Product.ProductDto.Active);
+        return await Task.WhenAll(
+            codes.Select(GetProductInventory));
+    }
+
+    public async Task<IEnumerable<ProductInventoryDto>> GetAvailableProducts()
+    => (await GetPurchasedProductsOnly()).Where(p => p.Product.ProductDto.Active);
     #endregion
 }

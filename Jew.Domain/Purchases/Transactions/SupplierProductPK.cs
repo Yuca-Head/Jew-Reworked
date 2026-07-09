@@ -1,3 +1,5 @@
+using Jew.Domain.Shared.Keys;
+
 namespace Jew.Domain.Purchases.Transactions;
 
 /// <summary>
@@ -5,4 +7,4 @@ namespace Jew.Domain.Purchases.Transactions;
 /// </summary>
 /// <param name="SupplierId"></param>
 /// <param name="ProductId"></param>
-public readonly record struct SupplierProductPK(int SupplierId, string ProductId);
+public readonly record struct SupplierProductPK(CodeKey SupplierId, string ProductId);

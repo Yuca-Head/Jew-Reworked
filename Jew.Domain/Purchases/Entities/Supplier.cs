@@ -6,17 +6,9 @@ using Jew.Domain.Shared.People;
 
 namespace Jew.Domain.Purchases.Entities;
 
-public class Supplier: Person<int>, IParty, IHasId
+public class Supplier: Person<CodeKey>, IParty, IHasPK<CodeKey>
 {
-    public Supplier(int id, string name) : base (id, name){}
+    public Supplier(CodeKey id, string name) : base (id, name){}
     public Supplier(Supplier supplier) : base(supplier){}
-
-    internal void SetId(int id)
-    {
-        if(Key != 0)
-            throw new InvalidOperationException("ID ya ha sido asignado.");
-        Key = id;
-    }
-    
 }
 

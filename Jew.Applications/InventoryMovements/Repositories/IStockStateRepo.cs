@@ -5,12 +5,16 @@ namespace Jew.Domain.InventoryMovements.Repositories;
 
 public interface IStockStateRepo : IRepository<ProductStockState, string>
 {
-    ProductStockState GetOrCreate(string productId);
+    Task<ProductStockState> GetOrCreateAsync(string productId);
 
-    void ApplyMovement(InventoryMovement movement);
+    Task ApplyMovementAsync(InventoryMovement movement);
 
+    Task ApplyMovementsAsync(IEnumerable<InventoryMovement> movements);
+
+    #pragma warning disable
     [Obsolete("Este método no debería ser utilizado, Mejor usar GetOrCreate o ApplyMovement")]
-    static void Add(ProductStockState stockState)
+    static Task AddAsync(ProductStockState stockState)
     =>  throw new NotSupportedException(
         "StockState cannot be added manually. It is derived from movements.");
+    #pragma warning enable
 }

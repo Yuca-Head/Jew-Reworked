@@ -1,0 +1,40 @@
+<UserControl 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Products.Inputs"
+    x:Class="Jew.Avalonia.Views.Products.ProductModifierCard"
+    x:DataType="vm:ModifyProductViewModel">
+
+    <Border Background="#31C1ABED" CornerRadius="8" Padding="10" Margin="10" > 
+        <Grid ShowGridLines="False" RowDefinitions="Auto,*,*,40,*"  ColumnDefinitions="*,*">
+            
+
+
+            <TextBlock Text="Modificar Producto" Grid.ColumnSpan="2" FontSize="20" Classes="header"/>
+
+            <Border Classes="output-generated" Grid.Row="1" Grid.ColumnSpan="2" Height="40" Width="300">
+                <TextBlock Text="{Binding Product.Code}"/>
+            </Border>
+
+            <StackPanel Grid.Row="2" Grid.Column="0">
+                <TextBlock Text="Descripción (Nombre)"/>
+                <TextBox Text="{Binding Name}" Classes="searchbar"/>
+            </StackPanel>
+            
+            
+            <StackPanel Grid.Row="2" Grid.Column="1">
+                <TextBlock Text="Estado"/>
+                <CheckBox IsChecked="{Binding State}" Classes="common" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Classes="error" FontSize="15" Text="{Binding ErrorMessage}" 
+            IsVisible="{Binding HasError}" VerticalAlignment="Top"/>
+            
+            
+            <Button Grid.Row="4" Classes="common" Content="Modificar Producto" Height="40" Width="400" Command="{Binding ModifyProductCommand}"
+            HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        </Grid>
+        
+    </Border>
+    
+</UserControl>

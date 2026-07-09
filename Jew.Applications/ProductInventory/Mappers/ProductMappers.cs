@@ -1,6 +1,5 @@
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Domain.ProductInventory.Entities;
-using Jew.Infrastructure.UnitOfWork;
 
 namespace Jew.Applications.ProductInventory.Mappers;
 

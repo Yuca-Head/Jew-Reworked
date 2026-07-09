@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.InventoryMovements.Queries;
@@ -18,16 +19,16 @@ public sealed class InventoryState
     public InventoryState(InventoryQueryService queryService) 
     {
         _queryService = queryService;
-        Update(null);
+        _ = Update(null);
         WeakReferenceMessenger.Default.Register<StockStateUpdatedMessage>(this,
-        (_, message) => Update(message.ProductsChangedCode));
+        async (_, message) => await Update(message.ProductsChangedCode));
 
         
         WeakReferenceMessenger.Default.Register<ProductUpdateMessage>(this,
-        (_,e) =>
+        async (_,e) =>
         {
             if(e.Action is ProductUpdateMessage.Activator.Modified)
-                Update(e.ProductsChangedCode);
+                await Update(e.ProductsChangedCode);
         });
 
     }
@@ -38,7 +39,7 @@ public sealed class InventoryState
     public ObservableCollection<ProductInventoryViewModel> Products {get;} = [];
 
    
-    private void Update(IEnumerable<string>? args)
+    private async Task Update(IEnumerable<string>? args)
     {
         if(args is null)
             CodesChanged = null;
@@ -47,14 +48,14 @@ public sealed class InventoryState
         if(args is null)    
         {
             Products.Clear();
-            foreach(var p in _queryService.GetAvailableProducts().Select(x => new ProductInventoryViewModel(x)))
+            foreach(var p in (await _queryService.GetAvailableProducts()).Select(x => new ProductInventoryViewModel(x)))
                 Products.Add(p);
         }
         else
         {
             foreach(var code in args)
             {
-                var item = _queryService.GetProductInventory(code);
+                var item = await _queryService.GetProductInventory(code);
 
                 var vm = Products.FirstOrDefault(x => x.Code == code);
                 

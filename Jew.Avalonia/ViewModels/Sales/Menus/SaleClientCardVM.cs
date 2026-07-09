@@ -27,8 +27,11 @@ public partial class SaleClientCardVM : ViewModelBase
     public SaleClientCardVM(ClientQueryService clientQuery)
     {   
         _clientQuery = clientQuery;
-        Clients = [defaultClient ,.._clientQuery.GetClients().Select(x => new ClientViewModel(x.Code, x.Name))];
+        InitializeClients();
     }
+
+    private async void InitializeClients()
+    => Clients = [defaultClient ,..(await _clientQuery.GetClients()).Select(x => new ClientViewModel(x.Code, x.Name))];
     public void Clear()
     {
         ClientSelected = defaultClient;

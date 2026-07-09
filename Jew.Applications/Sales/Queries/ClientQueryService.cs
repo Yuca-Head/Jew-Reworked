@@ -1,23 +1,25 @@
+using System.Threading.Tasks;
 using Jew.Applications.Sales.DTOs.Clients;
+using Jew.Applications.Shared.UnitsOfWork;
 using Jew.Domain.Sales.Exceptions;
 using Jew.Domain.Shared.Keys;
-using Jew.Infrastructure.UnitOfWork;
+
 
 namespace Jew.Applications.Sales.Queries;
 
 public sealed class ClientQueryService(IUnitOfWork context)
 {
-    public bool ClientExists(CodeKey codeKey)
-    => context.Clients.Exist(codeKey);
+    public Task<bool> ClientExistsAsync(CodeKey codeKey)
+    => context.Clients.ExistsAsync(codeKey);
 
-    public bool ClientExists(string code)
+    public Task<bool> ClientExists(string code)
     => string.IsNullOrWhiteSpace(code) || code.Length != 5 ? 
         throw new ClientException("Tipo de código no válido (debe contener 5 caracteres)") : 
-        ClientExists(new CodeKey(5, code.Take(5).ToString()));
+        ClientExistsAsync(new CodeKey(5, code.Take(5).ToString()));
 
-    public ClientDto GetClient(CodeKey key)
-    => ClientDto.From(context.Clients.GetById(key) ?? 
+    public async Task<ClientDto> GetClient(CodeKey key)
+    => ClientDto.From(await context.Clients.GetByIdAsync(key) ?? 
     throw new ClientException($"Cliente con código {key.Key} no encontrado "));
-    public IEnumerable<ClientDto> GetClients()
-    => context.Clients.GetAll().Select(ClientDto.From);
+    public async Task<IEnumerable<ClientDto>> GetClients()
+    => (await context.Clients.GetAllAsync()).Select(ClientDto.From);
 }

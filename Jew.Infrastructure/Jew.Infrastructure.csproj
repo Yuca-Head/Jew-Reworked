@@ -13,7 +13,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Jew.Domain\Jew.Domain.csproj"/>
+    <ProjectReference Include="..\Jew.Applications\Jew.Applications.csproj" />
+    <ProjectReference Include="..\Jew.Domain\Jew.Domain.csproj" />
   </ItemGroup>
 
 

@@ -1,5 +1,5 @@
+using Jew.Applications.ProductInventory.Repositories;
 using Jew.Domain.ProductInventory.Entities;
-using Jew.Domain.ProductInventory.Repositories;
 using Jew.Infrastructure.Persistence.Mappers;
 using Jew.Infrastructure.Persistence.Mappers.ProductInventory;
 using Jew.Infrastructure.Persistence.Models;

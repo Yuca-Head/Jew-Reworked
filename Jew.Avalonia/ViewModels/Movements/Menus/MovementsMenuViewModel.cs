@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jew.Applications.Purchases.DTOs.Suppliers;
@@ -114,7 +115,7 @@ public partial class MovementsMenuViewModel : ViewModelBase
         return query.Where(x => x.Date.Date <= dateTil.Date && x.Date.Date >= dateSince.Date);
     }
 
-    public DetailedTransactionViewModel GetDetailedTransaction()
+    public async Task<DetailedTransactionViewModel> GetDetailedTransaction()
     {
         var id = SelectedTransaction.TransactionId;
         var existing = DetailedTransactions.FirstOrDefault(x => x.TransactionId == id);
@@ -122,15 +123,15 @@ public partial class MovementsMenuViewModel : ViewModelBase
         if (existing is not null)
             return existing;
 
-        DetailedTransactionViewModel result = new(MovementState.Transactions.First(x => x.TransactionId == id));
+        DetailedTransactionViewModel result = new(MovementState.Transactions.First(x => x.TransactionId == id));    
 
         if (result.MovementType == MovementType.In)
             if (_registeredSuppliers.TryGetValue(result.Party!, out SupplierDto? value))
                 result.PartyName = value.Name;
             else
             {
-                var supp = _suppliers.GetSupplier(int.Parse(result.Party!));
-                _registeredSuppliers[supp.Id.ToString()] = supp;
+                var supp = await _suppliers.GetSupplier(new(5, result.Party!));
+                _registeredSuppliers[supp.CodeKey.Key] = supp;
                 result.PartyName = supp.Name;
             }
         else
@@ -138,7 +139,7 @@ public partial class MovementsMenuViewModel : ViewModelBase
                 result.PartyName = value.Name;
             else
             {
-                var client = _clients.GetClient(new(5, result.Party!));
+                var client = await _clients.GetClient(new(5, result.Party!));
                 _registeredClients[client.Code.Key] = client;
                 result.PartyName = client.Name;
             }

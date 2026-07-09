@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Jew.Applications.Purchases.Queries;
@@ -9,6 +10,7 @@ using Jew.Avalonia.ViewModels.Products.Outputs;
 using Jew.Avalonia.ViewModels.Purchases.Inputs;
 using Jew.Avalonia.ViewModels.Suppliers.Outputs;
 using Jew.Avalonia.ViewModels.Transactions;
+using Jew.Avalonia.Views.Purchases;
 using Jew.Domain.Purchases.Entities;
 
 namespace Jew.Avalonia.ViewModels.Purchases.Menus;
@@ -42,16 +44,22 @@ public partial class PurchaseProductsCartVM : CartProductsVM
     partial void OnSupplierChanged(SupplierViewModel? oldValue, SupplierViewModel newValue)
     {
         
-        if(oldValue == newValue || newValue.Id < 0)
+        if(oldValue == newValue || newValue == PurchaseSupplierCardVM.DefaultSupplier)
             return;
 
-        _allProducts.Clear();
-        foreach(var item in _supplierQuery.GetSupplierProducts(Supplier.Id))
-            _allProducts.Add(SupplierProductViewModel.From(item));
+        RedoProducts();
 
         UpdateSupplierProducts();
         Suggestions.Clear();
         TakeInitialSuggestions();
+    }
+
+    private async void RedoProducts()
+    {
+        _allProducts.Clear();
+        if(Supplier is not null)
+            foreach(var item in await _supplierQuery.GetSupplierProducts(Supplier.Id))
+                _allProducts.Add(SupplierProductViewModel.From(item));
     }
 
 

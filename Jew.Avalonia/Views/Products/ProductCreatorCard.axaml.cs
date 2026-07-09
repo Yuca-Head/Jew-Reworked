@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace Jew.Avalonia.Views.Products;
 
-public partial class ProductCreatorWindow : Window
+public partial class ProductCreatorCard : UserControl
 {
-    public ProductCreatorWindow()
+    public ProductCreatorCard()
     {
         InitializeComponent();
     }

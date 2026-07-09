@@ -8,7 +8,7 @@ namespace Jew.Infrastructure.Persistence.Mappers.Purchases;
 public class SupplierMapper : IMapper<Supplier, SupplierData>
 {
     public Supplier ToEntity(SupplierData data)
-    => new(data.Id, data.Name);
+    => new(data.Key, data.Name);
 
     public SupplierData ToModel(Supplier domain)
     => new(domain.Key, domain.Name);

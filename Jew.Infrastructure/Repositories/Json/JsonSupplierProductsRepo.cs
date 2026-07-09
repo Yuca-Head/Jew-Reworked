@@ -1,6 +1,7 @@
+using Jew.Applications.Purchases.Repositories;
 using Jew.Domain.Purchases.Entities;
-using Jew.Domain.Purchases.Repositories;
 using Jew.Domain.Purchases.Transactions;
+using Jew.Domain.Shared.Keys;
 using Jew.Infrastructure.Persistence.Mappers.Purchases;
 using Jew.Infrastructure.Persistence.Mappers.Shared;
 using Jew.Infrastructure.Persistence.Models.Purchases;
@@ -16,9 +17,10 @@ JsonRepository<SupplierProductPK, SupplierProduct, SupplierProductData>
     private const string defaultFileName = "SupplierProducts.json";
     protected override InMemorySupplierProducts InMemoryRepo {get;} = new([]);
 
-    public IEnumerable<SupplierProduct> GetByProductId(string productId)
-    => InMemoryRepo.GetByProductId(productId);
+    public Task<IEnumerable<SupplierProduct>> GetByProductIdAsync(string productId)
+    => InMemoryRepo.GetByProductIdAsync(productId);
 
-    public IEnumerable<SupplierProduct> GetBySupplierId(int supplierId)
-    => InMemoryRepo.GetBySupplierId(supplierId);
+    public Task<IEnumerable<SupplierProduct>> GetBySupplierIdAsync(CodeKey supplierId)
+    => InMemoryRepo.GetBySupplierIdAsync(supplierId);
+
 }

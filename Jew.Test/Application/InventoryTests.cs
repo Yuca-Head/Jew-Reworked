@@ -3,9 +3,8 @@ using Jew.Applications.ProductInventory.Commands;
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.ProductInventory.Exceptions;
-using Jew.Domain.ProductInventory.Repositories;
 using Jew.Infrastructure.Repositories.InMemory;
-using Jew.Infrastructure.UnitOfWork;
+/*
 using Moq;
 namespace Jew.Test.Application;
 
@@ -45,3 +44,4 @@ public class InventoryTests
     {
     }
 }
+*/

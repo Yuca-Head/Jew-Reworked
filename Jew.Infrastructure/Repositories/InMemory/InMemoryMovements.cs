@@ -1,5 +1,6 @@
 
 
+using Jew.Applications.InventoryMovements.Repositories;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
 using Jew.Infrastructure.Repositories.Shared;
@@ -10,18 +11,35 @@ public sealed class InMemoryMovements(Dictionary<int, InventoryMovement> movemen
 InMemoryRepository<InventoryMovement, int>(movements), IMovementsRepo
 {
     private readonly IncrementalKeyGenerator _identity = new(IncrementalKeyGenerator.GetLastKey(movements.Keys));
-    public override void Add(InventoryMovement entity)
+    public override Task AddAsync(InventoryMovement entity)
     {
-        _identity.Next(this);
-        _entities.Add(_identity.CurrentKey, entity with { Key = _identity.CurrentKey });
+        Validator(entity);
+        return Task.CompletedTask;
     }
 
-    public IEnumerable<InventoryMovement> GetByTransactionId(Guid id)
-    => GetAll().Where(m => m.TransactionId == id);
+    public override Task AddAsync(IEnumerable<InventoryMovement> entities)
+    {
+        Validator(entities);
+        return Task.CompletedTask;
+    }
 
-    public IEnumerable<InventoryMovement> GetByType(MovementType type)
-    => _entities.Values.Where(m => m.MovementType == type);
+    protected override Task Validator(params IEnumerable<InventoryMovement> entities)
+    {
+        foreach(var entity in entities)
+        {
+            _identity.Next(this);
+            _entities.Add(_identity.CurrentKey, entity with { Key = _identity.CurrentKey });
+        }
 
-    public IEnumerable<Guid> GetTransactionIds()
-    => _entities.Values.Select(m => m.TransactionId).Distinct();
+        return Task.CompletedTask;
+    }
+
+    public Task<IEnumerable<InventoryMovement>> GetByTransactionIdAsync(Guid id)
+    => Task.FromResult(_entities.Values.Where(m => m.TransactionId == id));
+
+    public Task<IEnumerable<InventoryMovement>> GetByTypeAsync(MovementType type)
+    => Task.FromResult(_entities.Values.Where(m => m.MovementType == type));
+
+    public Task<IEnumerable<Guid>> GetTransactionIdsAsync()
+    => Task.FromResult(_entities.Values.Select(m => m.TransactionId).Distinct());
 }

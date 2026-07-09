@@ -40,6 +40,8 @@ public partial class SearchProductViewModel : ViewModelBase
     
     public ObservableCollection<string> CategoriesFilter {get;} = [];
 
+
+
     [ObservableProperty]
     private string _selectedCategory = DefaultValue;
 

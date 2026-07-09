@@ -30,8 +30,6 @@ public abstract class Person<T> : IHasPK<T>
     {
         Key = key;
         Name = name;
-
-
     }
 
     public Person(Person<T> person)

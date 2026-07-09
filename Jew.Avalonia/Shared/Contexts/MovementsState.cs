@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.InventoryMovements.DTOs;
 using Jew.Applications.InventoryMovements.Queries;
@@ -39,13 +40,13 @@ public sealed class MovementsState
         _saleQuery = saleQuery;
         _purchaseQuery = purchaseQuery;
         WeakReferenceMessenger.Default.Register<MovementUpdateMessage>(this,
-        (_, e) =>
+        async (_, e) =>
         {
-            Update(e.TransactionsKey);
+            await Update(e.TransactionsKey);
         }
         );
 
-        Update(null);
+        Init();
     }
 
     private MovementQueryService _movementQuery;
@@ -61,25 +62,28 @@ public sealed class MovementsState
     
     public ObservableCollection<TransactionViewModel> Transactions {get;} = [];
 
-    private void Update(IEnumerable<Guid>? args)
+    private async void Init()
+    => await Update(null);
+
+    private async Task Update(IEnumerable<Guid>? args)
     {
 
         if(args is null)
         {
             Movements.Clear();
-            UpdateTransactions(_movementQuery.GetMovements());
+            await UpdateTransactions(await _movementQuery.GetMovements());
         }
         else
             foreach(var id in args)
             {
-                var movements = _movementQuery.GetMovementsByTransactionId(id);
-                UpdateTransactions(movements);
+                var movements = await _movementQuery.GetMovementsByTransactionId(id);
+                await UpdateTransactions(movements);
             }
 
         MovementChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private void UpdateTransactions(IEnumerable<MovementDto> movements)
+    private async Task UpdateTransactions(IEnumerable<MovementDto> movements)
     {
         TransactionViewModel currentTransaction = null;
         foreach (var m in movements.OrderBy(x => x.TransactionId).OrderBy(x => x.Id))
@@ -96,14 +100,14 @@ public sealed class MovementsState
                 string party;
                 if (m.MovementType == MovementType.In)
                 {
-                    var t = _purchaseQuery.GetPurchaseById(m.TransactionId);
-                    party = t.SupplierId.ToString();
+                    var t = await _purchaseQuery.GetPurchaseById(m.TransactionId);
+                    party = t.SupplierId.Key;
                     date = t.Date;
                     description = t.Description;
                 }
                 else
                 {
-                    var t = _saleQuery.GetSaleById(m.TransactionId);
+                    var t = await _saleQuery.GetSaleById(m.TransactionId);
                     party = t.ClientKey.Key;
                     date = t.Date;
                     description = t.Description;

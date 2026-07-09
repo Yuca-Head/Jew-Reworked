@@ -1,10 +1,12 @@
+using System.Threading.Tasks;
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Applications.ProductInventory.Queries;
 using Jew.Applications.Purchases.DTOs.Suppliers;
+using Jew.Applications.Shared.UnitsOfWork;
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.Purchases.Entities;
 using Jew.Domain.Purchases.Exceptions;
-using Jew.Infrastructure.UnitOfWork;
+using Jew.Domain.Shared.Keys;
 
 namespace Jew.Applications.Purchases.Queries;
 
@@ -14,31 +16,36 @@ public class SupplierQueryService(IUnitOfWork context, ProductQueryService produ
     private readonly ProductQueryService _productQuery = productQuery;
 
     #region Singulars
-    public decimal GetPrice(string productId, int suplierId)
+    public async Task<decimal> GetPrice(string productId, CodeKey suplierId)
     {    
-        SupplierProduct existingProduct = _context.SuppliersProducts.GetById(new(suplierId, productId))?? 
+        SupplierProduct existingProduct = await _context.SuppliersProducts.GetByIdAsync(new(suplierId, productId))?? 
         throw new SupplierException("Prodcuto no existente");
 
         return existingProduct.Price;
     }
-    public SupplierDto GetSupplier(int id)
+    public async Task<SupplierDto> GetSupplier(CodeKey id)
     => SupplierDto.From
-    (_context.Suppliers.GetById(id) ?? throw new SupplierException("Proveedor no encontrado", nameof(id)));
+    (await _context.Suppliers.GetByIdAsync(id) ?? throw new SupplierException("Proveedor no encontrado", nameof(id)));
 
-    private SupplierProductDto ConvertSupplierProductToDto(int supplierId, string productId)
+    private async Task<SupplierProductDto> ConvertSupplierProductToDto(CodeKey supplierId, string productId)
     {   
-        var supp = GetSupplier(supplierId);
+        var suppTask = GetSupplier(supplierId);
 
-        var prodcut = _productQuery.GetProductByCode(productId);
+        var prodcutTask = _productQuery.GetProductByCode(productId);
+
+        await Task.WhenAll(suppTask, prodcutTask);
+
+        var supp = await suppTask;
+        var prodcut = await prodcutTask;
 
         return new(supp, prodcut);
     } 
 
-    public bool SupplierExists(int id)
-    => _context.Suppliers.Exist(id);
+    public Task<bool> SupplierExists(CodeKey id)
+    => _context.Suppliers.ExistsAsync(id);
 
-    private SupplierProductDto ConvertSupplierProductToDto(SupplierProduct product)
-    => ConvertSupplierProductToDto(product.SupplierId, product.ProductId);
+    private Task<SupplierProductDto> ConvertSupplierProductToDto(SupplierProduct product)
+    => ConvertSupplierProductToDto(product.SupplierKey, product.ProductId);
     
     #endregion
 
@@ -58,39 +65,38 @@ public class SupplierQueryService(IUnitOfWork context, ProductQueryService produ
 
     #region Collections
     
-    public IEnumerable<SupplierProductDto> GetAllSupplierProducts()
-    => _context.SuppliersProducts.GetAll().Select(ConvertSupplierProductToDto);
+    public async Task<IEnumerable<SupplierProductDto>> GetAllSupplierProducts()
+    => await Task.WhenAll((await _context.SuppliersProducts.GetAllAsync()).Select(ConvertSupplierProductToDto));
 
-    public IEnumerable<ProductDto> GetProductsNotSuppliedBy(int supplierId)
+    public async Task<IEnumerable<ProductDto>> GetProductsNotSuppliedBy(CodeKey supplierId)
     {
-        var ids = GetProductsFromSupplier(supplierId).Select(p => p.Product.Code).ToHashSet();
+        var ids =(await GetProductsFromSupplier(supplierId)).Select(p => p.Product.Code).ToHashSet();
     
-        return _context.Products.GetAll()
+        return (await _context.Products.GetAllAsync())
             .Where(p => !ids.Contains(p.Code)).Select(ProductDto.From);
     }
 
     
-    public IEnumerable<SupplierProductDto> GetProductsFromSupplier(int supplierId)
-    => _context.SuppliersProducts.GetBySupplierId(supplierId).Select(ConvertSupplierProductToDto);
+    public async Task<IEnumerable<SupplierProductDto>> GetProductsFromSupplier(CodeKey supplierId)
+    =>  await Task.WhenAll((await _context.SuppliersProducts.GetBySupplierIdAsync(supplierId)).Select(ConvertSupplierProductToDto));
 
 
 
 
-    public IEnumerable<SupplierProductDto> GetSupplierProducts(int supplierId)
+    public async Task<IEnumerable<SupplierProductDto>> GetSupplierProducts(CodeKey supplierId)
     {
-        var exists = _context.Suppliers.GetById(supplierId) 
-        ?? throw new SupplierException("Proveedor no encontrado", nameof(supplierId));
+        var exists = await _context.Suppliers.GetByIdAsync(supplierId) 
+        ?? throw new SupplierException($"Proveedor {supplierId} no encontrado", nameof(supplierId));
 
-        foreach (var item in GetProductsFromSupplier(exists.Key))
-            yield return item;
+        return await GetProductsFromSupplier(exists.Key);
     }
 
-    public IEnumerable<SupplierDto> GetSupplierByName(string name)
-    => _context.Suppliers.GetByName(name)?.Select(SupplierDto.From) 
+    public async Task<IEnumerable<SupplierDto>> GetSupplierByName(string name)
+    => (await _context.Suppliers.GetByNameAsync(name))?.Select(SupplierDto.From) 
     ?? throw new SupplierException("Proveedor no econtrado.", nameof(name));
 
-    public IEnumerable<Supplier> GetSuppliers()
-    => _context.Suppliers.GetAll();
+    public async Task<IEnumerable<SupplierDto>> GetSuppliers()
+    => (await _context.Suppliers.GetAllAsync()).Select(SupplierDto.From);
     
     #endregion
 }

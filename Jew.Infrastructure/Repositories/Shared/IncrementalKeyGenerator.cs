@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Jew.Domain.Shared.Common;
 using Jew.Domain.Shared.Keys;
 
@@ -8,10 +9,10 @@ public sealed class IncrementalKeyGenerator(int initialKey = 0)
     public int CurrentKey { get; private set; } = initialKey;
 
 
-    public int Next<T>(IRepository<T, int> repository) where T : IHasPK<int>
+    public async Task<int> Next<T>(IRepository<T, int> repository) where T : IHasPK<int>
     {
         CurrentKey++;
-        while(repository.Exist(CurrentKey))
+        while(await repository.ExistsAsync(CurrentKey))
             CurrentKey++;
         return CurrentKey;
     }

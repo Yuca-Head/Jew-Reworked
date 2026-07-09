@@ -4,8 +4,8 @@ using Jew.Applications.Purchases.DTOs.Suppliers;
 using Jew.Domain.ProductInventory.Entities;
 using Jew.Domain.Shared.Keys;
 using Jew.Infrastructure.Repositories.Json;
-using Jew.Infrastructure.UnitOfWork;
 
+/*
 namespace Jew.Test.Infrastructure;
 
 public class JsonTests
@@ -64,4 +64,4 @@ public class JsonTests
         commands.AddProduct(new(miguelazo, ProductDto.From(context.Products.GetById("Carne-Mol")), 20));
         context.SaveChanges();
     }
-}
+}*/

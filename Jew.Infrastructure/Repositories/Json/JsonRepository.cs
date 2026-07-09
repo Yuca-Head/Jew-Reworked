@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Jew.Domain.Shared.Common;
 using Jew.Domain.Shared.Keys;
 using Jew.Infrastructure.Enums;
@@ -27,40 +28,47 @@ public abstract class JsonRepository<TKey, TEntity, TModel>
     public Enums.Environment EnvironmentType {get;}
 
     protected JsonStorageService<TModel> StorageService { get; }
-    public virtual void Add(TEntity entity)
-    => InMemoryRepo.Add(entity);
-    public virtual bool Exist(TKey key)
-    => InMemoryRepo.Exist(key);
-    public virtual IEnumerable<TEntity> GetAll()
-    => InMemoryRepo.GetAll();
-    public virtual TEntity? GetById(TKey key)
-    => InMemoryRepo.GetById(key);
+    public virtual Task AddAsync(TEntity entity)
+    => InMemoryRepo.AddAsync(entity);
+    public virtual Task<bool> ExistsAsync(TKey key)
+    => InMemoryRepo.ExistsAsync(key);
+    public virtual Task<IEnumerable<TEntity>> GetAllAsync()
+    => InMemoryRepo.GetAllAsync();
+    public virtual Task<TEntity?> GetByIdAsync(TKey key)
+    => InMemoryRepo.GetByIdAsync(key);
     protected IMapper<TEntity, TModel> Mapper { get; }
-    public virtual void Load()
+    public virtual async Task LoadAsync()
     {
-        ClearCache();
-        var models = StorageService.Load();
+        await ClearCacheAsync();
+
+        var models = await StorageService.LoadAsync();
+
         foreach (var model in models)
-            Add(Mapper.ToEntity(model));
+            await AddAsync(Mapper.ToEntity(model));
     }
-    public virtual void SaveChanges()
+    public virtual async Task SaveChangesAsync()
     {
-        var models = GetAll()
+        var models = (await GetAllAsync())
         .Select(Mapper.ToModel);
         
-        StorageService.Save(models);
+        await StorageService.SaveAsync(models);
     }
-    public virtual void ClearCache()
+    public virtual Task ClearCacheAsync()
     {
-        InMemoryRepo.Clear();
+        InMemoryRepo.ClearAsync();
+        return Task.CompletedTask;
     }
 
     public virtual void ClearMemory()
     {
         StorageService.Clear();
-        ClearCache();
+        ClearCacheAsync();
     }
 
-    public virtual IEnumerable<TKey> GetKeys()
-    => InMemoryRepo.GetKeys();
+
+    public Task AddAsync(IEnumerable<TEntity> entities)
+    => InMemoryRepo.AddAsync(entities);
+
+    public Task<IEnumerable<TKey>> GetKeysAsync()
+    => InMemoryRepo.GetKeysAsync();
 }

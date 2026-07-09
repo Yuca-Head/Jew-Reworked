@@ -1,7 +1,8 @@
+using System.Threading.Tasks;
 using Jew.Applications.ProductInventory.DTOs;
 using Jew.Applications.ProductInventory.Mappers;
+using Jew.Applications.Shared.UnitsOfWork;
 using Jew.Domain.ProductInventory.Exceptions;
-using Jew.Infrastructure.UnitOfWork;
 
 namespace Jew.Applications.ProductInventory.Queries;
 
@@ -10,20 +11,20 @@ public sealed class ProductQueryService(IUnitOfWork context)
     private readonly IUnitOfWork _context = context;
 
 
-    public IEnumerable<ProductDto> GetProductFromCategory(string categoryId)
-    => InventoryMappers.ConvertProductsToDto(_context.Products.GetFromCategory(categoryId));
+    public async Task<IEnumerable<ProductDto>> GetProductFromCategory(string categoryId)
+    => InventoryMappers.ConvertProductsToDto(await _context.Products.GetFromCategoryAsync(categoryId));
 
-    public IEnumerable<ProductDto> GetActiveProducts()
-    => InventoryMappers.ConvertProductsToDto( _context.Products.GetAll().Where(x => x.Active));
+    public async Task<IEnumerable<ProductDto>> GetActiveProducts()
+    => InventoryMappers.ConvertProductsToDto((await _context.Products.GetAllAsync()).Where(x => x.Active));
 
-    public ProductDto GetProductByCode(string code)
-    => ProductDto.From(_context.Products.GetByCode(code) ??
+    public async Task<ProductDto> GetProductByCode(string code)
+    => ProductDto.From((await _context.Products.GetByCodeAsync(code)) ??
     throw new InventoryException($"Producto {code} no encontrado"));
 
-    public bool ProductExists(string code)
-    => _context.Products.Exist(code);
-    public IEnumerable<ProductDto> GetProducts()
-    => InventoryMappers.ConvertProductsToDto(_context.Products.GetAll());
+    public Task<bool> ProductExists(string code)
+    => _context.Products.ExistsAsync(code);
+    public async Task<IEnumerable<ProductDto>> GetProducts()
+    => InventoryMappers.ConvertProductsToDto(await _context.Products.GetAllAsync());
 
 
 

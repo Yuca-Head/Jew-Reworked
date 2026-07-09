@@ -1,8 +1,7 @@
+using Jew.Applications.Sales.Repositories;
 using Jew.Domain.Sales.Entities;
-using Jew.Domain.Sales.Repositories;
 using Jew.Domain.Shared.Keys;
 using Jew.Infrastructure.Persistence.Mappers.Sales;
-using Jew.Infrastructure.Persistence.Mappers.Shared;
 using Jew.Infrastructure.Persistence.Models.Sales;
 using Jew.Infrastructure.Repositories.InMemory;
 
@@ -12,8 +11,8 @@ public sealed class JsonClientsRepo(Enums.Environment environment, string? fileN
 JsonRepository<CodeKey, Client, ClientData>(fileName ?? defaultFileName, new ClientMapper(), environment), IClientRepo
 {
     private const string defaultFileName = "Clients.json";
-    protected override InMemoryClients InMemoryRepo {get;} = new([]);
+    protected override InMemoryClients InMemoryRepo {get;} = new(new(new CodeKeyComparer()));
 
-    public IEnumerable<Client>? GetByName(string name)
-    => InMemoryRepo.GetByName(name);
+    public Task<IEnumerable<Client>> GetByNameAsync(string name)
+    => InMemoryRepo.GetByNameAsync(name);
 }

@@ -1,4 +1,5 @@
-using Jew.Domain.Purchases.Repositories;
+
+using Jew.Applications.Purchases.Repositories;
 using Jew.Domain.Purchases.Transactions;
 using Jew.Infrastructure.Persistence.Mappers;
 using Jew.Infrastructure.Persistence.Mappers.Purchases;

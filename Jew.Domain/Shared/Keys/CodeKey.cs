@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Text.Json.Serialization;
 
 namespace Jew.Domain.Shared.Keys;
 
-public readonly record struct CodeKey
+public readonly record struct   CodeKey
 {
     private readonly int _length = 0;
     private readonly string _key = string.Empty;
@@ -16,7 +17,7 @@ public readonly record struct CodeKey
             _length = value;
         }
     }
-
+    
     public string Key 
     {
         get => _key;
@@ -26,11 +27,17 @@ public readonly record struct CodeKey
             _key = value;
         }
     }
-
+    
     public CodeKey(int length, string key)
     {
         Length = length;    
         Key = key;
+    }
+   
+    public CodeKey(CodeKey codeKey)
+    {
+        Length = codeKey.Length;
+        Key = codeKey.Key;
     }
 
     /// <summary>

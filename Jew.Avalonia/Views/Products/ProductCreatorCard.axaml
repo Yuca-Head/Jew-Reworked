@@ -1,0 +1,52 @@
+<UserControl 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Jew.Avalonia.ViewModels.Products.Menus"
+    x:Class="Jew.Avalonia.Views.Products.ProductCreatorCard"
+    x:DataType="vm:CreateProductCardVM">
+
+    <Border Background="#31C1ABED" CornerRadius="8" Padding="10" Margin="10" > 
+        <Grid ShowGridLines="False" RowDefinitions="Auto,*,*,40,*"  ColumnDefinitions="*,*">
+            
+            
+            <TextBlock Text="Crear Producto" Grid.ColumnSpan="2" FontSize="20" Classes="header"/>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Código"/>
+                <TextBox Text="{Binding Product.Code}" Classes="searchbar"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <TextBlock Text="Descripción (Nombre)"/>
+                <TextBox Text="{Binding Product.Name}" Classes="searchbar"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1">
+                <TextBlock Text="Categoría"/>
+                <ComboBox Classes="common" Width="200" SelectedItem="{Binding Product.Category}"
+                ItemsSource="{Binding Categories}">
+                    <ComboBox.Styles>
+                        <Style Selector="ComboBox TextBlock">
+                            <Setter Property="Foreground" Value="black"/>
+                            <Setter Property="FontSize" Value="15"/>
+                        </Style>
+                    </ComboBox.Styles>
+                </ComboBox>
+            </StackPanel>
+            
+            
+            <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Classes="error" FontSize="15" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" VerticalAlignment="Top"/>
+            
+            
+            <Button Grid.Row="4" Classes="common" Content="Registrar Producto" Height="40" Width="200" Command="{Binding CreateProductCommand}"
+            HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button Grid.Row="4" Grid.Column="1" Classes="common warning" Content="Cancelar" Height="40" VerticalAlignment="Center"  Width="200"  Command="{Binding ClearCommand}"
+            HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            
+        
+        </Grid>
+    </Border>
+
+    
+</UserControl>

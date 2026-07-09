@@ -7,5 +7,5 @@ public sealed record ClientDto (CodeKey Code, string Name)
 {
     public static ClientDto From(Client client)
     => new(client.Key, client.Name);
-    
+
 }

@@ -3,11 +3,14 @@
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
 using Jew.Domain.ProductInventory.Exceptions;
+using Jew.Domain.Shared.Exceptions;
 
 namespace Jew.Infrastructure.Repositories.InMemory;
 
-public sealed class InMemoryStockState(Dictionary<string, ProductStockState> entities) : InMemoryRepository<ProductStockState, string>(entities), IStockStateRepo
+public sealed class InMemoryStockState(Dictionary<string, ProductStockState> entities) :
+ InMemoryRepository<ProductStockState, string>(entities), IStockStateRepo
 {
+
     public ProductStockState Get(string productId)
     {
         if (!_entities.TryGetValue(productId, out var state))
@@ -16,7 +19,7 @@ public sealed class InMemoryStockState(Dictionary<string, ProductStockState> ent
         return state;
     }
 
-    public ProductStockState GetOrCreate(string key)
+    public Task<ProductStockState> GetOrCreateAsync(string key)
     {
         if (!_entities.TryGetValue(key, out var state))
         {
@@ -24,10 +27,10 @@ public sealed class InMemoryStockState(Dictionary<string, ProductStockState> ent
             _entities.Add(key, state);
         }
 
-        return state;
+        return Task.FromResult(state);
     }
     
-    public override void Add(ProductStockState item)
+    public override Task AddAsync(ProductStockState item)
     {
         ArgumentNullException.ThrowIfNull(item);
 
@@ -35,11 +38,13 @@ public sealed class InMemoryStockState(Dictionary<string, ProductStockState> ent
             throw new InvalidOperationException($"Stock state for product {item.Key} already exists.");
         
         _entities.Add(item.Key, item);
+
+        return Task.CompletedTask;
     }
 
-    public void ApplyMovement(InventoryMovement movement)
+    public async Task ApplyMovementAsync(InventoryMovement movement)
     {
-        var state = GetOrCreate(movement.ProductId);
+        var state = await GetOrCreateAsync(movement.ProductId);
         switch (movement.MovementType)
         {
             case MovementType.In:
@@ -50,6 +55,27 @@ public sealed class InMemoryStockState(Dictionary<string, ProductStockState> ent
                 state.ReduceQuantity(movement.Quantity);
             break;
         }
+    
     }
+
+    public async Task ApplyMovementsAsync(IEnumerable<InventoryMovement> movements)
+    {
+        var tasks = movements.Select(ApplyMovementAsync);
+
+        await Task.WhenAll(tasks);
+    }
+
+    public override async Task AddAsync(IEnumerable<ProductStockState> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        foreach(var entity in entities)
+        {
+            if (_entities.ContainsKey(entity.Key))
+                throw new InvalidOperationException($"Stock state for product {entity.Key} already exists.");
+            _entities.Add(entity.Key, entity);
+        }
+    }
+
 
 }

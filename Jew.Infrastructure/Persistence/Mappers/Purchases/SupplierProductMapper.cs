@@ -8,7 +8,7 @@ namespace Jew.Infrastructure.Persistence.Mappers.Purchases;
 public sealed class SupplierProductMapper : IMapper<SupplierProduct, SupplierProductData>
 {
     public SupplierProduct ToEntity(SupplierProductData data)
-    => new(data.Productid, data.SupplierId, data.Price);
+    => new(data.ProductPK, data.Price);
     public SupplierProductData ToModel(SupplierProduct domain)
-    => new(domain.ProductId, domain.SupplierId, domain.Price);
+    => new(domain.Key, domain.Price);
 }   

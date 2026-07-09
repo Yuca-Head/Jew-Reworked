@@ -1,3 +1,4 @@
+using Jew.Applications.InventoryMovements.Repositories;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Domain.InventoryMovements.Repositories;
 using Jew.Infrastructure.Persistence.Mappers;
@@ -9,18 +10,19 @@ using Jew.Infrastructure.Repositories.InMemory;
 namespace Jew.Infrastructure.Repositories.Json;
 
 public sealed class JsonMovementsRepo(Enums.Environment environment, string? fileName = null) :
-JsonRepository<int, InventoryMovement, MovementData>(fileName ?? defaultFileName, new MovementMapper(), environment), IMovementsRepo
+JsonRepository<int, InventoryMovement, MovementData>(fileName ?? defaultFileName, new MovementMapper(), environment),
+IMovementsRepo
 {
     private const string defaultFileName = "Movements.json";
 
     protected override InMemoryMovements InMemoryRepo {get;} = new([]);
 
-    public IEnumerable<InventoryMovement> GetByTransactionId(Guid id)
-    => InMemoryRepo.GetByTransactionId(id);
+    public Task<IEnumerable<InventoryMovement>> GetByTransactionIdAsync(Guid id)
+    => InMemoryRepo.GetByTransactionIdAsync(id);
 
-    public IEnumerable<InventoryMovement> GetByType(MovementType type)
-    => InMemoryRepo.GetByType(type);
+    public Task<IEnumerable<InventoryMovement>> GetByTypeAsync(MovementType type)
+    => InMemoryRepo.GetByTypeAsync(type);
 
-    public IEnumerable<Guid> GetTransactionIds()
-    => InMemoryRepo.GetTransactionIds();
+    public Task<IEnumerable<Guid>> GetTransactionIdsAsync()
+    => InMemoryRepo.GetTransactionIdsAsync();
 }

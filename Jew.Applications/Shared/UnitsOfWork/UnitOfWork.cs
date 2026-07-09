@@ -1,11 +1,13 @@
+using Jew.Applications.InventoryMovements.Repositories;
+using Jew.Applications.ProductInventory.Repositories;
+using Jew.Applications.Purchases.Repositories;
+using Jew.Applications.Sales.Repositories;
+using Jew.Applications.Shared.Common;
 using Jew.Domain.InventoryMovements.Repositories;
-using Jew.Domain.ProductInventory.Repositories;
-using Jew.Domain.Purchases.Repositories;
-using Jew.Domain.Sales.Repositories;
 using Jew.Domain.Shared.Common;
 using Jew.Domain.Shared.Keys;
 
-namespace Jew.Infrastructure.UnitOfWork;
+namespace Jew.Applications.Shared.UnitsOfWork;
 
 public abstract class UnitOfWork : IUnitOfWork
 {
@@ -44,8 +46,9 @@ public abstract class UnitOfWork : IUnitOfWork
         SuppliersProducts = suppliersProducts;
         Clients = clients;
 
-        _repositories = 
-        [Categories, Products, Suppliers, Movements, StockState, Sales, Purchases, SuppliersProducts, Clients];
+        _independentsRepositories = 
+        [Categories, Suppliers, Clients];
+
     }
 
     public ICategoriesRepo Categories {get; }
@@ -54,15 +57,28 @@ public abstract class UnitOfWork : IUnitOfWork
     public IMovementsRepo Movements  {get; }
     public IStockStateRepo StockState  {get; }
     public ISalesRepo Sales  {get; }
-    public IPurchasesRepo Purchases  {get; }
+    public IPurchasesRepo Purchases  {get;} 
     public ISupplierProductsRepo SuppliersProducts {get;}
     public IClientRepo Clients {get;}
 
-    private readonly IRepository[] _repositories;
+    private readonly IRepository[] _independentsRepositories;
 
-    public virtual void SaveChanges()
-    => Array.ForEach(_repositories, x => x.SaveChanges());
+
+    public virtual async Task SaveChangesAsync()
+    {
+        
+        await Task.WhenAll(_independentsRepositories.Select(x => x.SaveChangesAsync()));
+        await Products.SaveChangesAsync();
+        await Task.WhenAll(SuppliersProducts.SaveChangesAsync(), Movements.SaveChangesAsync(), StockState.SaveChangesAsync());
+        await Task.WhenAll(Purchases.SaveChangesAsync(), Sales.SaveChangesAsync());
+        
+    }
     
-    public virtual void Load()
-    => Array.ForEach(_repositories, x => x.Load());
+    public virtual async Task LoadAsync()
+    {
+        await Task.WhenAll(_independentsRepositories.Select(x => x.LoadAsync()));
+        await Products.LoadAsync();
+        await Task.WhenAll(SuppliersProducts.LoadAsync(), Movements.LoadAsync(), StockState.LoadAsync());
+        await Task.WhenAll(Purchases.LoadAsync(), Sales.LoadAsync());
+    }
 }

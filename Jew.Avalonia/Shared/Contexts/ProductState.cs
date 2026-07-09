@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Jew.Applications.ProductInventory.DTOs;
@@ -20,8 +21,8 @@ public sealed partial class ProductState
         _service = inventoryQueryService;
         _categoryQuery = categoryQuery;
         UpdateBoth();
-        WeakReferenceMessenger.Default.Register<ProductUpdateMessage>(this, (_, e) => UpdateProducts(e.ProductsChangedCode));
-        WeakReferenceMessenger.Default.Register<CategoryUpdateMessage>(this, (_, e) => UpdateCategories(e.CategoriesChangedName));
+        WeakReferenceMessenger.Default.Register<ProductUpdateMessage>(this, async (_, e) => await UpdateProducts(e.ProductsChangedCode));
+        WeakReferenceMessenger.Default.Register<CategoryUpdateMessage>(this, async (_, e) => await UpdateCategories(e.CategoriesChangedName));
     }
     
     private readonly InventoryQueryService _service;
@@ -36,39 +37,32 @@ public sealed partial class ProductState
     public ProductWithCategoryDto? GetProductById(string id)
     => Products.FirstOrDefault(x => x.ProductDto.Code == id);
 
-    private void UpdateBoth()
-    {
-        UpdateProducts(null);
-        UpdateCategories(null);
-    }
+    private async void UpdateBoth()
+    => await Task.WhenAll(UpdateProducts(null),UpdateCategories(null));
+    
 
-    private void UpdateProducts(IEnumerable<string>? args)
+    private async Task UpdateProducts(IEnumerable<string>? args)
     {
         if(args is null)
-            foreach(var p in _service.GetProductsWithCategories())
+            foreach(var p in await _service.GetProductsWithCategories())
                 Products.Add(p);     
         else
             foreach(var code in args)
             {
                 var vm = Products.FirstOrDefault(x => x.ProductDto.Code==code);
-
-                if(vm is null)
-                    Products.Add(_service.GetProductWithCategory(code));
-                else
-                {
-                    var item = _service.GetProductInventory(code);
-
-                    vm = item.Product;
-                }
+                
+                if(vm != default)
+                    Products.Remove(vm);
+                Products.Add(await _service.GetProductWithCategory(code));
             }
 
         ProductsChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    private void UpdateCategories(IEnumerable<string>? args)
+    private async Task UpdateCategories(IEnumerable<string>? args)
     {
         if(args is null)
-            foreach(var c in _categoryQuery.GetCategories())
+            foreach(var c in await _categoryQuery.GetCategories())
                 Categories.Add(c);
         else
             foreach(var id in args)
@@ -76,15 +70,17 @@ public sealed partial class ProductState
                 var vm = Categories.FirstOrDefault(x => x.Name == id);
 
                 if(vm is null)
-                    Categories.Add(_categoryQuery.GetCategoryById(id));
+                    Categories.Add(await _categoryQuery.GetCategoryById(id));
                 
                 else
                 {
-                    var item = _categoryQuery.GetCategoryById(id);
+                    var item = await _categoryQuery.GetCategoryById(id);
 
                     vm = item;
                 }
             }
         CategoriesChanged?.Invoke(this, EventArgs.Empty);
     }
+
+    
 }

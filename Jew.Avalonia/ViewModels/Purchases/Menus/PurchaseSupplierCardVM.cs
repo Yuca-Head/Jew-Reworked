@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Jew.Applications.Purchases.DTOs.Suppliers;
 using Jew.Applications.Purchases.Queries;
@@ -15,7 +16,7 @@ public partial class PurchaseSupplierCardVM: ViewModelBase
     public ObservableCollection<SupplierViewModel> Suppliers {get; set;} = [];
 
     [ObservableProperty]
-    private SupplierViewModel _supplierSelected = new(-1, "Escoger Proveedor");
+    private SupplierViewModel _supplierSelected = DefaultSupplier;
 
     [ObservableProperty]
     private DateTimeOffset? _orderDate = DateTimeOffset.Now;
@@ -28,19 +29,28 @@ public partial class PurchaseSupplierCardVM: ViewModelBase
     public PurchaseSupplierCardVM(SupplierQueryService supplierQuery)
     {   
         _supplierQuery = supplierQuery;
-        Suppliers = [.._supplierQuery.GetSuppliers().Select(x => new SupplierViewModel(x.Key, x.Name))];
+        InitializeSuppliers();
     }
 
-    partial void OnSupplierSelectedChanged(SupplierViewModel? oldValue, SupplierViewModel newValue)
+    private async void InitializeSuppliers()
+    { 
+        foreach(var supp in (await _supplierQuery.GetSuppliers()).Select(x => new SupplierViewModel(x.CodeKey, x.Name)))
+            Suppliers.Add(supp);
+    }
+
+
+    async partial void OnSupplierSelectedChanged(SupplierViewModel? oldValue, SupplierViewModel newValue)
     {
-        if(oldValue != newValue && newValue.Id > 0)
-            SupplierProducts = [.._supplierQuery.GetSupplierProducts(SupplierSelected.Id)];
+        if(oldValue != newValue && newValue != DefaultSupplier && SupplierSelected is not null)
+            SupplierProducts = [..await _supplierQuery.GetProductsFromSupplier(SupplierSelected.Id)];
     }
 
     public void Clear()
     {
-        SupplierSelected = new(-1, "Escoger Proveedor");
+        SupplierSelected = DefaultSupplier;
         TransactionId = Guid.NewGuid();
         SupplierProducts.Clear();   
     }
+
+    public static SupplierViewModel DefaultSupplier {get;} = new(new(5,"-----"), "Escoger Proveedor");
 }

@@ -34,13 +34,13 @@ Func<PurchaseDto> createPurchase, Action clearForm) : ViewModelBase
     private readonly Func<PurchaseDto> _createPurchase = createPurchase;
 
     [RelayCommand]
-    private void RegisterPurchase()
+    private async Task RegisterPurchase()
     {
         //Aquí trato de registrar una venta
         try
         {
             var purchase = _createPurchase();
-            _purchaseCommands.RegisterPurchase(purchase);
+            await _purchaseCommands.RegisterPurchase(purchase);
             WeakReferenceMessenger.Default.Send(new StockStateUpdatedMessage(purchase.Items.Select(x => x.ProductId)));
             WeakReferenceMessenger.Default.Send(new MovementUpdateMessage(null, purchase.TransactionId));
             ClearForm();

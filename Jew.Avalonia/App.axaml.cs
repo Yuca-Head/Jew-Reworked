@@ -9,7 +9,6 @@ using Jew.Avalonia.Views;
 using System;
 using Jew.Applications.InventoryMovements.Commands;
 using Jew.Applications.ProductInventory.Queries;
-using Jew.Infrastructure.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 using Jew.Avalonia.Views.Products;
 using Jew.Avalonia.ViewModels.Products.Menus;
@@ -28,6 +27,11 @@ using Jew.Applications.Sales.Queries;
 using Jew.Applications.Sales.Commands;
 using Jew.Domain.InventoryMovements.Entities;
 using Jew.Avalonia.ViewModels.Movements.Menus;
+using Jew.Applications.Shared.UnitsOfWork;
+using System.Threading.Tasks;
+using Jew.Infrastructure.UnitsOfWork;
+using System.Collections.Generic;
+using Jew.Avalonia.ViewModels.Products.Inputs;
 
 namespace Jew.Avalonia;
 
@@ -40,7 +44,7 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    public async override void OnFrameworkInitializationCompleted()
     {
         #if DEBUG
             this.AttachDevTools();
@@ -53,19 +57,26 @@ public partial class App : Application
         Services = services.BuildServiceProvider();
 
         var context = Services.GetRequiredService<IUnitOfWork>();
+    
         
-        context.Load();
-        
+        await context.LoadAsync();
+
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+
             DisableAvaloniaDataAnnotationValidation();
             var mainWindow = Services.GetRequiredService<MainWindow>();
             desktop.MainWindow = mainWindow;
+            mainWindow.Show();
+            
         }
 
-        base.OnFrameworkInitializationCompleted();
+       
+
+        base.OnFrameworkInitializationCompleted();  
     }
 
     private void DisableAvaloniaDataAnnotationValidation()
@@ -101,6 +112,7 @@ public partial class App : Application
         services.AddSingleton<MovementQueryService>();
         services.AddSingleton<SaleQueryService>();
         services.AddSingleton<PurchaseQueryService>();
+        services.AddSingleton<ModifyProductsCommands>();
 
         //UI Services
         services.AddSingleton<ProductState>();
@@ -123,6 +135,8 @@ public partial class App : Application
         services.AddTransient<SearchProductViewModel>();
         services.AddTransient<CreateProductCardVM>();
         services.AddTransient<CreateCategoryCardVM>();
+        services.AddTransient<ModifyProductViewModel>();
         
     }   
 }
+

@@ -27,7 +27,7 @@ public partial class MovementsMenuView : UserControl
 
         var mdw = new MovementDetailsWindow
         {
-            DataContext = vm.GetDetailedTransaction()
+            DataContext = await vm.GetDetailedTransaction()
         };
         mdw.PartyType.Text = vm.SelectedTransaction.MovementType == MovementType.In ? "Proveedor" : "Cliente";
 

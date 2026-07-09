@@ -1,19 +1,21 @@
+using System.Threading.Tasks;
 using Jew.Applications.Sales.DTOs.Clients;
+using Jew.Applications.Shared.UnitsOfWork;
+using Jew.Domain.Sales.Entities;
 using Jew.Domain.Sales.Exceptions;
-using Jew.Infrastructure.UnitOfWork;
 
 namespace Jew.Applications.Sales.Commands;
 
 public sealed class ClientCommands(IUnitOfWork context)
 {
-    public void AddClient(ClientDto client)
+    public async Task AddClient(ClientDto client)
     {
         ArgumentNullException.ThrowIfNull(client);
 
-        if(context.Clients.Exist(client.Code))
+        if(await context.Clients.ExistsAsync(client.Code))
             throw new ClientException("Este cliente ya existe");
 
-        context.Clients.Add(new(client.Code, client.Name));
-        context.Clients.SaveChanges();
+        await context.Clients.AddAsync(new Client(client.Code, client.Name));
+        await context.Clients.SaveChangesAsync();
     }
 }
